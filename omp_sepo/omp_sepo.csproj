@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0407D3EE-B808-456A-9B03-957EC472AE2F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>omp_sepo</RootNamespace>
+    <AssemblyName>omp_sepo_11</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.DataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\oracle\app\product\11.2.0\client_1\odp.net\bin\4\Oracle.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="dialogs\Dialog.cs" />
+    <Compile Include="dialogs\EquipmentModelsImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\EquipmentModelsImport.Designer.cs">
+      <DependentUpon>EquipmentModelsImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\ExpImpDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\ExpImpDialog.Designer.cs">
+      <DependentUpon>ExpImpDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\ExportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\FixtureAttachFilesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\FixtureAttachFilesDialog.Designer.cs">
+      <DependentUpon>FixtureAttachFilesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\FixtureImportFilesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\FixtureImportFilesDialog.Designer.cs">
+      <DependentUpon>FixtureImportFilesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\FixtureImportObjectsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\FixtureImportObjectsDialog.Designer.cs">
+      <DependentUpon>FixtureImportObjectsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\OsnTypesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\OsnTypesDialog.Designer.cs">
+      <DependentUpon>OsnTypesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\OperationsImportDialog_old.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\ProfessionsExportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\ImportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\OperationsImportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\OperationsImportDialog.Designer.cs">
+      <DependentUpon>OperationsImportDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\StdFixtureImportClassifyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\StdFixtureImportClassifyDialog.Designer.cs">
+      <DependentUpon>StdFixtureImportClassifyDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\StdFixtureImportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\StdFixtureImportDialog.Designer.cs">
+      <DependentUpon>StdFixtureImportDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\StdFixtureOmpImportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\StdFixtureOmpImportDialog.Designer.cs">
+      <DependentUpon>StdFixtureOmpImportDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\StdFoxProAttrsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\StdFoxProAttrsDialog.Designer.cs">
+      <DependentUpon>StdFoxProAttrsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\StdSchemeEditDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\StdSchemeEditDialog.Designer.cs">
+      <DependentUpon>StdSchemeEditDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\StdSchemesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\StdSchemesDialog.Designer.cs">
+      <DependentUpon>StdSchemesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\StepsImportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\StepsImportDialog.Designer.cs">
+      <DependentUpon>StepsImportDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\TbInstructionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\TbInstructionsDialog.Designer.cs">
+      <DependentUpon>TbInstructionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\TFlexFixSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\TFlexFixSettings.Designer.cs">
+      <DependentUpon>TFlexFixSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\TFlexDocsSignDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\TFlexDocsSignDialog.Designer.cs">
+      <DependentUpon>TFlexDocsSignDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\TFlexObjSynchDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\TFlexObjSynchDialog.Designer.cs">
+      <DependentUpon>TFlexObjSynchDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\TFlexSpecSectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\TFlexSpecSectionDialog.Designer.cs">
+      <DependentUpon>TFlexSpecSectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\TFlexObjSynchView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="views\TFlexObjSynchView.Designer.cs">
+      <DependentUpon>TFlexObjSynchView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\TFlexSignDocsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="views\TFlexSignDocsView.Designer.cs">
+      <DependentUpon>TFlexSignDocsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\TFlexSpecSectionsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="views\TFlexSpecSectionsView.Designer.cs">
+      <DependentUpon>TFlexSpecSectionsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\TpImportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\TpImportDialog.Designer.cs">
+      <DependentUpon>TpImportDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module.cs" />
+    <Compile Include="dialogs\ProfessionsImportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NameObject.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Test.cs" />
+    <Compile Include="TreeTaskNode.cs" />
+    <Compile Include="TreeTaskView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="views\OsnTypesListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="views\StdAttrsListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="views\StdFoldersView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="views\StdFoxProAttrsView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="views\StdSchemesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\StdSchemesForm.Designer.cs">
+      <DependentUpon>StdSchemesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\StdSchemesListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="dialogs\EquipmentModelsImport.resx">
+      <DependentUpon>EquipmentModelsImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\ExpImpDialog.resx">
+      <DependentUpon>ExpImpDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\FixtureAttachFilesDialog.resx">
+      <DependentUpon>FixtureAttachFilesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\FixtureImportFilesDialog.resx">
+      <DependentUpon>FixtureImportFilesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\FixtureImportObjectsDialog.resx">
+      <DependentUpon>FixtureImportObjectsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\OsnTypesDialog.resx">
+      <DependentUpon>OsnTypesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\OperationsImportDialog.resx">
+      <DependentUpon>OperationsImportDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\StdFixtureImportClassifyDialog.resx">
+      <DependentUpon>StdFixtureImportClassifyDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\StdFixtureImportDialog.resx">
+      <DependentUpon>StdFixtureImportDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\StdFixtureOmpImportDialog.resx">
+      <DependentUpon>StdFixtureOmpImportDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\StdFoxProAttrsDialog.resx">
+      <DependentUpon>StdFoxProAttrsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\StdSchemeEditDialog.resx">
+      <DependentUpon>StdSchemeEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\StdSchemesDialog.resx">
+      <DependentUpon>StdSchemesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\StepsImportDialog.resx">
+      <DependentUpon>StepsImportDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\TbInstructionsDialog.resx">
+      <DependentUpon>TbInstructionsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\TFlexFixSettings.resx">
+      <DependentUpon>TFlexFixSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\TFlexDocsSignDialog.resx">
+      <DependentUpon>TFlexDocsSignDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\TFlexObjSynchDialog.resx">
+      <DependentUpon>TFlexObjSynchDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\TFlexSpecSectionDialog.resx">
+      <DependentUpon>TFlexSpecSectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\TFlexObjSynchView.resx">
+      <DependentUpon>TFlexObjSynchView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\TFlexSignDocsView.resx">
+      <DependentUpon>TFlexSignDocsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\TFlexSpecSectionsView.resx">
+      <DependentUpon>TFlexSpecSectionsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\TpImportDialog.resx">
+      <DependentUpon>TpImportDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="views\StdSchemesForm.resx">
+      <DependentUpon>StdSchemesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\general\general.csproj">
+      <Project>{6c9d676d-5041-4919-8d3e-3d85840e350f}</Project>
+      <Name>general</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\imp_exp\imp_exp.csproj">
+      <Project>{2e765516-db41-4c68-930e-82a72b1967bb}</Project>
+      <Name>imp_exp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\obj_lib\obj_lib.csproj">
+      <Project>{e5ddedb5-16c1-46b1-95fd-df5141103af5}</Project>
+      <Name>obj_lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ora_dialog\ora_dialog.csproj">
+      <Project>{a84032ae-ab0c-49ab-83df-1cd79c73215a}</Project>
+      <Name>ora_dialog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ui_lib\ui_lib.csproj">
+      <Project>{4f318072-9f73-4f8c-80cf-ff2f43b536a0}</Project>
+      <Name>ui_lib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

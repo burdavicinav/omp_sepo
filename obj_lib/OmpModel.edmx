@@ -1,0 +1,770 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Model" Alias="Self" Provider="Oracle.DataAccess.Client" ProviderManifestToken="12.2" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="ATTACHMENTS_GROUPS" EntityType="Хранилище Model.ATTACHMENTS_GROUPS" store:Type="Tables" Schema="OMP_ADM" />
+          <EntitySet Name="BUSINESS_OBJECTS" EntityType="Хранилище Model.BUSINESS_OBJECTS" store:Type="Tables" Schema="OMP_ADM" />
+          <EntitySet Name="BUSINESSOBJ_STATES" EntityType="Хранилище Model.BUSINESSOBJ_STATES" store:Type="Tables" Schema="OMP_ADM" />
+          <EntitySet Name="SEPO_TFLEX_OBJ_SYNCH" EntityType="Хранилище Model.SEPO_TFLEX_OBJ_SYNCH" store:Type="Tables" Schema="OMP_ADM" />
+          <EntitySet Name="SEPO_TFLEX_SIGN_DOCS" EntityType="Хранилище Model.SEPO_TFLEX_SIGN_DOCS" store:Type="Tables" Schema="OMP_ADM" />
+          <EntitySet Name="SEPO_TFLEX_SPEC_SECTIONS" EntityType="Хранилище Model.SEPO_TFLEX_SPEC_SECTIONS" store:Type="Tables" Schema="OMP_ADM" />
+          <EntitySet Name="SPC_SECTIONS" EntityType="Хранилище Model.SPC_SECTIONS" store:Type="Tables" Schema="OMP_ADM" />
+          <EntitySet Name="V_SEPO_TFLEX_BO_TYPES" EntityType="Хранилище Model.V_SEPO_TFLEX_BO_TYPES" store:Type="Views" store:Schema="OMP_ADM" store:Name="V_SEPO_TFLEX_BO_TYPES">
+            <DefiningQuery>SELECT 
+      "V_SEPO_TFLEX_BO_TYPES"."BOTYPE" AS "BOTYPE", 
+      "V_SEPO_TFLEX_BO_TYPES"."BOTYPENAME" AS "BOTYPENAME", 
+      "V_SEPO_TFLEX_BO_TYPES"."BOTYPESHORTNAME" AS "BOTYPESHORTNAME"
+      FROM "OMP_ADM"."V_SEPO_TFLEX_BO_TYPES" "V_SEPO_TFLEX_BO_TYPES"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_SEPO_TFLEX_OBJ_SYNCH" EntityType="Хранилище Model.V_SEPO_TFLEX_OBJ_SYNCH" store:Type="Views" store:Schema="OMP_ADM" store:Name="V_SEPO_TFLEX_OBJ_SYNCH">
+            <DefiningQuery>SELECT 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."ID" AS "ID", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."ID_SECTION" AS "ID_SECTION", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."TFLEX_SECTION" AS "TFLEX_SECTION", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."ID_DOCSIGN" AS "ID_DOCSIGN", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."TFLEX_DOCSIGN" AS "TFLEX_DOCSIGN", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."KOTYPE" AS "KOTYPE", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."BOTYPE" AS "BOTYPE", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."BOTYPENAME" AS "BOTYPENAME", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."BOTYPESHORTNAME" AS "BOTYPESHORTNAME", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."BOSTATECODE" AS "BOSTATECODE", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."BOSTATENAME" AS "BOSTATENAME", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."BOSTATESHORTNAME" AS "BOSTATESHORTNAME", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."FILEGROUP" AS "FILEGROUP", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."FILEGROUPNAME" AS "FILEGROUPNAME", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."FILEGROUPSHORTNAME" AS "FILEGROUPSHORTNAME", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."OWNER" AS "OWNER", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."OWNERNAME" AS "OWNERNAME", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."OMPSECTION" AS "OMPSECTION", 
+      "V_SEPO_TFLEX_OBJ_SYNCH"."OMPSECTIONNAME" AS "OMPSECTIONNAME"
+      FROM "OMP_ADM"."V_SEPO_TFLEX_OBJ_SYNCH" "V_SEPO_TFLEX_OBJ_SYNCH"</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_BO_REF_BO" Association="Хранилище Model.FK_BO_REF_BO">
+            <End Role="BUSINESS_OBJECTS" EntitySet="BUSINESS_OBJECTS" />
+            <End Role="BUSINESS_OBJECTS1" EntitySet="BUSINESS_OBJECTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BO_REF_BOSTATES" Association="Хранилище Model.FK_BO_REF_BOSTATES">
+            <End Role="BUSINESSOBJ_STATES" EntitySet="BUSINESSOBJ_STATES" />
+            <End Role="BUSINESS_OBJECTS" EntitySet="BUSINESS_OBJECTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BOSTATES_REF_BOSTATES" Association="Хранилище Model.FK_BOSTATES_REF_BOSTATES">
+            <End Role="BUSINESSOBJ_STATES" EntitySet="BUSINESSOBJ_STATES" />
+            <End Role="BUSINESSOBJ_STATES1" EntitySet="BUSINESSOBJ_STATES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BOSTE_REF_BOSTE_BYMAILCIRC" Association="Хранилище Model.FK_BOSTE_REF_BOSTE_BYMAILCIRC">
+            <End Role="BUSINESSOBJ_STATES" EntitySet="BUSINESSOBJ_STATES" />
+            <End Role="BUSINESSOBJ_STATES1" EntitySet="BUSINESSOBJ_STATES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BUSINESS_REF_BOSTA_BUSINESS" Association="Хранилище Model.FK_BUSINESS_REF_BOSTA_BUSINESS">
+            <End Role="BUSINESSOBJ_STATES" EntitySet="BUSINESSOBJ_STATES" />
+            <End Role="BUSINESSOBJ_STATES1" EntitySet="BUSINESSOBJ_STATES" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C00104367" Association="Хранилище Model.SYS_C00104367">
+            <End Role="SEPO_TFLEX_SPEC_SECTIONS" EntitySet="SEPO_TFLEX_SPEC_SECTIONS" />
+            <End Role="SEPO_TFLEX_OBJ_SYNCH" EntitySet="SEPO_TFLEX_OBJ_SYNCH" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C00104368" Association="Хранилище Model.SYS_C00104368">
+            <End Role="SEPO_TFLEX_SIGN_DOCS" EntitySet="SEPO_TFLEX_SIGN_DOCS" />
+            <End Role="SEPO_TFLEX_OBJ_SYNCH" EntitySet="SEPO_TFLEX_OBJ_SYNCH" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ATTACHMENTS_GROUPS">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="number" Nullable="false" />
+          <Property Name="BOTYPE" Type="number" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" Nullable="false" MaxLength="40" />
+          <Property Name="SHORTNAME" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="DEF_EXT" Type="varchar2" MaxLength="255" />
+          <Property Name="RIGHTS_SCHEME" Type="number" Nullable="false" />
+          <Property Name="NOTE" Type="varchar2" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="BUSINESS_OBJECTS">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="number" Nullable="false" />
+          <Property Name="TYPE" Type="number" Nullable="false" />
+          <Property Name="DOCCODE" Type="number" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" Nullable="false" MaxLength="200" />
+          <Property Name="OWNER" Type="number" Nullable="false" />
+          <Property Name="CHECKOUT" Type="number" />
+          <Property Name="REVISION" Type="number" Nullable="false" />
+          <Property Name="REVSIGN" Type="varchar2" MaxLength="30" />
+          <Property Name="PRODCODE" Type="number" Nullable="false" />
+          <Property Name="ACCESS_LEVEL" Type="number" />
+          <Property Name="TODAY_STATE" Type="number" />
+          <Property Name="TODAY_STATEDATE" Type="date" />
+          <Property Name="TODAY_PRODBOCODE" Type="number" />
+          <Property Name="TODAY_PRODDOCCODE" Type="number" />
+          <Property Name="TODAY_STATEUSER" Type="number" />
+          <Property Name="CREATE_DATE" Type="date" />
+          <Property Name="CREATE_USER" Type="number" />
+          <Property Name="UPDATE_DATE" Type="date" />
+          <Property Name="UPDATE_USER" Type="number" />
+          <Property Name="ATTACHMENTS_COUNT" Type="number" />
+        </EntityType>
+        <EntityType Name="BUSINESSOBJ_STATES">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="number" Nullable="false" />
+          <Property Name="BOTYPE" Type="number" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" Nullable="false" MaxLength="40" />
+          <Property Name="SHORTNAME" Type="varchar2" Nullable="false" MaxLength="15" />
+          <Property Name="RIGHTS_SCHEME" Type="number" />
+          <Property Name="MINSTATE" Type="number" Nullable="false" />
+          <Property Name="ADDITIONAL_TO" Type="number" />
+          <Property Name="DESCRIPTION" Type="varchar2" MaxLength="100" />
+          <Property Name="PROMLEVEL" Type="number" Nullable="false" />
+          <Property Name="RDATE" Type="date" Nullable="false" />
+          <Property Name="NOTE" Type="varchar2" MaxLength="40" />
+          <Property Name="REVCOUNT" Type="number" Nullable="false" />
+          <Property Name="REVCOUNT_OTHER" Type="number" Nullable="false" />
+          <Property Name="CATEGORY" Type="number" Nullable="false" />
+          <Property Name="EXCEPT_ACTION" Type="number" />
+          <Property Name="TO_STATE" Type="number" />
+          <Property Name="OBJECTS_DEF" Type="number" />
+          <Property Name="DO_INHERIT" Type="number" Nullable="false" />
+          <Property Name="SUBLEVEL" Type="number" />
+          <Property Name="MARKING_COLOR" Type="number" />
+          <Property Name="TO_STATE_BY_MAIL_CIRC" Type="number" />
+        </EntityType>
+        <EntityType Name="SEPO_TFLEX_OBJ_SYNCH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TFLEX_SECTION" Type="number" Nullable="false" />
+          <Property Name="TFLEX_DOCSIGN" Type="number" />
+          <Property Name="OMP_BOTYPE" Type="number" Nullable="false" />
+          <Property Name="OMP_BOSTATE" Type="number" Nullable="false" />
+          <Property Name="OMP_FILEGROUP" Type="number" />
+          <Property Name="OMP_OWNER" Type="number" />
+          <Property Name="OMP_SECTION" Type="number" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SEPO_TFLEX_SIGN_DOCS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SIGN" Type="varchar2" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SEPO_TFLEX_SPEC_SECTIONS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SECTION_" Type="varchar2" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SPC_SECTIONS">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="number" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" Nullable="false" MaxLength="100" />
+          <Property Name="DEFTYPE" Type="number" />
+          <Property Name="NUM" Type="number" />
+          <Property Name="ORDERNUM" Type="number" Nullable="false" />
+          <Property Name="UNDERLINE" Type="number" Nullable="false" />
+          <Property Name="ROWS_BEFORE" Type="number" Nullable="false" />
+          <Property Name="ROWS_AFTER" Type="number" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+      предупреждение 6002: В таблице или представлении "OMP_ADM.V_SEPO_TFLEX_BO_TYPES" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.
+      -->
+        <EntityType Name="V_SEPO_TFLEX_BO_TYPES">
+          <Key>
+            <PropertyRef Name="BOTYPE" />
+            <PropertyRef Name="BOTYPENAME" />
+          </Key>
+          <Property Name="BOTYPE" Type="number" Nullable="false" />
+          <Property Name="BOTYPENAME" Type="varchar2" Nullable="false" MaxLength="40" />
+          <Property Name="BOTYPESHORTNAME" Type="varchar2" MaxLength="20" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+      предупреждение 6002: В таблице или представлении "OMP_ADM.V_SEPO_TFLEX_OBJ_SYNCH" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.
+      -->
+        <EntityType Name="V_SEPO_TFLEX_OBJ_SYNCH">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_SECTION" />
+            <PropertyRef Name="TFLEX_SECTION" />
+            <PropertyRef Name="KOTYPE" />
+            <PropertyRef Name="BOTYPE" />
+            <PropertyRef Name="BOTYPENAME" />
+            <PropertyRef Name="BOSTATECODE" />
+            <PropertyRef Name="BOSTATENAME" />
+            <PropertyRef Name="BOSTATESHORTNAME" />
+            <PropertyRef Name="OMPSECTION" />
+            <PropertyRef Name="OMPSECTIONNAME" />
+          </Key>
+          <Property Name="ID" Type="number" Nullable="false" />
+          <Property Name="ID_SECTION" Type="number" Nullable="false" />
+          <Property Name="TFLEX_SECTION" Type="varchar2" Nullable="false" MaxLength="100" />
+          <Property Name="ID_DOCSIGN" Type="number" />
+          <Property Name="TFLEX_DOCSIGN" Type="varchar2" MaxLength="100" />
+          <Property Name="KOTYPE" Type="number" Nullable="false" />
+          <Property Name="BOTYPE" Type="number" Nullable="false" />
+          <Property Name="BOTYPENAME" Type="varchar2" Nullable="false" MaxLength="40" />
+          <Property Name="BOTYPESHORTNAME" Type="varchar2" MaxLength="20" />
+          <Property Name="BOSTATECODE" Type="number" Nullable="false" />
+          <Property Name="BOSTATENAME" Type="varchar2" Nullable="false" MaxLength="40" />
+          <Property Name="BOSTATESHORTNAME" Type="varchar2" Nullable="false" MaxLength="15" />
+          <Property Name="FILEGROUP" Type="number" />
+          <Property Name="FILEGROUPNAME" Type="varchar2" MaxLength="40" />
+          <Property Name="FILEGROUPSHORTNAME" Type="varchar2" MaxLength="20" />
+          <Property Name="OWNER" Type="number" />
+          <Property Name="OWNERNAME" Type="varchar2" MaxLength="100" />
+          <Property Name="OMPSECTION" Type="number" Nullable="false" />
+          <Property Name="OMPSECTIONNAME" Type="varchar2" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_BO_REF_BO">
+          <End Role="BUSINESS_OBJECTS" Type="Хранилище Model.BUSINESS_OBJECTS" Multiplicity="0..1" />
+          <End Role="BUSINESS_OBJECTS1" Type="Хранилище Model.BUSINESS_OBJECTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BUSINESS_OBJECTS">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="BUSINESS_OBJECTS1">
+              <PropertyRef Name="TODAY_PRODBOCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BO_REF_BOSTATES">
+          <End Role="BUSINESSOBJ_STATES" Type="Хранилище Model.BUSINESSOBJ_STATES" Multiplicity="0..1" />
+          <End Role="BUSINESS_OBJECTS" Type="Хранилище Model.BUSINESS_OBJECTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BUSINESSOBJ_STATES">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="BUSINESS_OBJECTS">
+              <PropertyRef Name="TODAY_STATE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BOSTATES_REF_BOSTATES">
+          <End Role="BUSINESSOBJ_STATES" Type="Хранилище Model.BUSINESSOBJ_STATES" Multiplicity="0..1" />
+          <End Role="BUSINESSOBJ_STATES1" Type="Хранилище Model.BUSINESSOBJ_STATES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BUSINESSOBJ_STATES">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="BUSINESSOBJ_STATES1">
+              <PropertyRef Name="ADDITIONAL_TO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BOSTE_REF_BOSTE_BYMAILCIRC">
+          <End Role="BUSINESSOBJ_STATES" Type="Хранилище Model.BUSINESSOBJ_STATES" Multiplicity="0..1" />
+          <End Role="BUSINESSOBJ_STATES1" Type="Хранилище Model.BUSINESSOBJ_STATES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BUSINESSOBJ_STATES">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="BUSINESSOBJ_STATES1">
+              <PropertyRef Name="TO_STATE_BY_MAIL_CIRC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BUSINESS_REF_BOSTA_BUSINESS">
+          <End Role="BUSINESSOBJ_STATES" Type="Хранилище Model.BUSINESSOBJ_STATES" Multiplicity="0..1" />
+          <End Role="BUSINESSOBJ_STATES1" Type="Хранилище Model.BUSINESSOBJ_STATES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BUSINESSOBJ_STATES">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="BUSINESSOBJ_STATES1">
+              <PropertyRef Name="TO_STATE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C00104367">
+          <End Role="SEPO_TFLEX_SPEC_SECTIONS" Type="Хранилище Model.SEPO_TFLEX_SPEC_SECTIONS" Multiplicity="1" />
+          <End Role="SEPO_TFLEX_OBJ_SYNCH" Type="Хранилище Model.SEPO_TFLEX_OBJ_SYNCH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEPO_TFLEX_SPEC_SECTIONS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SEPO_TFLEX_OBJ_SYNCH">
+              <PropertyRef Name="TFLEX_SECTION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C00104368">
+          <End Role="SEPO_TFLEX_SIGN_DOCS" Type="Хранилище Model.SEPO_TFLEX_SIGN_DOCS" Multiplicity="0..1" />
+          <End Role="SEPO_TFLEX_OBJ_SYNCH" Type="Хранилище Model.SEPO_TFLEX_OBJ_SYNCH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEPO_TFLEX_SIGN_DOCS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SEPO_TFLEX_OBJ_SYNCH">
+              <PropertyRef Name="TFLEX_DOCSIGN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="OmpModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SEPO_TFLEX_OBJ_SYNCH" EntityType="Model.SEPO_TFLEX_OBJ_SYNCH" />
+          <EntitySet Name="SEPO_TFLEX_SIGN_DOCS" EntityType="Model.SEPO_TFLEX_SIGN_DOCS" />
+          <EntitySet Name="SEPO_TFLEX_SPEC_SECTIONS" EntityType="Model.SEPO_TFLEX_SPEC_SECTIONS" />
+          <AssociationSet Name="SYS_C00104367" Association="Model.SYS_C00104367">
+            <End Role="SEPO_TFLEX_SPEC_SECTIONS" EntitySet="SEPO_TFLEX_SPEC_SECTIONS" />
+            <End Role="SEPO_TFLEX_OBJ_SYNCH" EntitySet="SEPO_TFLEX_OBJ_SYNCH" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C00104368" Association="Model.SYS_C00104368">
+            <End Role="SEPO_TFLEX_SIGN_DOCS" EntitySet="SEPO_TFLEX_SIGN_DOCS" />
+            <End Role="SEPO_TFLEX_OBJ_SYNCH" EntitySet="SEPO_TFLEX_OBJ_SYNCH" />
+          </AssociationSet>
+          <EntitySet Name="V_SEPO_TFLEX_BO_TYPES" EntityType="Model.V_SEPO_TFLEX_BO_TYPES" />
+          <EntitySet Name="V_SEPO_TFLEX_OBJ_SYNCH" EntityType="Model.V_SEPO_TFLEX_OBJ_SYNCH" />
+          <EntitySet Name="BUSINESS_OBJECTS" EntityType="Model.BUSINESS_OBJECTS" />
+          <EntitySet Name="SPC_SECTIONS" EntityType="Model.SPC_SECTIONS" />
+          <AssociationSet Name="FK_BO_REF_BO" Association="Model.FK_BO_REF_BO">
+            <End Role="BUSINESS_OBJECTS" EntitySet="BUSINESS_OBJECTS" />
+            <End Role="BUSINESS_OBJECTS1" EntitySet="BUSINESS_OBJECTS" />
+          </AssociationSet>
+          <EntitySet Name="BUSINESSOBJ_STATES" EntityType="Model.BUSINESSOBJ_STATES" />
+          <AssociationSet Name="FK_BO_REF_BOSTATES" Association="Model.FK_BO_REF_BOSTATES">
+            <End Role="BUSINESSOBJ_STATES" EntitySet="BUSINESSOBJ_STATES" />
+            <End Role="BUSINESS_OBJECTS" EntitySet="BUSINESS_OBJECTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BOSTATES_REF_BOSTATES" Association="Model.FK_BOSTATES_REF_BOSTATES">
+            <End Role="BUSINESSOBJ_STATES" EntitySet="BUSINESSOBJ_STATES" />
+            <End Role="BUSINESSOBJ_STATES1" EntitySet="BUSINESSOBJ_STATES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BOSTE_REF_BOSTE_BYMAILCIRC" Association="Model.FK_BOSTE_REF_BOSTE_BYMAILCIRC">
+            <End Role="BUSINESSOBJ_STATES" EntitySet="BUSINESSOBJ_STATES" />
+            <End Role="BUSINESSOBJ_STATES1" EntitySet="BUSINESSOBJ_STATES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BUSINESS_REF_BOSTA_BUSINESS" Association="Model.FK_BUSINESS_REF_BOSTA_BUSINESS">
+            <End Role="BUSINESSOBJ_STATES" EntitySet="BUSINESSOBJ_STATES" />
+            <End Role="BUSINESSOBJ_STATES1" EntitySet="BUSINESSOBJ_STATES" />
+          </AssociationSet>
+          <EntitySet Name="ATTACHMENTS_GROUPS" EntityType="Model.ATTACHMENTS_GROUPS" />
+        </EntityContainer>
+        <EntityType Name="SEPO_TFLEX_OBJ_SYNCH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TFLEX_SECTION" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="TFLEX_DOCSIGN" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="OMP_BOTYPE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="OMP_BOSTATE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="OMP_FILEGROUP" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="OMP_OWNER" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="OMP_SECTION" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <NavigationProperty Name="SEPO_TFLEX_SPEC_SECTIONS" Relationship="Model.SYS_C00104367" FromRole="SEPO_TFLEX_OBJ_SYNCH" ToRole="SEPO_TFLEX_SPEC_SECTIONS" />
+          <NavigationProperty Name="SEPO_TFLEX_SIGN_DOCS" Relationship="Model.SYS_C00104368" FromRole="SEPO_TFLEX_OBJ_SYNCH" ToRole="SEPO_TFLEX_SIGN_DOCS" />
+        </EntityType>
+        <EntityType Name="SEPO_TFLEX_SIGN_DOCS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SIGN" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="SEPO_TFLEX_OBJ_SYNCH" Relationship="Model.SYS_C00104368" FromRole="SEPO_TFLEX_SIGN_DOCS" ToRole="SEPO_TFLEX_OBJ_SYNCH" />
+        </EntityType>
+        <EntityType Name="SEPO_TFLEX_SPEC_SECTIONS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SECTION_" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="SEPO_TFLEX_OBJ_SYNCH" Relationship="Model.SYS_C00104367" FromRole="SEPO_TFLEX_SPEC_SECTIONS" ToRole="SEPO_TFLEX_OBJ_SYNCH" />
+        </EntityType>
+        <Association Name="SYS_C00104367">
+          <End Role="SEPO_TFLEX_SPEC_SECTIONS" Type="Model.SEPO_TFLEX_SPEC_SECTIONS" Multiplicity="1" />
+          <End Role="SEPO_TFLEX_OBJ_SYNCH" Type="Model.SEPO_TFLEX_OBJ_SYNCH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEPO_TFLEX_SPEC_SECTIONS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SEPO_TFLEX_OBJ_SYNCH">
+              <PropertyRef Name="TFLEX_SECTION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C00104368">
+          <End Role="SEPO_TFLEX_SIGN_DOCS" Type="Model.SEPO_TFLEX_SIGN_DOCS" Multiplicity="0..1" />
+          <End Role="SEPO_TFLEX_OBJ_SYNCH" Type="Model.SEPO_TFLEX_OBJ_SYNCH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEPO_TFLEX_SIGN_DOCS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SEPO_TFLEX_OBJ_SYNCH">
+              <PropertyRef Name="TFLEX_DOCSIGN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="V_SEPO_TFLEX_BO_TYPES">
+          <Key>
+            <PropertyRef Name="BOTYPE" />
+            <PropertyRef Name="BOTYPENAME" />
+          </Key>
+          <Property Type="Decimal" Name="BOTYPE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="BOTYPENAME" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="BOTYPESHORTNAME" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="V_SEPO_TFLEX_OBJ_SYNCH">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_SECTION" />
+            <PropertyRef Name="TFLEX_SECTION" />
+            <PropertyRef Name="KOTYPE" />
+            <PropertyRef Name="BOTYPE" />
+            <PropertyRef Name="BOTYPENAME" />
+            <PropertyRef Name="BOSTATECODE" />
+            <PropertyRef Name="BOSTATENAME" />
+            <PropertyRef Name="BOSTATESHORTNAME" />
+            <PropertyRef Name="OMPSECTION" />
+            <PropertyRef Name="OMPSECTIONNAME" />
+          </Key>
+          <Property Type="Decimal" Name="ID" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="ID_SECTION" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="TFLEX_SECTION" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ID_DOCSIGN" Precision="38" Scale="0" />
+          <Property Type="String" Name="TFLEX_DOCSIGN" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="KOTYPE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="BOTYPE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="BOTYPENAME" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="BOTYPESHORTNAME" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="BOSTATECODE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="BOSTATENAME" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="BOSTATESHORTNAME" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="FILEGROUP" Precision="38" Scale="0" />
+          <Property Type="String" Name="FILEGROUPNAME" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FILEGROUPSHORTNAME" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="OWNER" Precision="38" Scale="0" />
+          <Property Type="String" Name="OWNERNAME" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="OMPSECTION" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="OMPSECTIONNAME" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="BUSINESS_OBJECTS">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Type="Decimal" Name="CODE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="TYPE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="DOCCODE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="NAME" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="OWNER" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="CHECKOUT" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="REVISION" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="REVSIGN" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="PRODCODE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="ACCESS_LEVEL" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="TODAY_STATE" Precision="38" Scale="0" />
+          <Property Type="DateTime" Name="TODAY_STATEDATE" />
+          <Property Type="Decimal" Name="TODAY_PRODBOCODE" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="TODAY_PRODDOCCODE" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="TODAY_STATEUSER" Precision="38" Scale="0" />
+          <Property Type="DateTime" Name="CREATE_DATE" />
+          <Property Type="Decimal" Name="CREATE_USER" Precision="38" Scale="0" />
+          <Property Type="DateTime" Name="UPDATE_DATE" />
+          <Property Type="Decimal" Name="UPDATE_USER" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="ATTACHMENTS_COUNT" Precision="38" Scale="0" />
+          <NavigationProperty Name="BUSINESS_OBJECTS1" Relationship="Model.FK_BO_REF_BO" FromRole="BUSINESS_OBJECTS" ToRole="BUSINESS_OBJECTS1" />
+          <NavigationProperty Name="BUSINESS_OBJECTS2" Relationship="Model.FK_BO_REF_BO" FromRole="BUSINESS_OBJECTS1" ToRole="BUSINESS_OBJECTS" />
+          <NavigationProperty Name="BUSINESSOBJ_STATES" Relationship="Model.FK_BO_REF_BOSTATES" FromRole="BUSINESS_OBJECTS" ToRole="BUSINESSOBJ_STATES" />
+        </EntityType>
+        <EntityType Name="SPC_SECTIONS">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Type="Decimal" Name="CODE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="NAME" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="DEFTYPE" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="NUM" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="ORDERNUM" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="UNDERLINE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="ROWS_BEFORE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="ROWS_AFTER" Nullable="false" Precision="38" Scale="0" />
+        </EntityType>
+        <Association Name="FK_BO_REF_BO">
+          <End Type="Model.BUSINESS_OBJECTS" Role="BUSINESS_OBJECTS" Multiplicity="0..1" />
+          <End Type="Model.BUSINESS_OBJECTS" Role="BUSINESS_OBJECTS1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BUSINESS_OBJECTS">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="BUSINESS_OBJECTS1">
+              <PropertyRef Name="TODAY_PRODBOCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BUSINESSOBJ_STATES">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Type="Decimal" Name="CODE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="BOTYPE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="NAME" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SHORTNAME" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="RIGHTS_SCHEME" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="MINSTATE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="ADDITIONAL_TO" Precision="38" Scale="0" />
+          <Property Type="String" Name="DESCRIPTION" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="PROMLEVEL" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="DateTime" Name="RDATE" Nullable="false" />
+          <Property Type="String" Name="NOTE" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="REVCOUNT" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="REVCOUNT_OTHER" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="CATEGORY" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="EXCEPT_ACTION" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="TO_STATE" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="OBJECTS_DEF" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="DO_INHERIT" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="SUBLEVEL" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="MARKING_COLOR" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="TO_STATE_BY_MAIL_CIRC" Precision="38" Scale="0" />
+          <NavigationProperty Name="BUSINESS_OBJECTS" Relationship="Model.FK_BO_REF_BOSTATES" FromRole="BUSINESSOBJ_STATES" ToRole="BUSINESS_OBJECTS" />
+          <NavigationProperty Name="BUSINESSOBJ_STATES1" Relationship="Model.FK_BOSTATES_REF_BOSTATES" FromRole="BUSINESSOBJ_STATES" ToRole="BUSINESSOBJ_STATES1" />
+          <NavigationProperty Name="BUSINESSOBJ_STATES2" Relationship="Model.FK_BOSTATES_REF_BOSTATES" FromRole="BUSINESSOBJ_STATES1" ToRole="BUSINESSOBJ_STATES" />
+          <NavigationProperty Name="BUSINESSOBJ_STATES11" Relationship="Model.FK_BOSTE_REF_BOSTE_BYMAILCIRC" FromRole="BUSINESSOBJ_STATES" ToRole="BUSINESSOBJ_STATES1" />
+          <NavigationProperty Name="BUSINESSOBJ_STATES3" Relationship="Model.FK_BOSTE_REF_BOSTE_BYMAILCIRC" FromRole="BUSINESSOBJ_STATES1" ToRole="BUSINESSOBJ_STATES" />
+          <NavigationProperty Name="BUSINESSOBJ_STATES12" Relationship="Model.FK_BUSINESS_REF_BOSTA_BUSINESS" FromRole="BUSINESSOBJ_STATES" ToRole="BUSINESSOBJ_STATES1" />
+          <NavigationProperty Name="BUSINESSOBJ_STATES4" Relationship="Model.FK_BUSINESS_REF_BOSTA_BUSINESS" FromRole="BUSINESSOBJ_STATES1" ToRole="BUSINESSOBJ_STATES" />
+        </EntityType>
+        <Association Name="FK_BO_REF_BOSTATES">
+          <End Type="Model.BUSINESSOBJ_STATES" Role="BUSINESSOBJ_STATES" Multiplicity="0..1" />
+          <End Type="Model.BUSINESS_OBJECTS" Role="BUSINESS_OBJECTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BUSINESSOBJ_STATES">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="BUSINESS_OBJECTS">
+              <PropertyRef Name="TODAY_STATE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BOSTATES_REF_BOSTATES">
+          <End Type="Model.BUSINESSOBJ_STATES" Role="BUSINESSOBJ_STATES" Multiplicity="0..1" />
+          <End Type="Model.BUSINESSOBJ_STATES" Role="BUSINESSOBJ_STATES1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BUSINESSOBJ_STATES">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="BUSINESSOBJ_STATES1">
+              <PropertyRef Name="ADDITIONAL_TO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BOSTE_REF_BOSTE_BYMAILCIRC">
+          <End Type="Model.BUSINESSOBJ_STATES" Role="BUSINESSOBJ_STATES" Multiplicity="0..1" />
+          <End Type="Model.BUSINESSOBJ_STATES" Role="BUSINESSOBJ_STATES1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BUSINESSOBJ_STATES">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="BUSINESSOBJ_STATES1">
+              <PropertyRef Name="TO_STATE_BY_MAIL_CIRC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BUSINESS_REF_BOSTA_BUSINESS">
+          <End Type="Model.BUSINESSOBJ_STATES" Role="BUSINESSOBJ_STATES" Multiplicity="0..1" />
+          <End Type="Model.BUSINESSOBJ_STATES" Role="BUSINESSOBJ_STATES1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BUSINESSOBJ_STATES">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="BUSINESSOBJ_STATES1">
+              <PropertyRef Name="TO_STATE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ATTACHMENTS_GROUPS">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Type="Decimal" Name="CODE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="BOTYPE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="NAME" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SHORTNAME" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DEF_EXT" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="RIGHTS_SCHEME" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="NOTE" MaxLength="40" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="OmpModel">
+          <EntitySetMapping Name="SEPO_TFLEX_OBJ_SYNCH">
+            <EntityTypeMapping TypeName="Model.SEPO_TFLEX_OBJ_SYNCH">
+              <MappingFragment StoreEntitySet="SEPO_TFLEX_OBJ_SYNCH">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TFLEX_SECTION" ColumnName="TFLEX_SECTION" />
+                <ScalarProperty Name="TFLEX_DOCSIGN" ColumnName="TFLEX_DOCSIGN" />
+                <ScalarProperty Name="OMP_BOTYPE" ColumnName="OMP_BOTYPE" />
+                <ScalarProperty Name="OMP_BOSTATE" ColumnName="OMP_BOSTATE" />
+                <ScalarProperty Name="OMP_FILEGROUP" ColumnName="OMP_FILEGROUP" />
+                <ScalarProperty Name="OMP_OWNER" ColumnName="OMP_OWNER" />
+                <ScalarProperty Name="OMP_SECTION" ColumnName="OMP_SECTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SEPO_TFLEX_SIGN_DOCS">
+            <EntityTypeMapping TypeName="Model.SEPO_TFLEX_SIGN_DOCS">
+              <MappingFragment StoreEntitySet="SEPO_TFLEX_SIGN_DOCS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SIGN" ColumnName="SIGN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SEPO_TFLEX_SPEC_SECTIONS">
+            <EntityTypeMapping TypeName="Model.SEPO_TFLEX_SPEC_SECTIONS">
+              <MappingFragment StoreEntitySet="SEPO_TFLEX_SPEC_SECTIONS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SECTION_" ColumnName="SECTION_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_SEPO_TFLEX_BO_TYPES">
+            <EntityTypeMapping TypeName="Model.V_SEPO_TFLEX_BO_TYPES">
+              <MappingFragment StoreEntitySet="V_SEPO_TFLEX_BO_TYPES">
+                <ScalarProperty Name="BOTYPESHORTNAME" ColumnName="BOTYPESHORTNAME" />
+                <ScalarProperty Name="BOTYPENAME" ColumnName="BOTYPENAME" />
+                <ScalarProperty Name="BOTYPE" ColumnName="BOTYPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_SEPO_TFLEX_OBJ_SYNCH">
+            <EntityTypeMapping TypeName="Model.V_SEPO_TFLEX_OBJ_SYNCH">
+              <MappingFragment StoreEntitySet="V_SEPO_TFLEX_OBJ_SYNCH">
+                <ScalarProperty Name="OMPSECTIONNAME" ColumnName="OMPSECTIONNAME" />
+                <ScalarProperty Name="OMPSECTION" ColumnName="OMPSECTION" />
+                <ScalarProperty Name="OWNERNAME" ColumnName="OWNERNAME" />
+                <ScalarProperty Name="OWNER" ColumnName="OWNER" />
+                <ScalarProperty Name="FILEGROUPSHORTNAME" ColumnName="FILEGROUPSHORTNAME" />
+                <ScalarProperty Name="FILEGROUPNAME" ColumnName="FILEGROUPNAME" />
+                <ScalarProperty Name="FILEGROUP" ColumnName="FILEGROUP" />
+                <ScalarProperty Name="BOSTATESHORTNAME" ColumnName="BOSTATESHORTNAME" />
+                <ScalarProperty Name="BOSTATENAME" ColumnName="BOSTATENAME" />
+                <ScalarProperty Name="BOSTATECODE" ColumnName="BOSTATECODE" />
+                <ScalarProperty Name="BOTYPESHORTNAME" ColumnName="BOTYPESHORTNAME" />
+                <ScalarProperty Name="BOTYPENAME" ColumnName="BOTYPENAME" />
+                <ScalarProperty Name="BOTYPE" ColumnName="BOTYPE" />
+                <ScalarProperty Name="KOTYPE" ColumnName="KOTYPE" />
+                <ScalarProperty Name="TFLEX_DOCSIGN" ColumnName="TFLEX_DOCSIGN" />
+                <ScalarProperty Name="ID_DOCSIGN" ColumnName="ID_DOCSIGN" />
+                <ScalarProperty Name="TFLEX_SECTION" ColumnName="TFLEX_SECTION" />
+                <ScalarProperty Name="ID_SECTION" ColumnName="ID_SECTION" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BUSINESS_OBJECTS">
+            <EntityTypeMapping TypeName="Model.BUSINESS_OBJECTS">
+              <MappingFragment StoreEntitySet="BUSINESS_OBJECTS">
+                <ScalarProperty Name="ATTACHMENTS_COUNT" ColumnName="ATTACHMENTS_COUNT" />
+                <ScalarProperty Name="UPDATE_USER" ColumnName="UPDATE_USER" />
+                <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+                <ScalarProperty Name="CREATE_USER" ColumnName="CREATE_USER" />
+                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="TODAY_STATEUSER" ColumnName="TODAY_STATEUSER" />
+                <ScalarProperty Name="TODAY_PRODDOCCODE" ColumnName="TODAY_PRODDOCCODE" />
+                <ScalarProperty Name="TODAY_PRODBOCODE" ColumnName="TODAY_PRODBOCODE" />
+                <ScalarProperty Name="TODAY_STATEDATE" ColumnName="TODAY_STATEDATE" />
+                <ScalarProperty Name="TODAY_STATE" ColumnName="TODAY_STATE" />
+                <ScalarProperty Name="ACCESS_LEVEL" ColumnName="ACCESS_LEVEL" />
+                <ScalarProperty Name="PRODCODE" ColumnName="PRODCODE" />
+                <ScalarProperty Name="REVSIGN" ColumnName="REVSIGN" />
+                <ScalarProperty Name="REVISION" ColumnName="REVISION" />
+                <ScalarProperty Name="CHECKOUT" ColumnName="CHECKOUT" />
+                <ScalarProperty Name="OWNER" ColumnName="OWNER" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="DOCCODE" ColumnName="DOCCODE" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPC_SECTIONS">
+            <EntityTypeMapping TypeName="Model.SPC_SECTIONS">
+              <MappingFragment StoreEntitySet="SPC_SECTIONS">
+                <ScalarProperty Name="ROWS_AFTER" ColumnName="ROWS_AFTER" />
+                <ScalarProperty Name="ROWS_BEFORE" ColumnName="ROWS_BEFORE" />
+                <ScalarProperty Name="UNDERLINE" ColumnName="UNDERLINE" />
+                <ScalarProperty Name="ORDERNUM" ColumnName="ORDERNUM" />
+                <ScalarProperty Name="NUM" ColumnName="NUM" />
+                <ScalarProperty Name="DEFTYPE" ColumnName="DEFTYPE" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BUSINESSOBJ_STATES">
+            <EntityTypeMapping TypeName="Model.BUSINESSOBJ_STATES">
+              <MappingFragment StoreEntitySet="BUSINESSOBJ_STATES">
+                <ScalarProperty Name="TO_STATE_BY_MAIL_CIRC" ColumnName="TO_STATE_BY_MAIL_CIRC" />
+                <ScalarProperty Name="MARKING_COLOR" ColumnName="MARKING_COLOR" />
+                <ScalarProperty Name="SUBLEVEL" ColumnName="SUBLEVEL" />
+                <ScalarProperty Name="DO_INHERIT" ColumnName="DO_INHERIT" />
+                <ScalarProperty Name="OBJECTS_DEF" ColumnName="OBJECTS_DEF" />
+                <ScalarProperty Name="TO_STATE" ColumnName="TO_STATE" />
+                <ScalarProperty Name="EXCEPT_ACTION" ColumnName="EXCEPT_ACTION" />
+                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
+                <ScalarProperty Name="REVCOUNT_OTHER" ColumnName="REVCOUNT_OTHER" />
+                <ScalarProperty Name="REVCOUNT" ColumnName="REVCOUNT" />
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+                <ScalarProperty Name="RDATE" ColumnName="RDATE" />
+                <ScalarProperty Name="PROMLEVEL" ColumnName="PROMLEVEL" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="ADDITIONAL_TO" ColumnName="ADDITIONAL_TO" />
+                <ScalarProperty Name="MINSTATE" ColumnName="MINSTATE" />
+                <ScalarProperty Name="RIGHTS_SCHEME" ColumnName="RIGHTS_SCHEME" />
+                <ScalarProperty Name="SHORTNAME" ColumnName="SHORTNAME" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="BOTYPE" ColumnName="BOTYPE" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATTACHMENTS_GROUPS">
+            <EntityTypeMapping TypeName="Model.ATTACHMENTS_GROUPS">
+              <MappingFragment StoreEntitySet="ATTACHMENTS_GROUPS">
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+                <ScalarProperty Name="RIGHTS_SCHEME" ColumnName="RIGHTS_SCHEME" />
+                <ScalarProperty Name="DEF_EXT" ColumnName="DEF_EXT" />
+                <ScalarProperty Name="SHORTNAME" ColumnName="SHORTNAME" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="BOTYPE" ColumnName="BOTYPE" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
