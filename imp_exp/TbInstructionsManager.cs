@@ -26,13 +26,13 @@ namespace imp_exp
 
         public void LoadFromXml(string file)
         {
-            using (OracleTransaction transaction = Module.Connection.BeginTransaction())
+            using (OracleTransaction transaction = obj_lib.Module.Connection.BeginTransaction())
             {
                 try
                 {
                     OracleCommand del_command = new OracleCommand(
                         "delete from sepo_instructions_tb",
-                        Module.Connection
+                        obj_lib.Module.Connection
                         );
 
                     del_command.ExecuteNonQuery();
@@ -41,7 +41,7 @@ namespace imp_exp
                     command.CommandText =
                         @"insert into sepo_instructions_tb (f_key, f_name, f_owner, f_level)
                             values (:f_key, :f_name, :f_owner, :f_level)";
-                    command.Connection = Module.Connection;
+                    command.Connection = obj_lib.Module.Connection;
 
                     OracleParameter p_key = new OracleParameter("f_key", OracleDbType.Decimal);
                     OracleParameter p_name = new OracleParameter("f_name", OracleDbType.Varchar2);
@@ -96,7 +96,7 @@ namespace imp_exp
         public void Load(decimal p_state, decimal p_owner)
         {
             OracleCommand ld_command = new OracleCommand();
-            ld_command.Connection = Module.Connection;
+            ld_command.Connection = obj_lib.Module.Connection;
             ld_command.CommandType = System.Data.CommandType.StoredProcedure;
             ld_command.CommandText = "pkg_sepo_import_global.loadinstructionstb";
 

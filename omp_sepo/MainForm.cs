@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using obj_lib.Entities;
+using obj_lib.Repositories;
+using System.Windows.Forms;
 using ui_lib;
 
 namespace omp_sepo
@@ -97,7 +99,11 @@ namespace omp_sepo
             Text = Program.Settings.ProgramName;
 
             treeTaskView.Init();
-            treeTaskView.LoadData();
+
+            treeTaskView.LoadData(
+                new ViewRepository<SEPO_TASK_FOLDER_LIST>(),
+                new ViewRepository<SEPO_TASK_LIST>());
+
             treeTaskView.ExpandAll();
 
             SetMainMenu();

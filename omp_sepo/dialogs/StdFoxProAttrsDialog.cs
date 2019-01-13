@@ -1,4 +1,5 @@
-﻿using Oracle.DataAccess.Client;
+﻿using obj_lib.Entities;
+using obj_lib.Repositories;
 using System;
 using System.Windows.Forms;
 
@@ -6,36 +7,16 @@ namespace omp_sepo.dialogs
 {
     public partial class StdFoxProAttrsDialog : Form
     {
+        private IRepository<SEPO_STD_FOXPRO_ATTRS> attrsRepo;
+
         public DialogType DialogType { get; private set; }
 
-        public decimal Id { get; set; }
+        public SEPO_STD_FOXPRO_ATTRS Attr { get; set; }
 
-        public string Shortname
+        public StdFoxProAttrsDialog(IRepository<SEPO_STD_FOXPRO_ATTRS> repo)
         {
-            get
-            {
-                return shortnameBox.Text;
-            }
-        }
+            attrsRepo = repo;
 
-        public string Name_
-        {
-            get
-            {
-                return nameBox.Text;
-            }
-        }
-
-        public short Type_
-        {
-            get
-            {
-                return (short)typeBox.SelectedValue;
-            }
-        }
-
-        public StdFoxProAttrsDialog()
-        {
             InitializeComponent();
 
             DialogType = DialogType.Add;
@@ -49,24 +30,17 @@ namespace omp_sepo.dialogs
             typeBox.SelectedValueChanged += OnDataChanged;
         }
 
-        public StdFoxProAttrsDialog(decimal id, string shortname, string name, string type)
+        public StdFoxProAttrsDialog() : this(new Repository<SEPO_STD_FOXPRO_ATTRS>())
         {
-            InitializeComponent();
+        }
 
+        public StdFoxProAttrsDialog(SEPO_STD_FOXPRO_ATTRS attr, IRepository<SEPO_STD_FOXPRO_ATTRS> repo)
+            : this(repo)
+
+        {
             DialogType = DialogType.Edit;
             this.Text = "Редактирование атрибута";
-            SetData();
-            okButton.Enabled = IsCorrectData();
-            okButton.Click += OnOkClicked;
-
-            shortnameBox.TextChanged += OnDataChanged;
-            nameBox.TextChanged += OnDataChanged;
-            typeBox.SelectedValueChanged += OnDataChanged;
-
-            Id = id;
-            shortnameBox.Text = shortname;
-            nameBox.Text = name;
-            typeBox.Text = type;
+            Attr = attr;
         }
 
         private void OnDataChanged(object sender, EventArgs args)
@@ -101,26 +75,15 @@ namespace omp_sepo.dialogs
             {
                 try
                 {
-                    OracleCommand sq_cmd = new OracleCommand();
-                    sq_cmd.Connection = Module.Connection;
-                    sq_cmd.CommandText = "select sq_sepo_std_foxpro_attrs.nextval from dual";
+                    SEPO_STD_FOXPRO_ATTRS attr = new SEPO_STD_FOXPRO_ATTRS();
 
-                    decimal id = (decimal)sq_cmd.ExecuteScalar();
+                    attr.NAME = nameBox.Text;
+                    attr.SHORTNAME = shortnameBox.Text;
+                    attr.TYPE_ = (short)typeBox.SelectedValue;
 
-                    OracleCommand cmd = new OracleCommand();
-                    cmd.Connection = Module.Connection;
-                    cmd.CommandText = @"insert into sepo_std_foxpro_attrs (id, shortname, name, type_)
-                                    values (:id, :shortname, :name, :type_)";
+                    attrsRepo.Create(attr);
+                    Attr = attr;
 
-                    OracleParameter p_id = new OracleParameter("id", id);
-                    OracleParameter p_shortname = new OracleParameter("shortname", shortnameBox.Text);
-                    OracleParameter p_name = new OracleParameter("name", nameBox.Text);
-                    OracleParameter p_type = new OracleParameter("type_", typeBox.SelectedValue);
-
-                    cmd.Parameters.AddRange(new OracleParameter[] { p_id, p_shortname, p_name, p_type });
-                    cmd.ExecuteNonQuery();
-
-                    Id = id;
                     DialogResult = DialogResult.OK;
                 }
                 catch (Exception exc)
@@ -132,18 +95,11 @@ namespace omp_sepo.dialogs
             {
                 try
                 {
-                    OracleCommand cmd = new OracleCommand();
-                    cmd.Connection = Module.Connection;
-                    cmd.CommandText = @"update sepo_std_foxpro_attrs set shortname = :shortname,
-                                        name = :name, type_ = :type_ where id = :id";
+                    Attr.SHORTNAME = shortnameBox.Text;
+                    Attr.NAME = nameBox.Text;
+                    Attr.TYPE_ = (short)typeBox.SelectedValue;
 
-                    OracleParameter p_id = new OracleParameter("id", Id);
-                    OracleParameter p_shortname = new OracleParameter("shortname", shortnameBox.Text);
-                    OracleParameter p_name = new OracleParameter("name", nameBox.Text);
-                    OracleParameter p_type = new OracleParameter("type_", typeBox.SelectedValue);
-
-                    cmd.Parameters.AddRange(new OracleParameter[] { p_shortname, p_name, p_type, p_id });
-                    cmd.ExecuteNonQuery();
+                    attrsRepo.Update(Attr);
 
                     DialogResult = DialogResult.OK;
                 }

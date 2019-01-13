@@ -39,10 +39,8 @@ namespace omp_sepo.dialogs
 
         private void LoadData()
         {
-            using (OracleTransaction transaction = Module.Connection.BeginTransaction())
+            using (OracleTransaction transaction = obj_lib.Module.Connection.BeginTransaction())
             {
-                imp_exp.Module.Connection = Module.Connection;
-
                 try
                 {
                     StandardFixtureManager mng = new StandardFixtureManager();

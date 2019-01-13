@@ -32,7 +32,7 @@ namespace omp_sepo.dialogs
         private void FillData()
         {
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = "select f_level, f_name from sepo_std_folders where f_owner = :f_owner";
 
             OracleParameter p_owner = command.Parameters.Add("f_owner", null);

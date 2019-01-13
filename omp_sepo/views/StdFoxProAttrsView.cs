@@ -1,18 +1,23 @@
-﻿using obj_lib;
+﻿using obj_lib.Entities;
+using obj_lib.Repositories;
 using omp_sepo.dialogs;
-using Oracle.DataAccess.Client;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace omp_sepo.views
 {
     public class StdFoxProAttrsView : ListView
     {
+        private IRepository<SEPO_STD_FOXPRO_ATTRS> attrsRepo;
+
         private ContextMenuStrip menu;
         private ToolStripItem addMenuItem, editMenuItem, deleteMenuItem;
 
-        public StdFoxProAttrsView()
+        public StdFoxProAttrsView(IRepository<SEPO_STD_FOXPRO_ATTRS> repo)
         {
+            attrsRepo = repo;
+
             this.View = View.Details;
             this.MultiSelect = false;
             this.FullRowSelect = true;
@@ -26,6 +31,10 @@ namespace omp_sepo.views
 
             InizializeMenu();
             UpdateScene();
+        }
+
+        public StdFoxProAttrsView() : this(new Repository<SEPO_STD_FOXPRO_ATTRS>())
+        {
         }
 
         private void OnSceneClick(object sender, MouseEventArgs e)
@@ -63,16 +72,11 @@ namespace omp_sepo.views
 
         private void OnAddItemClick(object sender, EventArgs args)
         {
-            StdFoxProAttrsDialog dlg = new StdFoxProAttrsDialog();
+            StdFoxProAttrsDialog dlg = new StdFoxProAttrsDialog(attrsRepo);
+
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                V_SEPO_STD_FOXPRO_ATTRS attr = new V_SEPO_STD_FOXPRO_ATTRS();
-                attr.Id = dlg.Id;
-                attr.Name = dlg.Name_;
-                attr.Shortname = dlg.Shortname;
-                attr.Type_ = dlg.Type_;
-
-                AddItem(attr);
+                AddItem(dlg.Attr);
             }
         }
 
@@ -82,22 +86,14 @@ namespace omp_sepo.views
             {
                 ListViewItem item = this.SelectedItems[0];
 
-                StdFoxProAttrsDialog dlg = new StdFoxProAttrsDialog(
-                    (decimal)item.Tag,
-                    item.SubItems[0].Text,
-                    item.SubItems[1].Text,
-                    item.SubItems[2].Text
-                    );
+                int id = (int)item.Tag;
+                SEPO_STD_FOXPRO_ATTRS attr = attrsRepo.GetById(id);
+
+                StdFoxProAttrsDialog dlg = new StdFoxProAttrsDialog(attr, attrsRepo);
 
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    V_SEPO_STD_FOXPRO_ATTRS attr = new V_SEPO_STD_FOXPRO_ATTRS();
-                    attr.Id = dlg.Id;
-                    attr.Name = dlg.Name_;
-                    attr.Shortname = dlg.Shortname;
-                    attr.Type_ = dlg.Type_;
-
-                    UpdateItem(item, attr);
+                    UpdateItem(item, dlg.Attr);
                 }
             }
         }
@@ -107,16 +103,12 @@ namespace omp_sepo.views
             if (this.SelectedItems.Count > 0)
             {
                 ListViewItem item = this.SelectedItems[0];
-                decimal id = (decimal)item.Tag;
+                decimal id = (int)item.Tag;
 
                 try
                 {
-                    OracleCommand cmd = new OracleCommand();
-                    cmd.Connection = Module.Connection;
-                    cmd.CommandText = "delete from sepo_std_foxpro_attrs where id = :id";
-
-                    cmd.Parameters.Add("id", id);
-                    cmd.ExecuteNonQuery();
+                    SEPO_STD_FOXPRO_ATTRS attr = attrsRepo.GetById(id);
+                    attrsRepo.Delete(attr);
 
                     this.Items.Remove(item);
                 }
@@ -127,41 +119,30 @@ namespace omp_sepo.views
             }
         }
 
-        private void AddItem(V_SEPO_STD_FOXPRO_ATTRS attr)
+        private void AddItem(SEPO_STD_FOXPRO_ATTRS attr)
         {
-            ListViewItem item = new ListViewItem(attr.Shortname);
-            item.SubItems.Add(attr.Name);
-            item.SubItems.Add(attr.TypeName);
-            item.Tag = attr.Id;
+            ListViewItem item = new ListViewItem(attr.SHORTNAME);
+            item.SubItems.Add(attr.NAME);
+            item.SubItems.Add(attr.TYPENAME);
+            item.Tag = attr.ID;
 
             this.Items.Add(item);
         }
 
-        private void UpdateItem(ListViewItem item, V_SEPO_STD_FOXPRO_ATTRS attr)
+        private void UpdateItem(ListViewItem item, SEPO_STD_FOXPRO_ATTRS attr)
         {
-            item.SubItems[0].Text = attr.Shortname;
-            item.SubItems[1].Text = attr.Name;
-            item.SubItems[2].Text = attr.TypeName;
+            item.SubItems[0].Text = attr.SHORTNAME;
+            item.SubItems[1].Text = attr.NAME;
+            item.SubItems[2].Text = attr.TYPENAME;
         }
 
         private void UpdateScene()
         {
-            OracleCommand cmd = new OracleCommand();
-            cmd.Connection = Module.Connection;
-            cmd.CommandText = "select id, shortname, name, type_ from sepo_std_foxpro_attrs order by id";
+            Items.Clear();
 
-            using (OracleDataReader rd = cmd.ExecuteReader())
+            foreach (var attr in attrsRepo.GetQuery().OrderBy(x => x.ID))
             {
-                while (rd.Read())
-                {
-                    V_SEPO_STD_FOXPRO_ATTRS attr = new V_SEPO_STD_FOXPRO_ATTRS();
-                    attr.Id = rd.GetDecimal(0);
-                    attr.Shortname = rd.GetString(1);
-                    attr.Name = rd.GetString(2);
-                    attr.Type_ = rd.GetInt16(3);
-
-                    AddItem(attr);
-                }
+                AddItem(attr);
             }
         }
     }

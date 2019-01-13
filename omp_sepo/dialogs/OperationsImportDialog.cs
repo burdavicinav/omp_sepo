@@ -1,7 +1,8 @@
 ﻿using imp_exp;
-using Oracle.DataAccess.Client;
+using obj_lib.Entities;
+using obj_lib.Repositories;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using ui_lib;
@@ -10,31 +11,26 @@ namespace omp_sepo.dialogs
 {
     public partial class OperationsImportDialog : Form
     {
+        private IViewRepository<TECHOPERATION_TYPES> _repoOperTypes;
+
         private void LoadOperTypes()
         {
-            Dictionary<decimal, string> types = new Dictionary<decimal, string>();
+            var types = _repoOperTypes.GetQuery()
+                .Select(x => new { Key = x.CODE, Value = x.NAME })
+                .OrderBy(x => x.Value)
+                .ToList();
 
-            OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
-            command.CommandText = "select code, name from techoperation_types order by name";
-
-            types.Add(-1, String.Empty);
-
-            using (OracleDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    types.Add(reader.GetDecimal(0), reader.GetString(1));
-                }
-            }
+            types.Add(new { Key = -1, Value = String.Empty });
 
             operTypeBox.ValueMember = "Key";
             operTypeBox.DisplayMember = "Value";
             operTypeBox.DataSource = new BindingSource(types, null);
         }
 
-        public OperationsImportDialog()
+        public OperationsImportDialog(IViewRepository<TECHOPERATION_TYPES> repo)
         {
+            _repoOperTypes = repo;
+
             InitializeComponent();
             LoadOperTypes();
 
@@ -44,6 +40,10 @@ namespace omp_sepo.dialogs
 
             okButton.Enabled = false;
             TaskAccept = false;
+        }
+
+        public OperationsImportDialog() : this(new ViewRepository<TECHOPERATION_TYPES>())
+        {
         }
 
         private void ChangeOperTypeValue(object sender, EventArgs e)
@@ -70,9 +70,7 @@ namespace omp_sepo.dialogs
         {
             try
             {
-                decimal? opertype = ((decimal)operTypeBox.SelectedValue == -1) ? null : (decimal?)operTypeBox.SelectedValue;
-
-                imp_exp.Module.Connection = omp_sepo.Module.Connection;
+                int? opertype = ((int)operTypeBox.SelectedValue == -1) ? null : (int?)operTypeBox.SelectedValue;
 
                 TechnologyOperationsManager import = new TechnologyOperationsManager();
                 import.LoadFromXml(fileBox.TextValue, fileDopBox.TextValue);

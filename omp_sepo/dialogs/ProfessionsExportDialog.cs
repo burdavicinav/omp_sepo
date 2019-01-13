@@ -16,8 +16,6 @@ namespace omp_sepo.dialogs
 
             try
             {
-                imp_exp.Module.Connection = omp_sepo.Module.Connection;
-
                 IExportManager export = new ProfessionsManager();
                 export.ExportToXml(this.File);
 

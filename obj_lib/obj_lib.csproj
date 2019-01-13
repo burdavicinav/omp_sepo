@@ -48,8 +48,14 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    <Reference Include="FluentNHibernate, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.1.2.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.DataAccess, Version=2.112.3.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -69,79 +75,64 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ATTACHMENTS_GROUPS.cs">
-      <DependentUpon>OmpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BUSINESSOBJ_STATES.cs">
-      <DependentUpon>OmpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BUSINESS_OBJECTS.cs">
-      <DependentUpon>OmpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OmpModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OmpModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OmpModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OmpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OmpModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OmpModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="SEPO_TFLEX_OBJ_SYNCH.cs">
-      <DependentUpon>OmpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SEPO_TFLEX_SIGN_DOCS.cs">
-      <DependentUpon>OmpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SEPO_TFLEX_SPEC_SECTIONS.cs">
-      <DependentUpon>OmpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SPC_SECTIONS.cs">
-      <DependentUpon>OmpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="V_SEPO_OSN_TYPES.cs" />
+    <Compile Include="Entities\ATTACHMENTS_GROUPS.cs" />
+    <Compile Include="Entities\BUSINESSOBJ_STATES.cs" />
+    <Compile Include="Entities\BUSINESS_OBJECTS.cs" />
+    <Compile Include="Entities\DOCUMENTS_PARAMS.cs" />
+    <Compile Include="Entities\DOCUMENTS_PARTS.cs" />
+    <Compile Include="Entities\SEPO_STD_FOLDERS.cs" />
+    <Compile Include="Entities\SEPO_TASK_FOLDER_LIST.cs" />
+    <Compile Include="Entities\SEPO_TASK_LIST.cs" />
+    <Compile Include="Entities\SEPO_TFLEX_OBJ_SYNCH.cs" />
+    <Compile Include="Entities\SEPO_TFLEX_SIGN_DOCS.cs" />
+    <Compile Include="Entities\SEPO_TFLEX_SPEC_SECTIONS.cs" />
+    <Compile Include="Entities\SPC_SECTIONS.cs" />
+    <Compile Include="Entities\TECHOPERATION_TYPES.cs" />
+    <Compile Include="Entities\V_SEPO_TFLEX_BO_TYPES.cs" />
+    <Compile Include="Entities\V_SEPO_TFLEX_OBJ_SYNCH.cs" />
+    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="Mappings\AttachmentsGroupsMap.cs" />
+    <Compile Include="Mappings\BusinessObjectsMap.cs" />
+    <Compile Include="Mappings\BusinessObjStatesMap.cs" />
+    <Compile Include="Mappings\DocumentsParamsMap.cs" />
+    <Compile Include="Mappings\DocumentsPartsMap.cs" />
+    <Compile Include="Mappings\SepoStdFoldersMap.cs" />
+    <Compile Include="Mappings\SepoStdFoxProAttrsMap.cs" />
+    <Compile Include="Mappings\SepoTaskFolderListMap.cs" />
+    <Compile Include="Mappings\SepoTaskListMap.cs" />
+    <Compile Include="Mappings\SepoTFlexSectionMap.cs" />
+    <Compile Include="Mappings\SepoTFlexSignDocsMap.cs" />
+    <Compile Include="Mappings\SepoTFlexObjSynchMap.cs" />
+    <Compile Include="Mappings\SpcSectionsMap.cs" />
+    <Compile Include="Mappings\TechoperationTypesMap.cs" />
+    <Compile Include="Mappings\VSepoOsnTypesMap.cs" />
+    <Compile Include="Mappings\VSepoStdAttrsMap.cs" />
+    <Compile Include="Mappings\VSepoStdSchemesMap.cs" />
+    <Compile Include="Mappings\VSepoStdTablesMap.cs" />
+    <Compile Include="Mappings\VSepoTFlexBoTypesMap.cs" />
+    <Compile Include="Mappings\VSepoTFlexObjSynchMap.cs" />
+    <Compile Include="Entities\V_SEPO_OSN_TYPES.cs" />
+    <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="V_SEPO_STD_ATTRS.cs" />
-    <Compile Include="V_SEPO_STD_FOXPRO_ATTRS.cs" />
-    <Compile Include="V_SEPO_STD_SCHEMES.cs" />
-    <Compile Include="V_SEPO_STD_TABLES.cs" />
-    <Compile Include="V_SEPO_TFLEX_BO_TYPES.cs">
-      <DependentUpon>OmpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="V_SEPO_TFLEX_OBJ_SYNCH.cs">
-      <DependentUpon>OmpModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Entities\V_SEPO_STD_ATTRS.cs" />
+    <Compile Include="Entities\SEPO_STD_FOXPRO_ATTRS.cs" />
+    <Compile Include="Entities\V_SEPO_STD_SCHEMES.cs" />
+    <Compile Include="Entities\V_SEPO_STD_TABLES.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IViewRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\ViewRepository.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="OmpModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OmpModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="App.Config" />
-    <None Include="OmpModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OmpModel.edmx</DependentUpon>
-      <LastGenOutput>OmpModel.Context.cs</LastGenOutput>
-    </None>
-    <None Include="OmpModel.edmx.diagram">
-      <DependentUpon>OmpModel.edmx</DependentUpon>
-    </None>
-    <None Include="OmpModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OmpModel.edmx</DependentUpon>
-      <LastGenOutput>OmpModel.cs</LastGenOutput>
-    </None>
+    <None Include="Design\Diagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

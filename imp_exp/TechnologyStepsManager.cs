@@ -23,7 +23,7 @@ namespace imp_exp
         {
             OracleCommand del_command = new OracleCommand(
                         "delete from sepo_tech_step_texts",
-                        Module.Connection
+                        obj_lib.Module.Connection
                         );
             del_command.ExecuteNonQuery();
 
@@ -33,7 +33,7 @@ namespace imp_exp
             OracleCommand command = new OracleCommand(
                 @"insert into sepo_tech_steps (f_key, f_owner, f_level, f_name)
                             values (:key, :owner, :level_, :name)",
-                Module.Connection
+                obj_lib.Module.Connection
                 );
 
             OracleParameter p_key = new OracleParameter("key", OracleDbType.Decimal);
@@ -67,7 +67,7 @@ namespace imp_exp
         private void LoadXmlStepTexts(string file)
         {
             OracleCommand command_al = new OracleCommand();
-            command_al.Connection = Module.Connection;
+            command_al.Connection = obj_lib.Module.Connection;
 
             command_al.CommandText =
                 @"insert into sepo_tech_step_texts (f_key, f_level, f_type, f_numbered, f_blob)
@@ -122,7 +122,7 @@ namespace imp_exp
 
         public void LoadFromXml(string file, string file_dop)
         {
-            using (OracleTransaction transaction = Module.Connection.BeginTransaction())
+            using (OracleTransaction transaction = obj_lib.Module.Connection.BeginTransaction())
             {
                 try
                 {
@@ -137,7 +137,7 @@ namespace imp_exp
 
                     //OracleCommand command_log = new OracleCommand(
                     //       "insert into sepo_xml_log values (:log_)",
-                    //       Module.Connection
+                    //       obj_lib.Module.Connection
                     //       );
                     //command_log.Parameters.Add("log_", level);
                     //command_log.ExecuteNonQuery();
@@ -157,12 +157,12 @@ namespace imp_exp
 
         public void Load(int is_load_classify_catalogs = 1)
         {
-            using (OracleTransaction transaction = Module.Connection.BeginTransaction())
+            using (OracleTransaction transaction = obj_lib.Module.Connection.BeginTransaction())
             {
                 try
                 {
                     OracleCommand command = new OracleCommand();
-                    command.Connection = Module.Connection;
+                    command.Connection = obj_lib.Module.Connection;
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.CommandText = "pkg_sepo_import_global.clearsteps";
                     command.ExecuteNonQuery();

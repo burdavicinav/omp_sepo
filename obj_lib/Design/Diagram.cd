@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="obj_lib.Entities.ATTACHMENTS_GROUPS">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAABAAAAAQAAAAAAACAAAAAAACCAAAAAAEA=</HashCode>
+      <FileName>Entities\ATTACHMENTS_GROUPS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="obj_lib.Entities.BUSINESSOBJ_STATES">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <AssociationLine Name="ADDITIONAL_TO" Type="obj_lib.Entities.BUSINESSOBJ_STATES">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.378" Y="0.478" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="TO_STATE" Type="obj_lib.Entities.BUSINESSOBJ_STATES">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.069" Y="0.349" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="TO_STATE_BY_MAIL_CIRC" Type="obj_lib.Entities.BUSINESSOBJ_STATES">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.215" Y="-0.32" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAIAKAIIIIBAAAgAQAAABAAAAASBgAABCCAAAAAAkA=</HashCode>
+      <FileName>Entities\BUSINESSOBJ_STATES.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ADDITIONAL_TO" />
+      <Property Name="TO_STATE" />
+      <Property Name="TO_STATE_BY_MAIL_CIRC" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="obj_lib.Entities.SEPO_TFLEX_SPEC_SECTIONS">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAQEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\SEPO_TFLEX_SPEC_SECTIONS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="obj_lib.Entities.SEPO_TFLEX_SIGN_DOCS">
+    <Position X="1" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAEAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Entities\SEPO_TFLEX_SIGN_DOCS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="obj_lib.Entities.SEPO_TFLEX_OBJ_SYNCH">
+    <Position X="4" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAACAAEAAgAAAhAAAAAAAAAAAAAAACAAAACAAAAA=</HashCode>
+      <FileName>Entities\SEPO_TFLEX_OBJ_SYNCH.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TFLEX_SECTION" />
+      <Property Name="TFLEX_DOCSIGN" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="obj_lib.Entities.V_SEPO_TFLEX_OBJ_SYNCH">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABCAAIAkABghAQAAAAIEAAAAEAAIIAAAAAAIIgAAI=</HashCode>
+      <FileName>Entities\V_SEPO_TFLEX_OBJ_SYNCH.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="obj_lib.Entities.BUSINESS_OBJECTS">
+    <Position X="12.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAIEABEFCQAAAAAAAAAACBBIIAAAAAQEBAgEA=</HashCode>
+      <FileName>Entities\BUSINESS_OBJECTS.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TODAY_STATE" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="obj_lib.Entities.V_SEPO_OSN_TYPES">
+    <Position X="1" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAgAAAAAAAAAAAAAAAAAAAAACAAAACAAA=</HashCode>
+      <FileName>Entities\V_SEPO_OSN_TYPES.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="obj_lib.Entities.V_SEPO_STD_ATTRS">
+    <Position X="3.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAMICAAAAAIAAACEAAMAAAAAAAAAAAAADAQQAAEA=</HashCode>
+      <FileName>Entities\V_SEPO_STD_ATTRS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="obj_lib.Entities.SEPO_STD_FOXPRO_ATTRS">
+    <Position X="6.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAABAAAACAIAAAAEA=</HashCode>
+      <FileName>Entities\SEPO_STD_FOXPRO_ATTRS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="obj_lib.Entities.V_SEPO_STD_SCHEMES">
+    <Position X="9.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIMAECAAAAAAAAAAIAAAAAACAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Entities\V_SEPO_STD_SCHEMES.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="obj_lib.Entities.V_SEPO_STD_TABLES">
+    <Position X="12" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAEIAAAAAgAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\V_SEPO_STD_TABLES.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="obj_lib.Entities.SEPO_STD_FOLDERS">
+    <Position X="14.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAEAAAAAAgAAAAAAAAAAEAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Entities\SEPO_STD_FOLDERS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="obj_lib.Entities.SEPO_TASK_FOLDER_LIST">
+    <Position X="15.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAgAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Entities\SEPO_TASK_FOLDER_LIST.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ID_PARENT" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="obj_lib.Entities.SEPO_TASK_LIST">
+    <Position X="15.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAIAAAAAAAAEA=</HashCode>
+      <FileName>Entities\SEPO_TASK_LIST.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ID_FOLDER" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="obj_lib.Entities.TECHOPERATION_TYPES">
+    <Position X="15.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAIAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Entities\TECHOPERATION_TYPES.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="obj_lib.Entities.DOCUMENTS_PARTS">
+    <Position X="17.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAgAAAABABAAAAAAAAA=</HashCode>
+      <FileName>Entities\DOCUMENTS_PARTS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="obj_lib.Entities.DOCUMENTS_PARAMS">
+    <Position X="19.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAQoACgBAIAAgAABAAAAAgBBgAAgAAAAABAIEA=</HashCode>
+      <FileName>Entities\DOCUMENTS_PARAMS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -36,7 +36,6 @@ namespace omp_sepo.dialogs
         {
             try
             {
-                imp_exp.Module.Connection = omp_sepo.Module.Connection;
                 imp_exp.TechnologyStepsManager mngr = new imp_exp.TechnologyStepsManager();
 
                 mngr.LoadFromXml(

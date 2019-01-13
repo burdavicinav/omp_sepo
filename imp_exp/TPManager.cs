@@ -35,7 +35,7 @@ namespace imp_exp
             Log("Удаление данных");
 #endif
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandType = System.Data.CommandType.StoredProcedure;
             command.CommandText = "pkg_sepo_import_global.cleartpdata";
 
@@ -57,11 +57,11 @@ namespace imp_exp
             XName articles = tp_doc.GetXName("Articles");
 
             OracleCommand sq_cmd = new OracleCommand();
-            sq_cmd.Connection = Module.Connection;
+            sq_cmd.Connection = obj_lib.Module.Connection;
             sq_cmd.CommandText = "select sq_sepo_tech_processes.nextval from dual";
 
             OracleCommand tp_cmd = new OracleCommand();
-            tp_cmd.Connection = Module.Connection;
+            tp_cmd.Connection = obj_lib.Module.Connection;
             tp_cmd.CommandText =
                 @"insert into sepo_tech_processes
                     (id, key_, designation, name, doc_id, kind, production_id, version_key)
@@ -88,7 +88,7 @@ namespace imp_exp
             });
 
             OracleCommand art_cmd = new OracleCommand();
-            art_cmd.Connection = Module.Connection;
+            art_cmd.Connection = obj_lib.Module.Connection;
             art_cmd.CommandText =
                 @"insert into sepo_tp_to_dce (id_tp, key_, designation, name, art_id)
                     values (:id_tp, :key_, :designation, :name, :art_id)";
@@ -151,7 +151,7 @@ namespace imp_exp
             XName entity = tp_doc.GetXName("Entity");
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"insert into sepo_tp_entities_legend (f_recordid, f_type, f_name, f_tblkey)
                                     values (:f_recordid, :f_type, :f_name, :f_tblkey)";
 
@@ -174,11 +174,11 @@ namespace imp_exp
             }
 
             OracleCommand sq_cmd = new OracleCommand();
-            sq_cmd.Connection = Module.Connection;
+            sq_cmd.Connection = obj_lib.Module.Connection;
             sq_cmd.CommandText = "select sq_sepo_tp_entities.nextval from dual";
 
             OracleCommand ent_command = new OracleCommand();
-            ent_command.Connection = Module.Connection;
+            ent_command.Connection = obj_lib.Module.Connection;
             ent_command.CommandText = @"insert into sepo_tp_entities (id, f_code, f_name, f_recordid, f_record,
                                     f_type, f_reference, f_linkcode, f_field) values (:id, :p_code, :p_name,
                                     :p_recordid, :p_record, :p_type, :p_reference, :p_linkcode, :p_field)";
@@ -235,7 +235,7 @@ namespace imp_exp
             XName entity = doc.GetXName("Entity");
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"insert into sepo_tp_fields (id_tp, field_name, f_value)
                                         values (:id_tp, :field_name, :f_value)";
 
@@ -248,7 +248,7 @@ namespace imp_exp
             p_id_tp.Value = id_tp;
 
             OracleCommand comment_cmd = new OracleCommand();
-            comment_cmd.Connection = Module.Connection;
+            comment_cmd.Connection = obj_lib.Module.Connection;
             comment_cmd.CommandText = @"insert into sepo_tp_comments (id_tp, field_name, comment_)
                                         values (:id_tp, :field_name, :comment_)";
 
@@ -299,11 +299,11 @@ namespace imp_exp
             if (tp.Element(opers) == null) return;
 
             OracleCommand sq_op_cmd = new OracleCommand();
-            sq_op_cmd.Connection = Module.Connection;
+            sq_op_cmd.Connection = obj_lib.Module.Connection;
             sq_op_cmd.CommandText = "select sq_sepo_tp_opers.nextval from dual";
 
             OracleCommand op_cmd = new OracleCommand();
-            op_cmd.Connection = Module.Connection;
+            op_cmd.Connection = obj_lib.Module.Connection;
             op_cmd.CommandText = @"insert into sepo_tp_opers (id, id_tp, key_, reckey, order_, date_,
                                     num, place, tpkey) values (:id, :id_tp, :key_, :reckey, :order_, :date_,
                                     :num, :place, :tpkey)";
@@ -333,7 +333,7 @@ namespace imp_exp
             p_id_tp.Value = id_tp;
 
             OracleCommand op_ent_cmd = new OracleCommand();
-            op_ent_cmd.Connection = Module.Connection;
+            op_ent_cmd.Connection = obj_lib.Module.Connection;
             op_ent_cmd.CommandText = @"insert into sepo_tp_oper_fields (id_oper, field_name, f_value)
                                             values (:id_oper, :field_name, :f_value)";
 
@@ -344,7 +344,7 @@ namespace imp_exp
             op_ent_cmd.Parameters.AddRange(new OracleParameter[] { p_id, p_field_name, p_value });
 
             OracleCommand op_comment_cmd = new OracleCommand();
-            op_comment_cmd.Connection = Module.Connection;
+            op_comment_cmd.Connection = obj_lib.Module.Connection;
             op_comment_cmd.CommandText = @"insert into sepo_tp_oper_comments (id_oper, field_name, comment_)
                                             values (:id_oper, :field_name, :comment_)";
 
@@ -410,11 +410,11 @@ namespace imp_exp
             if (tp.Element(steps) == null) return;
 
             OracleCommand sq_step_cmd = new OracleCommand();
-            sq_step_cmd.Connection = Module.Connection;
+            sq_step_cmd.Connection = obj_lib.Module.Connection;
             sq_step_cmd.CommandText = "select sq_sepo_tp_steps.nextval from dual";
 
             OracleCommand step_cmd = new OracleCommand();
-            step_cmd.Connection = Module.Connection;
+            step_cmd.Connection = obj_lib.Module.Connection;
             step_cmd.CommandText = @"insert into sepo_tp_steps (id, id_tp, key_, reckey, order_, date_,
                                     num, operkey) values (:id, :id_tp, :key_, :reckey, :order_, :date_,
                                     :num, :operkey)";
@@ -442,7 +442,7 @@ namespace imp_exp
             p_id_tp.Value = id_tp;
 
             OracleCommand step_ent_cmd = new OracleCommand();
-            step_ent_cmd.Connection = Module.Connection;
+            step_ent_cmd.Connection = obj_lib.Module.Connection;
             step_ent_cmd.CommandText = @"insert into sepo_tp_step_fields (id_step, field_name, f_value)
                                             values (:id_step, :field_name, :f_value)";
 
@@ -452,7 +452,7 @@ namespace imp_exp
             step_ent_cmd.Parameters.AddRange(new OracleParameter[] { p_id, p_field_name, p_value });
 
             OracleCommand step_comment_cmd = new OracleCommand();
-            step_comment_cmd.Connection = Module.Connection;
+            step_comment_cmd.Connection = obj_lib.Module.Connection;
             step_comment_cmd.CommandText = @"insert into sepo_tp_step_comments (id_step, field_name, comment_)
                                             values (:id_step, :field_name, :comment_)";
 
@@ -513,11 +513,11 @@ namespace imp_exp
             if (tp.Element(workers) == null) return;
 
             OracleCommand sq_wk_cmd = new OracleCommand();
-            sq_wk_cmd.Connection = Module.Connection;
+            sq_wk_cmd.Connection = obj_lib.Module.Connection;
             sq_wk_cmd.CommandText = "select sq_sepo_tp_workers.nextval from dual";
 
             OracleCommand wk_cmd = new OracleCommand();
-            wk_cmd.Connection = Module.Connection;
+            wk_cmd.Connection = obj_lib.Module.Connection;
             wk_cmd.CommandText = @"insert into sepo_tp_workers (id, id_tp, key_, reckey, tblkey, order_, date_,
                                     kind, count_, operkey, perehkey) values (:id, :id_tp, :key_, :reckey, :tblkey,
                                     :order_, :date_, :kind, :count_, :operkey, :perehkey)";
@@ -551,7 +551,7 @@ namespace imp_exp
             p_id_tp.Value = id_tp;
 
             OracleCommand wk_ent_cmd = new OracleCommand();
-            wk_ent_cmd.Connection = Module.Connection;
+            wk_ent_cmd.Connection = obj_lib.Module.Connection;
             wk_ent_cmd.CommandText = @"insert into sepo_tp_worker_fields (id_worker, field_name, f_value)
                                             values (:id_worker, :field_name, :f_value)";
 
@@ -607,11 +607,11 @@ namespace imp_exp
             if (tp.Element(equipments) == null) return;
 
             OracleCommand sq_eq_cmd = new OracleCommand();
-            sq_eq_cmd.Connection = Module.Connection;
+            sq_eq_cmd.Connection = obj_lib.Module.Connection;
             sq_eq_cmd.CommandText = "select sq_sepo_tp_equipments.nextval from dual";
 
             OracleCommand eq_cmd = new OracleCommand();
-            eq_cmd.Connection = Module.Connection;
+            eq_cmd.Connection = obj_lib.Module.Connection;
             eq_cmd.CommandText = @"insert into sepo_tp_equipments (id, id_tp, key_, reckey, order_, invnom, date_,
                                     operkey, perehkey) values (:id, :id_tp, :key_, :reckey, :order_, :invnom,
                                     :date_, :operkey, :perehkey)";
@@ -641,7 +641,7 @@ namespace imp_exp
             p_id_tp.Value = id_tp;
 
             OracleCommand eq_ent_cmd = new OracleCommand();
-            eq_ent_cmd.Connection = Module.Connection;
+            eq_ent_cmd.Connection = obj_lib.Module.Connection;
             eq_ent_cmd.CommandText = @"insert into sepo_tp_equipment_fields (id_equipment, field_name, f_value)
                                             values (:id_equipment, :field_name, :f_value)";
 
@@ -695,11 +695,11 @@ namespace imp_exp
             if (tp.Element(tools) == null) return;
 
             OracleCommand sq_tool_cmd = new OracleCommand();
-            sq_tool_cmd.Connection = Module.Connection;
+            sq_tool_cmd.Connection = obj_lib.Module.Connection;
             sq_tool_cmd.CommandText = "select sq_sepo_tp_tools.nextval from dual";
 
             OracleCommand tool_cmd = new OracleCommand();
-            tool_cmd.Connection = Module.Connection;
+            tool_cmd.Connection = obj_lib.Module.Connection;
             tool_cmd.CommandText = @"insert into sepo_tp_tools (id, id_tp, key_, reckey, tblkey, order_, date_,
                                     kind, count_, operkey, perehkey) values (:id, :id_tp, :key_, :reckey, :tblkey,
                                     :order_, :date_, :kind, :count_, :operkey, :perehkey)";
@@ -733,7 +733,7 @@ namespace imp_exp
             p_id_tp.Value = id_tp;
 
             OracleCommand tool_ent_cmd = new OracleCommand();
-            tool_ent_cmd.Connection = Module.Connection;
+            tool_ent_cmd.Connection = obj_lib.Module.Connection;
             tool_ent_cmd.CommandText = @"insert into sepo_tp_tool_fields (id_tool, field_name, f_value)
                                             values (:id_step, :field_name, :f_value)";
 
@@ -814,7 +814,7 @@ namespace imp_exp
             Log("Обновление ссылок");
 #endif
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandType = System.Data.CommandType.StoredProcedure;
             command.CommandText = "pkg_sepo_import_global.updatetplinks";
 
@@ -827,7 +827,7 @@ namespace imp_exp
             Log("Анализ формул стандартной оснастки");
 #endif
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandType = System.Data.CommandType.StoredProcedure;
             command.CommandText = "pkg_sepo_import_global.parsingstdfixformuls";
 
@@ -867,12 +867,12 @@ namespace imp_exp
 
         public void Load(decimal groupcode, decimal letter, decimal state, decimal owner)
         {
-            using (OracleTransaction transaction = Module.Connection.BeginTransaction())
+            using (OracleTransaction transaction = obj_lib.Module.Connection.BeginTransaction())
             {
                 try
                 {
                     OracleCommand command = new OracleCommand();
-                    command.Connection = Module.Connection;
+                    command.Connection = obj_lib.Module.Connection;
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.CommandText = "pkg_sepo_import_global.importtp";
 

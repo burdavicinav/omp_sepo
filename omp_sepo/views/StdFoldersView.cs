@@ -1,33 +1,28 @@
-﻿using obj_lib;
-using Oracle.DataAccess.Client;
+﻿using obj_lib.Entities;
+using obj_lib.Repositories;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace omp_sepo.views
 {
     public class StdFoldersView : TreeView
     {
-        public StdFoldersView(decimal id_record)
+        private IViewRepository<V_SEPO_STD_TABLES> tablesRepo;
+
+        private IViewRepository<SEPO_STD_FOLDERS> foldersRepo;
+
+        public StdFoldersView(
+            decimal id_record,
+            IViewRepository<V_SEPO_STD_TABLES> trepo,
+            IViewRepository<SEPO_STD_FOLDERS> frepo)
         {
-            OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
-            command.CommandText = @"select id, id_record, f_level, f_table, f_descr from v_sepo_std_tables
-                                        where id_record = :id_record";
+            tablesRepo = trepo;
+            foldersRepo = frepo;
 
-            command.Parameters.Add("id_record", id_record);
-
-            V_SEPO_STD_TABLES tbl = new V_SEPO_STD_TABLES();
-
-            using (OracleDataReader reader = command.ExecuteReader())
+            foreach (var table in tablesRepo.GetQuery().Where(x => x.ID_RECORD == id_record))
             {
-                reader.Read();
-                tbl.Id = reader.GetDecimal(0);
-                tbl.IdRecord = reader.GetDecimal(1);
-                tbl.FLevel = reader.GetDecimal(2);
-                tbl.FTable = reader.GetString(3);
-                tbl.FDescr = reader.GetString(4);
-
-                TreeNode tbl_node = new TreeNode(tbl.FTable + " " + tbl.FDescr);
-                tbl_node.Tag = tbl.FLevel;
+                TreeNode tbl_node = new TreeNode(table.F_TABLE + " " + table.F_DESCR);
+                tbl_node.Tag = table.F_LEVEL;
                 this.Nodes.Add(tbl_node);
 
                 BuildNodes(tbl_node);
@@ -36,25 +31,21 @@ namespace omp_sepo.views
             this.ExpandAll();
         }
 
+        public StdFoldersView(decimal id_record)
+            : this(id_record, new ViewRepository<V_SEPO_STD_TABLES>(), new ViewRepository<SEPO_STD_FOLDERS>())
+        {
+        }
+
         private void BuildNodes(TreeNode parent)
         {
-            OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
-            command.CommandText = "select f_owner, f_name from sepo_std_folders where f_level = :f_level";
-
-            command.Parameters.Add("f_level", parent.Tag);
-
-            using (OracleDataReader reader = command.ExecuteReader())
+            foreach (var folder in foldersRepo.GetQuery().Where(x => x.F_LEVEL == (int)parent.Tag))
             {
-                while (reader.Read())
-                {
-                    TreeNode node = new TreeNode(parent.Tag + " " + reader.GetString(1));
-                    node.Tag = reader.GetDecimal(0);
+                TreeNode node = new TreeNode(parent.Tag + " " + folder.F_NAME);
+                node.Tag = folder.F_OWNER;
 
-                    parent.Nodes.Add(node);
+                parent.Nodes.Add(node);
 
-                    BuildNodes(node);
-                }
+                BuildNodes(node);
             }
         }
     }

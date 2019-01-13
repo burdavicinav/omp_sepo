@@ -54,7 +54,7 @@ namespace omp_sepo.dialogs
             Dictionary<decimal, string> units = new Dictionary<decimal, string>();
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"select code, shortname from measures order by shortname";
 
             OracleDataReader reader = command.ExecuteReader();
@@ -73,7 +73,7 @@ namespace omp_sepo.dialogs
             Dictionary<decimal, string> owners = new Dictionary<decimal, string>();
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"select owner, name from owner_name order by name";
 
             OracleDataReader reader = command.ExecuteReader();
@@ -92,7 +92,7 @@ namespace omp_sepo.dialogs
             Dictionary<decimal, string> states = new Dictionary<decimal, string>();
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"select code, name from businessobj_states
                                     where botype = :id_type order by name";
 
@@ -127,7 +127,7 @@ namespace omp_sepo.dialogs
             Dictionary<decimal, string> types = new Dictionary<decimal, string>();
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"select code, name from fixture_types order by name";
 
             OracleDataReader reader = command.ExecuteReader();
@@ -163,7 +163,7 @@ namespace omp_sepo.dialogs
         private void DisableTriggers()
         {
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"select trigger_name from sepo_import_triggers_disable";
 
             OracleDataReader reader = command.ExecuteReader();
@@ -171,7 +171,7 @@ namespace omp_sepo.dialogs
             while (reader.Read())
             {
                 OracleCommand exec_command = new OracleCommand();
-                exec_command.Connection = Module.Connection;
+                exec_command.Connection = obj_lib.Module.Connection;
                 exec_command.CommandText =
                     @"alter trigger " + reader.GetString(0) + " disable";
 
@@ -182,7 +182,7 @@ namespace omp_sepo.dialogs
         private void EnableTriggers()
         {
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"select trigger_name from sepo_import_triggers_disable";
 
             OracleDataReader reader = command.ExecuteReader();
@@ -190,7 +190,7 @@ namespace omp_sepo.dialogs
             while (reader.Read())
             {
                 OracleCommand exec_command = new OracleCommand();
-                exec_command.Connection = Module.Connection;
+                exec_command.Connection = obj_lib.Module.Connection;
                 exec_command.CommandText =
                     @"alter trigger " + reader.GetString(0) + " enable";
 
@@ -200,7 +200,7 @@ namespace omp_sepo.dialogs
 
         private void OnAcceptClicked(object sender, EventArgs args)
         {
-            using (OracleTransaction transaction = Module.Connection.BeginTransaction())
+            using (OracleTransaction transaction = obj_lib.Module.Connection.BeginTransaction())
             {
                 try
                 {
@@ -211,7 +211,7 @@ namespace omp_sepo.dialogs
                     if (fixtureNodesBox.Checked)
                     {
                         command = new OracleCommand();
-                        command.Connection = Module.Connection;
+                        command.Connection = obj_lib.Module.Connection;
                         command.CommandType = CommandType.StoredProcedure;
                         command.CommandText = "pkg_sepo_import_global.loadfixturenodes";
 
@@ -226,7 +226,7 @@ namespace omp_sepo.dialogs
                     if (fixtureBox.Checked)
                     {
                         command = new OracleCommand();
-                        command.Connection = Module.Connection;
+                        command.Connection = obj_lib.Module.Connection;
                         command.CommandType = CommandType.StoredProcedure;
                         command.CommandText = "pkg_sepo_import_global.loadfixture";
 
@@ -241,7 +241,7 @@ namespace omp_sepo.dialogs
                     if (detailsBox.Checked)
                     {
                         command = new OracleCommand();
-                        command.Connection = Module.Connection;
+                        command.Connection = obj_lib.Module.Connection;
                         command.CommandType = CommandType.StoredProcedure;
                         command.CommandText = "pkg_sepo_import_global.loadfixturedetails";
 
@@ -255,7 +255,7 @@ namespace omp_sepo.dialogs
                     if (specificationsBox.Checked)
                     {
                         command = new OracleCommand();
-                        command.Connection = Module.Connection;
+                        command.Connection = obj_lib.Module.Connection;
                         command.CommandType = CommandType.StoredProcedure;
                         command.CommandText = "pkg_sepo_import_global.loadfixturespecifications";
 

@@ -1,26 +1,42 @@
 ﻿using obj_lib;
+using obj_lib.Entities;
+using obj_lib.Repositories;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace omp_sepo.dialogs
 {
     public partial class TFlexDocsSignDialog : Form
     {
+        private IRepository<SEPO_TFLEX_SIGN_DOCS> signDocsRepo;
+
         private DialogType dialogType;
 
-        public decimal Id { get; set; }
+        public SEPO_TFLEX_SIGN_DOCS DocSign { get; set; }
 
-        public TFlexDocsSignDialog()
+        public TFlexDocsSignDialog(IRepository<SEPO_TFLEX_SIGN_DOCS> repo)
         {
-            InitializeComponent();
+            signDocsRepo = repo;
 
-            dialogType = DialogType.Add;
+            InitializeComponent();
 
             signBox.TextChanged += SectionBox_TextChanged;
             okButton.Enabled = false;
 
             okButton.Click += OkButton_Click;
+        }
+
+        public TFlexDocsSignDialog() : this(new Repository<SEPO_TFLEX_SIGN_DOCS>())
+        {
+            dialogType = DialogType.Add;
+        }
+
+        public TFlexDocsSignDialog(SEPO_TFLEX_SIGN_DOCS docSign, IRepository<SEPO_TFLEX_SIGN_DOCS> repo) : this(repo)
+        {
+            dialogType = DialogType.Edit;
+            DocSign = docSign;
+
+            signBox.Text = DocSign.SIGN;
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -32,39 +48,42 @@ namespace omp_sepo.dialogs
                     SIGN = signBox.Text
                 };
 
-                Module.Context.SEPO_TFLEX_SIGN_DOCS.Add(sign);
-
-                try
+                using (var transaction = new UnitOfWork())
                 {
-                    Module.Context.SaveChanges();
+                    try
+                    {
+                        signDocsRepo.Create(sign);
+                        DocSign = sign;
 
-                    Id = sign.ID;
+                        transaction.Commit();
 
-                    DialogResult = DialogResult.OK;
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show(exc.Message);
-
-                    Module.Context.SEPO_TFLEX_SIGN_DOCS.Remove(sign);
+                        DialogResult = DialogResult.OK;
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
                 }
             }
             else
             {
-                SEPO_TFLEX_SIGN_DOCS item =
-                    Module.Context.SEPO_TFLEX_SIGN_DOCS.Where(x => x.ID == Id).FirstOrDefault();
-
-                item.SIGN = signBox.Text;
-
-                try
+                using (var transaction = new UnitOfWork())
                 {
-                    Module.Context.SaveChanges();
+                    try
+                    {
+                        DocSign.SIGN = signBox.Text;
+                        signDocsRepo.Update(DocSign);
 
-                    DialogResult = DialogResult.OK;
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show(exc.Message);
+                        transaction.Commit();
+
+                        DialogResult = DialogResult.OK;
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
                 }
             }
         }
@@ -72,24 +91,6 @@ namespace omp_sepo.dialogs
         private void SectionBox_TextChanged(object sender, EventArgs e)
         {
             okButton.Enabled = (signBox.Text != String.Empty);
-        }
-
-        public TFlexDocsSignDialog(decimal id) : this()
-        {
-            dialogType = DialogType.Edit;
-            Id = id;
-
-            try
-            {
-                SEPO_TFLEX_SIGN_DOCS item =
-                    Module.Context.SEPO_TFLEX_SIGN_DOCS.Where(x => x.ID == id).FirstOrDefault();
-
-                signBox.Text = item.SIGN;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
         }
     }
 }

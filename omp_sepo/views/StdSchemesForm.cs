@@ -21,8 +21,8 @@ namespace omp_sepo.views
         {
             if (e.IsSelected)
             {
-                decimal id_record = (decimal)e.Item.Tag;
-                //attrsView.UpdateScene(id_record);
+                int id_record = (int)e.Item.Tag;
+                attrsView.UpdateScene(id_record);
             }
         }
 

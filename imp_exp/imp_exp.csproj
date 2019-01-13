@@ -67,7 +67,6 @@
     <Compile Include="IImportManager.cs" />
     <Compile Include="ImportManager.cs" />
     <Compile Include="ModelsEquipmentManager.cs" />
-    <Compile Include="Module.cs" />
     <Compile Include="ObjectManager.cs" />
     <Compile Include="ProfessionsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +85,10 @@
     <ProjectReference Include="..\general\general.csproj">
       <Project>{6c9d676d-5041-4919-8d3e-3d85840e350f}</Project>
       <Name>general</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\obj_lib\obj_lib.csproj">
+      <Project>{e5ddedb5-16c1-46b1-95fd-df5141103af5}</Project>
+      <Name>obj_lib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

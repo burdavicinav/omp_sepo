@@ -12,7 +12,7 @@ namespace omp_sepo.dialogs
             List<NameObject> objects = new List<NameObject>();
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"select code, clcode || ': ' || clname as name
                                     from classify where cltype = :cltype order by clname";
 
@@ -38,7 +38,7 @@ namespace omp_sepo.dialogs
             List<NameObject> objects = new List<NameObject>();
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"select owner, name from owner_name order by name";
 
             OracleDataReader reader = command.ExecuteReader();
@@ -93,7 +93,6 @@ namespace omp_sepo.dialogs
                 decimal classify = Convert.ToDecimal(classifyBox.SelectedValue);
                 decimal owner = Convert.ToDecimal(ownerBox.SelectedValue);
 
-                imp_exp.Module.Connection = omp_sepo.Module.Connection;
                 imp_exp.ModelsEquipmentManager mngr = new imp_exp.ModelsEquipmentManager();
 
                 mngr.LoadFromXml(fileBox.TextValue);

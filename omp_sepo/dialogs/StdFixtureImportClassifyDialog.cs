@@ -47,7 +47,7 @@ namespace omp_sepo.dialogs
             Dictionary<decimal, string> catalogs = new Dictionary<decimal, string>();
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = "select f_level, f_name from sepo_std_folders where f_owner = :f_owner";
 
             OracleParameter p_catalog = command.Parameters.Add("f_owner", null);
@@ -69,7 +69,7 @@ namespace omp_sepo.dialogs
             Dictionary<decimal, string> owners = new Dictionary<decimal, string>();
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"select owner, name from owner_name order by name";
 
             OracleDataReader reader = command.ExecuteReader();
@@ -90,14 +90,14 @@ namespace omp_sepo.dialogs
 
         private void OnAcceptClicked(object sender, EventArgs args)
         {
-            using (OracleTransaction transaction = Module.Connection.BeginTransaction())
+            using (OracleTransaction transaction = obj_lib.Module.Connection.BeginTransaction())
             {
                 try
                 {
                     int objtype = (int)typeBox.SelectedValue;
 
                     OracleCommand command = new OracleCommand();
-                    command.Connection = Module.Connection;
+                    command.Connection = obj_lib.Module.Connection;
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.Add("p_name", nameBox.Text);

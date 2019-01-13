@@ -8,7 +8,7 @@ namespace imp_exp
 
         protected void OpenLogSession()
         {
-            ora_log = Module.Connection.Clone() as OracleConnection;
+            ora_log = obj_lib.Module.Connection.Clone() as OracleConnection;
             ora_log.Open();
         }
 

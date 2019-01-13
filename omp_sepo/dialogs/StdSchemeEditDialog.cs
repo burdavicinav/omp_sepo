@@ -14,7 +14,7 @@ namespace omp_sepo.dialogs
             }
         }
 
-        private decimal IdRecord { get; set; }
+        private int IdRecord { get; set; }
 
         public StdSchemeEditDialog()
         {
@@ -29,7 +29,7 @@ namespace omp_sepo.dialogs
             try
             {
                 OracleCommand command = new OracleCommand();
-                command.Connection = Module.Connection;
+                command.Connection = obj_lib.Module.Connection;
                 command.CommandText = @"update sepo_std_schemes
                                         set omp_name = :omp_name, isedit = :isedit where id_record = :id_record";
 
@@ -53,7 +53,7 @@ namespace omp_sepo.dialogs
         }
 
         public StdSchemeEditDialog(
-            decimal id_record,
+            int id_record,
             string lvl,
             string tname,
             string catalog,

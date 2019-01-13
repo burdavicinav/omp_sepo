@@ -19,7 +19,7 @@ namespace imp_exp
         private void ClearLoadData()
         {
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandType = System.Data.CommandType.StoredProcedure;
             command.CommandText = "pkg_sepo_import_global.clearstdfixturedata";
             command.ExecuteNonQuery();
@@ -36,7 +36,7 @@ namespace imp_exp
             command.CommandText =
                 @"insert into sepo_std_fields (field, f_longname, f_datatype, f_entermode, f_data)
                             values (:field, :f_longname, :f_datatype, :f_entermode, :f_data)";
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
 
             OracleParameter p_field = new OracleParameter("field", OracleDbType.Varchar2);
             OracleParameter p_longname = new OracleParameter("f_longname", OracleDbType.Varchar2);
@@ -81,7 +81,7 @@ namespace imp_exp
             command.CommandText =
                 @"insert into sepo_std_folders (f_key, f_name, f_owner, f_level)
                             values (:f_key, :f_name, :f_owner, :f_level)";
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
 
             OracleParameter p_key = new OracleParameter("f_key", OracleDbType.Decimal);
             OracleParameter p_name = new OracleParameter("f_name", OracleDbType.Varchar2);
@@ -111,13 +111,13 @@ namespace imp_exp
             XName f_level = fix_doc.GetXName("F_LEVEL");
 
             OracleCommand sq_command = new OracleCommand();
-            sq_command.Connection = Module.Connection;
+            sq_command.Connection = obj_lib.Module.Connection;
             sq_command.CommandText = "select sq_sepo_std_records.nextval from dual";
 
             OracleCommand command = new OracleCommand();
             command.CommandText =
                 @"insert into sepo_std_records (id, f_key, f_level) values (:id, :f_key, :f_level)";
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
 
             OracleParameter p_id = new OracleParameter("id", OracleDbType.Decimal);
             OracleParameter p_key = new OracleParameter("f_key", OracleDbType.Decimal);
@@ -126,7 +126,7 @@ namespace imp_exp
             command.Parameters.AddRange(new OracleParameter[] { p_id, p_key, p_level });
 
             OracleCommand fld_command = new OracleCommand();
-            fld_command.Connection = Module.Connection;
+            fld_command.Connection = obj_lib.Module.Connection;
             fld_command.CommandText = "select id, field from sepo_std_fields";
 
             Dictionary<decimal, XName> fields = new Dictionary<decimal, XName>();
@@ -141,7 +141,7 @@ namespace imp_exp
             }
 
             OracleCommand rec_command = new OracleCommand();
-            rec_command.Connection = Module.Connection;
+            rec_command.Connection = obj_lib.Module.Connection;
             rec_command.CommandText =
                 @"insert into sepo_std_record_contents (id_record, id_field, field_value)
                     values (:id_record, :id_field, :field_value)";
@@ -188,13 +188,13 @@ namespace imp_exp
             #region tables command
 
             OracleCommand sq_table = new OracleCommand();
-            sq_table.Connection = Module.Connection;
+            sq_table.Connection = obj_lib.Module.Connection;
             sq_table.CommandText = "select sq_sepo_std_tables.nextval from dual";
 
             OracleCommand command = new OracleCommand();
             command.CommandText =
                 @"insert into sepo_std_tables (id, f_key, f_table, f_descr) values (:id, :f_key, :f_level, :f_descr)";
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
 
             OracleParameter p_id = new OracleParameter("id", OracleDbType.Decimal);
             OracleParameter p_key = new OracleParameter("f_key", OracleDbType.Decimal);
@@ -208,7 +208,7 @@ namespace imp_exp
             #region fields command
 
             OracleCommand sq_table_fields = new OracleCommand();
-            sq_table_fields.Connection = Module.Connection;
+            sq_table_fields.Connection = obj_lib.Module.Connection;
             sq_table_fields.CommandText = "select sq_sepo_std_table_fields.nextval from dual";
 
             OracleCommand field_command = new OracleCommand();
@@ -219,7 +219,7 @@ namespace imp_exp
                     values (:id, :id_table, :field, :f_longname, :f_shortname, :f_datatype, :f_entermode, :f_data,
                         :enm_owner, :enm_type)";
 
-            field_command.Connection = Module.Connection;
+            field_command.Connection = obj_lib.Module.Connection;
 
             OracleParameter p_field_id = new OracleParameter("id", OracleDbType.Decimal);
             OracleParameter p_field = new OracleParameter("field", OracleDbType.Varchar2);
@@ -243,13 +243,13 @@ namespace imp_exp
             #region records command
 
             OracleCommand sq_table_records = new OracleCommand();
-            sq_table_records.Connection = Module.Connection;
+            sq_table_records.Connection = obj_lib.Module.Connection;
             sq_table_records.CommandText = "select sq_sepo_std_table_records.nextval from dual";
 
             OracleCommand record_command = new OracleCommand();
             record_command.CommandText =
                 @"insert into sepo_std_table_records (id, f_key, id_table) values (:id, :f_key, :id_table)";
-            record_command.Connection = Module.Connection;
+            record_command.Connection = obj_lib.Module.Connection;
 
             OracleParameter p_record_id = new OracleParameter("id", OracleDbType.Decimal);
             OracleParameter p_record_key = new OracleParameter("f_key", OracleDbType.Decimal);
@@ -264,7 +264,7 @@ namespace imp_exp
             content_command.CommandText =
                 @"insert into sepo_std_table_rec_contents (id_record, id_field, field_value)
                     values (:id_record, :id_field, :field_value)";
-            content_command.Connection = Module.Connection;
+            content_command.Connection = obj_lib.Module.Connection;
 
             OracleParameter p_field_value = new OracleParameter("field_value", OracleDbType.Varchar2);
             content_command.Parameters.AddRange(new OracleParameter[] { p_record_id, p_field_id, p_field_value });
@@ -340,7 +340,7 @@ namespace imp_exp
 
             // обновление связи записи с таблицей
             OracleCommand up_command = new OracleCommand();
-            up_command.Connection = Module.Connection;
+            up_command.Connection = obj_lib.Module.Connection;
             up_command.CommandType = System.Data.CommandType.StoredProcedure;
             up_command.CommandText = "pkg_sepo_import_global.setidtableonrecord";
             up_command.ExecuteNonQuery();
@@ -382,7 +382,7 @@ namespace imp_exp
             XName f_name = enum_doc.GetXName("F_NAME");
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"insert into sepo_std_enum_folders (f_key, f_name, f_owner)
                                         values (:f_key, :f_name, :f_owner)";
 
@@ -408,11 +408,11 @@ namespace imp_exp
             }
 
             OracleCommand sq_command = new OracleCommand();
-            sq_command.Connection = Module.Connection;
+            sq_command.Connection = obj_lib.Module.Connection;
             sq_command.CommandText = "select sq_sepo_std_enum_list.nextval from dual";
 
             command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText =
                 @"insert into sepo_std_enum_list (id, f_key, f_name, f_owner, f_int, tcentity)
                     values (:id, :f_key, :f_name, :f_owner, :f_int, :tcentity)";
@@ -422,7 +422,7 @@ namespace imp_exp
             });
 
             OracleCommand rec_command = new OracleCommand();
-            rec_command.Connection = Module.Connection;
+            rec_command.Connection = obj_lib.Module.Connection;
             rec_command.CommandText =
                 @"insert into sepo_std_enum_contents (id_enum, f_key, f_str, f_int, f_dbl, f_name)
                     values (:id_enum, :f_key, :f_str, :f_int, :f_dbl, :f_name)";
@@ -505,7 +505,7 @@ namespace imp_exp
         public void UpdateDB()
         {
             OracleCommand cmd = new OracleCommand();
-            cmd.Connection = Module.Connection;
+            cmd.Connection = obj_lib.Module.Connection;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "pkg_sepo_import_global.setstdfixobjparams";
 

@@ -1,18 +1,21 @@
 ﻿using obj_lib;
+using obj_lib.Entities;
+using obj_lib.Repositories;
 using omp_sepo.dialogs;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace omp_sepo.views
 {
     public partial class TFlexSignDocsView : UserControl
     {
+        private IRepository<SEPO_TFLEX_SIGN_DOCS> signDocsRepo;
+
         private ContextMenuStrip menu;
 
         private void RefrechData()
         {
-            foreach (var item in Module.Context.SEPO_TFLEX_SIGN_DOCS)
+            foreach (var item in signDocsRepo.GetQuery())
             {
                 AddRow(item);
             }
@@ -55,8 +58,10 @@ namespace omp_sepo.views
             this.ContextMenuStrip = menu;
         }
 
-        public TFlexSignDocsView()
+        public TFlexSignDocsView(IRepository<SEPO_TFLEX_SIGN_DOCS> repo)
         {
+            signDocsRepo = repo;
+
             InitializeComponent();
 
             InizializeMenu();
@@ -64,30 +69,32 @@ namespace omp_sepo.views
             RefrechData();
         }
 
+        public TFlexSignDocsView() : this(new Repository<SEPO_TFLEX_SIGN_DOCS>())
+        {
+        }
+
         protected void OnAddItemClick(object sender, EventArgs e)
         {
-            TFlexDocsSignDialog dialog = new TFlexDocsSignDialog();
+            TFlexDocsSignDialog dialog = new TFlexDocsSignDialog(signDocsRepo);
+
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                SEPO_TFLEX_SIGN_DOCS sign =
-                    Module.Context.SEPO_TFLEX_SIGN_DOCS.Where(x => x.ID == dialog.Id).FirstOrDefault();
-
-                AddRow(sign);
+                AddRow(dialog.DocSign);
             }
         }
 
         protected void OnEditItemClick(object sender, EventArgs e)
         {
             DataGridViewRow row = scene.SelectedRows[0];
-            decimal id = (decimal)row.Tag;
+            int id = (int)row.Tag;
 
-            TFlexDocsSignDialog dialog = new TFlexDocsSignDialog(id);
+            SEPO_TFLEX_SIGN_DOCS docSign = signDocsRepo.GetById(id);
+
+            TFlexDocsSignDialog dialog = new TFlexDocsSignDialog(docSign, signDocsRepo);
+
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                SEPO_TFLEX_SIGN_DOCS sign =
-                    Module.Context.SEPO_TFLEX_SIGN_DOCS.Where(x => x.ID == dialog.Id).FirstOrDefault();
-
-                UpdateRow(row, sign);
+                UpdateRow(row, dialog.DocSign);
             }
         }
 
@@ -95,15 +102,25 @@ namespace omp_sepo.views
         {
             DataGridViewRow row = scene.SelectedRows[0];
 
-            decimal id = (decimal)row.Tag;
+            int id = (int)row.Tag;
 
-            SEPO_TFLEX_SIGN_DOCS sign =
-                    Module.Context.SEPO_TFLEX_SIGN_DOCS.Where(x => x.ID == id).FirstOrDefault();
+            using (var transaction = new UnitOfWork())
+            {
+                try
+                {
+                    SEPO_TFLEX_SIGN_DOCS signDoc = signDocsRepo.GetById(id);
+                    signDocsRepo.Delete(signDoc);
 
-            Module.Context.SEPO_TFLEX_SIGN_DOCS.Remove(sign);
-            Module.Context.SaveChanges();
+                    transaction.Commit();
 
-            scene.Rows.Remove(row);
+                    scene.Rows.Remove(row);
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
         }
 
         protected void OnMenuVisible(object sender, EventArgs e)

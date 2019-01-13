@@ -28,7 +28,7 @@ namespace omp_sepo.dialogs
 
             OracleCommand command = new OracleCommand(
                 "select * from v_sepo_osn_types where id = :id",
-                Module.Connection
+                obj_lib.Module.Connection
                 );
 
             command.Parameters.Add("id", id);
@@ -44,7 +44,7 @@ namespace omp_sepo.dialogs
 
             OracleCommand command_tp = new OracleCommand(
                 "select code, name from fixture_types order by name",
-                Module.Connection
+                obj_lib.Module.Connection
                 );
 
             reader = command_tp.ExecuteReader();
@@ -67,7 +67,7 @@ namespace omp_sepo.dialogs
             {
                 OracleCommand command = new OracleCommand(
                     "update sepo_osn_types set id_type = :id_type where id = :id",
-                    Module.Connection
+                    obj_lib.Module.Connection
                     );
 
                 object id_type = null;

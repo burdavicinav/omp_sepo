@@ -11,7 +11,7 @@ namespace omp_sepo.dialogs
         private void SetStateFilter()
         {
             OracleCommand state_command = new OracleCommand();
-            state_command.Connection = Module.Connection;
+            state_command.Connection = obj_lib.Module.Connection;
             state_command.CommandText =
                 "select code, name from businessobj_states where botype = :botype order by name";
 
@@ -33,7 +33,7 @@ namespace omp_sepo.dialogs
         private void SetOwnerFilter()
         {
             OracleCommand owner_command = new OracleCommand();
-            owner_command.Connection = Module.Connection;
+            owner_command.Connection = obj_lib.Module.Connection;
             owner_command.CommandText =
                 "select owner, name from owner_name order by name";
 
@@ -75,8 +75,6 @@ namespace omp_sepo.dialogs
         {
             try
             {
-                imp_exp.Module.Connection = omp_sepo.Module.Connection;
-
                 TbInstructionsManager mgr = new TbInstructionsManager();
                 mgr.LoadFromXml(filePathBox.TextValue);
                 mgr.Load(

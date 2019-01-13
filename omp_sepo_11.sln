@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omp_sepo", "omp_sepo\omp_sepo.csproj", "{0407D3EE-B808-456A-9B03-957EC472AE2F}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -19,6 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imp_exp", "imp_exp\imp_exp.
 	ProjectSection(ProjectDependencies) = postProject
 		{9F3DC95B-BCB2-46A0-92A3-7131E64A95C4} = {9F3DC95B-BCB2-46A0-92A3-7131E64A95C4}
 		{6C9D676D-5041-4919-8D3E-3D85840E350F} = {6C9D676D-5041-4919-8D3E-3D85840E350F}
+		{E5DDEDB5-16C1-46B1-95FD-DF5141103AF5} = {E5DDEDB5-16C1-46B1-95FD-DF5141103AF5}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "general", "general\general.csproj", "{6C9D676D-5041-4919-8D3E-3D85840E350F}"
@@ -30,10 +31,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "obj_lib", "obj_lib\obj_lib.csproj", "{E5DDEDB5-16C1-46B1-95FD-DF5141103AF5}"
 EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
@@ -100,5 +97,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14D4DAC4-4736-4861-93C7-B76FCD8D0C97}
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

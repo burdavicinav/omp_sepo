@@ -11,7 +11,7 @@ namespace imp_exp
             get
             {
                 OracleCommand command = new OracleCommand();
-                command.Connection = Module.Connection;
+                command.Connection = obj_lib.Module.Connection;
                 command.CommandText =
                     "select count(*) from (select doc_id, filename from v_sepo_fixture_docs group by doc_id, filename)";
 
@@ -22,14 +22,14 @@ namespace imp_exp
         public void CreateDocuments(string dir_path)
         {
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = "delete from sepo_osn_docs_link_omp";
             command.ExecuteNonQuery();
 
             DirectoryInfo dir = new DirectoryInfo(dir_path);
 
             OracleCommand doc_command = new OracleCommand();
-            doc_command.Connection = Module.Connection;
+            doc_command.Connection = obj_lib.Module.Connection;
             doc_command.CommandType = System.Data.CommandType.StoredProcedure;
             doc_command.CommandText = "pkg_sepo_import_global.createdocument";
 
@@ -41,7 +41,7 @@ namespace imp_exp
             doc_command.Parameters.AddRange(new OracleParameter[] { p_data, p_doc, p_name, p_hash });
 
             OracleCommand file_command = new OracleCommand();
-            file_command.Connection = Module.Connection;
+            file_command.Connection = obj_lib.Module.Connection;
             file_command.CommandText = "select doc_id, filename from v_sepo_fixture_docs group by doc_id, filename";
 
             OracleDataReader reader = file_command.ExecuteReader();
@@ -59,12 +59,12 @@ namespace imp_exp
                     stream.Read(bytes, 0, (int)stream.Length);
 
                     SHA1 s = new SHA1CryptoServiceProvider();
-                    byte[] hash = s.ComputeHash(stream);
+                    byte[] hash = s.ComputeHash(bytes);
 
                     p_data.Value = bytes;
                     p_doc.Value = doc;
                     p_name.Value = filename;
-                    p_hash.Value = (System.BitConverter.ToString(hash)).Replace("-", "");
+                    p_hash.Value = System.BitConverter.ToString(hash).Replace("-", "");
 
                     doc_command.ExecuteNonQuery();
 
@@ -76,7 +76,7 @@ namespace imp_exp
         public void AttachDocuments()
         {
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandType = System.Data.CommandType.StoredProcedure;
             command.CommandText = "pkg_sepo_import_global.attachfixturedocuments";
             command.ExecuteNonQuery();

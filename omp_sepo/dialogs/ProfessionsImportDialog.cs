@@ -16,8 +16,6 @@ namespace omp_sepo.dialogs
 
             try
             {
-                imp_exp.Module.Connection = omp_sepo.Module.Connection;
-
                 IImportManager import = new ProfessionsManager();
                 import.LoadFromXml(this.File);
                 import.Load();

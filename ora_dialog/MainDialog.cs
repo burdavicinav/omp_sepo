@@ -8,20 +8,25 @@ namespace ora_dialog
 {
     public partial class MainDialog : Form
     {
+        private Version AssemblyVersion { get; set; }
+
         public OracleConnection Connection { get; set; }
 
         public string ConnectionString { get; set; }
 
         public ConnectionObject[] Connections { get; set; }
 
-        public MainDialog()
+        public MainDialog(Version asmVersion)
         {
+            AssemblyVersion = asmVersion;
+
             InitializeComponent();
 
             okButton.Enabled = false;
+            this.Text = "v." + AssemblyVersion.ToString();
         }
 
-        public MainDialog(ConnectionObject[] connections) : this()
+        public MainDialog(Version version, ConnectionObject[] connections) : this(version)
         {
             Connections = connections;
 
@@ -79,7 +84,7 @@ namespace ora_dialog
 
             string prop_value = command.ExecuteScalar().ToString();
 
-            string current_version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            string current_version = AssemblyVersion.ToString();
             if (prop_value != current_version) throw new VersionException();
         }
 

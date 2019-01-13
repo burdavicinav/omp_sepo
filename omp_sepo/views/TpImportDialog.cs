@@ -41,7 +41,7 @@ namespace omp_sepo.dialogs
             Dictionary<decimal, string> groups = new Dictionary<decimal, string>();
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"select code, name from distr_group_ext order by name";
 
             OracleDataReader reader = command.ExecuteReader();
@@ -60,7 +60,7 @@ namespace omp_sepo.dialogs
             Dictionary<decimal, string> letters = new Dictionary<decimal, string>();
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"select code, name from letters order by name";
 
             OracleDataReader reader = command.ExecuteReader();
@@ -79,7 +79,7 @@ namespace omp_sepo.dialogs
             Dictionary<decimal, string> owners = new Dictionary<decimal, string>();
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"select owner, name from owner_name order by name";
 
             OracleDataReader reader = command.ExecuteReader();
@@ -98,7 +98,7 @@ namespace omp_sepo.dialogs
             Dictionary<decimal, string> states = new Dictionary<decimal, string>();
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"select code, name from businessobj_states
                                     where botype = :id_type order by name";
 
@@ -119,7 +119,6 @@ namespace omp_sepo.dialogs
         {
             try
             {
-                imp_exp.Module.Connection = Module.Connection;
                 TPManager manager = new TPManager();
                 manager.Load(
                     (decimal)prodBox.SelectedValue,

@@ -30,7 +30,7 @@ namespace imp_exp
 
             OracleCommand command = new OracleCommand(
                 "select profcode, name from professions order by profcode",
-                Module.Connection
+                obj_lib.Module.Connection
                 );
 
             OracleDataReader reader = command.ExecuteReader();
@@ -56,13 +56,13 @@ namespace imp_exp
 
         public void LoadFromXml(string file)
         {
-            using (OracleTransaction transaction = Module.Connection.BeginTransaction())
+            using (OracleTransaction transaction = obj_lib.Module.Connection.BeginTransaction())
             {
                 try
                 {
                     OracleCommand del_command = new OracleCommand(
                         "delete from sepo_professions",
-                        Module.Connection
+                        obj_lib.Module.Connection
                         );
 
                     del_command.ExecuteNonQuery();
@@ -70,7 +70,7 @@ namespace imp_exp
                     OracleCommand command = new OracleCommand();
                     command.CommandText =
                         "insert into sepo_professions (prof_code, prof_name) values (:code, :name)";
-                    command.Connection = Module.Connection;
+                    command.Connection = obj_lib.Module.Connection;
 
                     OracleParameter p_code = new OracleParameter("code", OracleDbType.Decimal);
                     OracleParameter p_name = new OracleParameter("name", OracleDbType.Varchar2);
@@ -106,12 +106,12 @@ namespace imp_exp
 
         public void Load()
         {
-            using (OracleTransaction transaction = Module.Connection.BeginTransaction())
+            using (OracleTransaction transaction = obj_lib.Module.Connection.BeginTransaction())
             {
                 try
                 {
                     OracleCommand command = new OracleCommand();
-                    command.Connection = Module.Connection;
+                    command.Connection = obj_lib.Module.Connection;
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.CommandText = "pkg_sepo_import_global.clearprofessions";
                     command.ExecuteNonQuery();

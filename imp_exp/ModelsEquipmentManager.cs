@@ -28,7 +28,7 @@ namespace imp_exp
         {
             OracleCommand del_command = new OracleCommand(
                         "delete from sepo_eqp_model_folders",
-                        Module.Connection
+                        obj_lib.Module.Connection
                         );
             del_command.ExecuteNonQuery();
 
@@ -38,7 +38,7 @@ namespace imp_exp
             OracleCommand command = new OracleCommand(
                 @"insert into sepo_eqp_model_folders (f_key, f_owner, f_level, f_name)
                             values (:key, :owner, :level_, :name)",
-                Module.Connection
+                obj_lib.Module.Connection
                 );
 
             OracleParameter p_key = new OracleParameter("key", OracleDbType.Decimal);
@@ -134,7 +134,7 @@ namespace imp_exp
 
         public void Load(decimal classify, decimal owner)
         {
-            using (OracleTransaction transaction = Module.Connection.BeginTransaction())
+            using (OracleTransaction transaction = obj_lib.Module.Connection.BeginTransaction())
             {
                 try
                 {
@@ -142,7 +142,7 @@ namespace imp_exp
                     OracleParameter p_owner = new OracleParameter("p_owner", owner);
 
                     OracleCommand command = new OracleCommand();
-                    command.Connection = Module.Connection;
+                    command.Connection = obj_lib.Module.Connection;
                     command.CommandType = System.Data.CommandType.StoredProcedure;
 
                     command.CommandText = "pkg_sepo_import_global.cleareqpmodels";

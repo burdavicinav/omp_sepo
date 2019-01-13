@@ -1,7 +1,8 @@
-﻿using obj_lib;
+﻿using obj_lib.Entities;
+using obj_lib.Repositories;
 using omp_sepo.dialogs;
-using Oracle.DataAccess.Client;
 using System;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ui_lib;
@@ -14,16 +15,23 @@ namespace omp_sepo.views
 
         private ToolStripItem folders;
 
+        private IViewRepository<V_SEPO_STD_SCHEMES> schemesRepo;
+
         public Control Form { get; set; }
 
-        public StdSchemesListView()
+        public StdSchemesListView(IViewRepository<V_SEPO_STD_SCHEMES> repo)
+        {
+            schemesRepo = repo;
+        }
+
+        public StdSchemesListView() : this(new ViewRepository<V_SEPO_STD_SCHEMES>())
         {
             //ViewSettings();
             //MenuSettings();
             //UpdateScene();
         }
 
-        public StdSchemesListView(decimal lvl, bool is_edit_items)
+        public StdSchemesListView(decimal lvl, bool is_edit_items) : this()
         {
             //ViewSettings();
             //MenuSettings();
@@ -61,7 +69,7 @@ namespace omp_sepo.views
         private void Folders_Click(object sender, EventArgs e)
         {
             ListViewItem item = this.SelectedItems[0];
-            StdFoldersView folders_view = new StdFoldersView((decimal)item.Tag);
+            StdFoldersView folders_view = new StdFoldersView((int)item.Tag);
 
             StringBuilder sb = new StringBuilder("Каталоги: ");
             sb.Append(item.Text);
@@ -86,7 +94,7 @@ namespace omp_sepo.views
                 item.Checked = !item.Checked;
 
                 StdSchemeEditDialog dialog = new StdSchemeEditDialog(
-                    (decimal)item.Tag,
+                    (int)item.Tag,
                     item.SubItems[1].Text,
                     item.SubItems[0].Text,
                     item.SubItems[2].Text,
@@ -111,62 +119,38 @@ namespace omp_sepo.views
         private void AddItem(V_SEPO_STD_SCHEMES item)
         {
             ListViewItem vitem = new ListViewItem();
-            vitem.Tag = item.IdRecord;
-            vitem.Checked = (item.IsEdit == 1) ? true : false;
+            vitem.Tag = item.ID_RECORD;
+            vitem.Checked = (item.ISEDIT == 1) ? true : false;
 
-            vitem.Text = item.FTable;
-            vitem.SubItems.Add(item.HLevel.ToString());
-            vitem.SubItems.Add(item.FName);
-            vitem.SubItems.Add(item.TblDescr);
-            vitem.SubItems.Add(item.SchemeName);
-            vitem.SubItems.Add(item.OmpName);
+            vitem.Text = item.F_TABLE;
+            vitem.SubItems.Add(item.H_LEVEL.ToString());
+            vitem.SubItems.Add(item.F_NAME);
+            vitem.SubItems.Add(item.TBL_DESCR);
+            vitem.SubItems.Add(item.SCHEME_NAME);
+            vitem.SubItems.Add(item.OMP_NAME);
 
             this.Items.Add(vitem);
         }
 
         public void UpdateScene(decimal lvl = -1, bool is_edit_items = false)
         {
-            OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
-
-            StringBuilder comstr = new StringBuilder();
-            comstr.Append(@"select id_record, f_table, h_level, f_name, tbl_descr,
-                                    scheme_name, omp_name, istable, isedit
-                                    from v_sepo_std_schemes where 1=1");
+            var schemes = schemesRepo.GetQuery();
 
             if (lvl > -1)
             {
-                comstr.Append(" and h_level = :lvl");
-                command.Parameters.Add("lvl", lvl);
+                schemes = schemes.Where(x => x.H_LEVEL == lvl);
             }
 
             if (is_edit_items)
             {
-                comstr.Append(" and isedit = :isedit");
-                command.Parameters.Add("isedit", 1);
+                schemes = schemes.Where(x => x.ISEDIT == ((is_edit_items) ? 1 : 0));
             }
 
-            comstr.Append(" order by f_table");
+            schemes.OrderBy(x => x.F_TABLE);
 
-            command.CommandText = comstr.ToString();
-
-            using (OracleDataReader reader = command.ExecuteReader())
+            foreach (var scheme in schemes)
             {
-                while (reader.Read())
-                {
-                    V_SEPO_STD_SCHEMES item = new V_SEPO_STD_SCHEMES();
-                    item.IdRecord = reader.GetDecimal(0);
-                    item.FTable = reader.GetString(1);
-                    item.HLevel = reader.GetDecimal(2);
-                    item.FName = reader.GetString(3);
-                    item.TblDescr = reader.GetString(4);
-                    item.SchemeName = reader.GetString(5);
-                    item.OmpName = reader.GetString(6);
-                    item.IsTable = reader.GetInt16(7);
-                    item.IsEdit = reader.GetInt16(8);
-
-                    AddItem(item);
-                }
+                AddItem(scheme);
             }
         }
     }

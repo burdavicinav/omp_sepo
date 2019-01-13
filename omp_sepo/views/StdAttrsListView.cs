@@ -1,14 +1,21 @@
-﻿using obj_lib;
-using Oracle.DataAccess.Client;
+﻿using obj_lib.Entities;
+using obj_lib.Repositories;
 using System;
-using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace omp_sepo.views
 {
     public class StdAttrsListView : ListView
     {
-        public StdAttrsListView()
+        private IViewRepository<V_SEPO_STD_ATTRS> attrsRepo;
+
+        public StdAttrsListView(IViewRepository<V_SEPO_STD_ATTRS> repo)
+        {
+            attrsRepo = repo;
+        }
+
+        public StdAttrsListView() : this(new ViewRepository<V_SEPO_STD_ATTRS>())
         {
         }
 
@@ -33,18 +40,18 @@ namespace omp_sepo.views
         private void AddItem(V_SEPO_STD_ATTRS item)
         {
             ListViewItem vitem = new ListViewItem();
-            vitem.Tag = item.IdAttr;
+            vitem.Tag = item.ID_ATTR;
 
-            vitem.Text = item.TName;
-            vitem.SubItems.Add(item.Field);
-            vitem.SubItems.Add(item.FDataType);
-            vitem.SubItems.Add(item.FEnterMode);
-            vitem.SubItems.Add(item.FData);
-            vitem.SubItems.Add(item.AttrName);
-            vitem.SubItems.Add(item.OmpName);
+            vitem.Text = item.TNAME;
+            vitem.SubItems.Add(item.FIELD);
+            vitem.SubItems.Add(item.F_DATATYPE);
+            vitem.SubItems.Add(item.F_ENTERMODE);
+            vitem.SubItems.Add(item.F_DATA);
+            vitem.SubItems.Add(item.ATTR_NAME);
+            vitem.SubItems.Add(item.OMP_NAME);
 
             string omp_type = String.Empty;
-            switch ((int)item.OmpType)
+            switch ((int)item.OMP_TYPE)
             {
                 case 1:
                     omp_type = "Строка";
@@ -68,7 +75,7 @@ namespace omp_sepo.views
             }
 
             vitem.SubItems.Add(omp_type);
-            vitem.SubItems.Add(item.EnumName);
+            vitem.SubItems.Add(item.ENUM_NAME);
 
             this.Items.Add(vitem);
         }
@@ -77,47 +84,16 @@ namespace omp_sepo.views
         {
             this.Items.Clear();
 
-            OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
-
-            StringBuilder sb = new StringBuilder(
-                @"select id_attr, id_table, tname, field, f_datatype, f_entermode, f_data,
-                    attr_name, omp_name, omp_type, id_enum, enum_name, id_record
-                  from v_sepo_std_attrs where 1=1");
+            var attrs = attrsRepo.GetQuery();
 
             if (id_record != -1)
             {
-                sb.Append(" and id_record = :id_record");
-
-                command.Parameters.Add("id_record", id_record);
+                attrs = attrs.Where(x => x.ID_RECORD == id_record);
             }
 
-            sb.Append(" order by tname, field");
-
-            command.CommandText = sb.ToString();
-
-            using (OracleDataReader reader = command.ExecuteReader())
+            foreach (var attr in attrs)
             {
-                while (reader.Read())
-                {
-                    V_SEPO_STD_ATTRS item = new V_SEPO_STD_ATTRS();
-
-                    item.IdAttr = reader.GetDecimal(0);
-                    item.IdTable = reader.GetDecimal(1);
-                    item.TName = reader.GetString(2);
-                    item.Field = reader.GetString(3);
-                    item.FDataType = reader.GetString(4);
-                    item.FEnterMode = reader.GetString(5);
-                    if (!reader.IsDBNull(6)) item.FData = reader.GetString(6);
-                    item.AttrName = reader.GetString(7);
-                    item.OmpName = reader.GetString(8);
-                    item.OmpType = reader.GetDecimal(9);
-                    if (!reader.IsDBNull(10)) item.IdEnum = reader.GetDecimal(10);
-                    if (!reader.IsDBNull(11)) item.EnumName = reader.GetString(11);
-                    item.IdRecord = reader.GetDecimal(12);
-
-                    AddItem(item);
-                }
+                AddItem(attr);
             }
         }
     }

@@ -1,4 +1,6 @@
 ﻿using obj_lib;
+using obj_lib.Entities;
+using obj_lib.Repositories;
 using omp_sepo.dialogs;
 using System;
 using System.Linq;
@@ -8,10 +10,19 @@ namespace omp_sepo.views
 {
     public partial class TFlexObjSynchView : UserControl
     {
+        private IViewRepository<V_SEPO_TFLEX_OBJ_SYNCH> _repoObjSynchView;
+
+        private IRepository<SEPO_TFLEX_OBJ_SYNCH> _repoObjSynch;
+
         private ContextMenuStrip menu;
 
-        public TFlexObjSynchView()
+        public TFlexObjSynchView(
+            IViewRepository<V_SEPO_TFLEX_OBJ_SYNCH> repoView,
+            IRepository<SEPO_TFLEX_OBJ_SYNCH> repo)
         {
+            _repoObjSynchView = repoView;
+            _repoObjSynch = repo;
+
             InitializeComponent();
 
             InizializeMenu();
@@ -19,9 +30,15 @@ namespace omp_sepo.views
             RefrechData();
         }
 
+        public TFlexObjSynchView() : this(
+            new ViewRepository<V_SEPO_TFLEX_OBJ_SYNCH>(),
+            new Repository<SEPO_TFLEX_OBJ_SYNCH>())
+        {
+        }
+
         private void RefrechData()
         {
-            foreach (var item in Module.Context.V_SEPO_TFLEX_OBJ_SYNCH)
+            foreach (var item in _repoObjSynchView.GetQuery())
             {
                 AddRow(item);
             }
@@ -83,27 +100,21 @@ namespace omp_sepo.views
             TFlexObjSynchDialog dialog = new TFlexObjSynchDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                V_SEPO_TFLEX_OBJ_SYNCH synch =
-                    Module.Context.V_SEPO_TFLEX_OBJ_SYNCH.Where(x => x.ID == dialog.Id).FirstOrDefault();
-
-                AddRow(synch);
+                var obj = _repoObjSynchView.GetById(dialog.Id);
+                AddRow(obj);
             }
         }
 
         protected void OnEditItemClick(object sender, EventArgs e)
         {
             DataGridViewRow row = scene.SelectedRows[0];
-            decimal id = (decimal)row.Tag;
+            int id = (int)row.Tag;
 
             TFlexObjSynchDialog dialog = new TFlexObjSynchDialog(id);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                V_SEPO_TFLEX_OBJ_SYNCH synch =
-                    Module.Context.V_SEPO_TFLEX_OBJ_SYNCH.Where(x => x.ID == dialog.Id).FirstOrDefault();
-
-                Module.Context.Entry(synch).Reload();
-
-                UpdateRow(row, synch);
+                var obj = _repoObjSynchView.GetById(dialog.Id);
+                UpdateRow(row, obj);
             }
         }
 
@@ -111,15 +122,25 @@ namespace omp_sepo.views
         {
             DataGridViewRow row = scene.SelectedRows[0];
 
-            decimal id = (decimal)row.Tag;
+            int id = (int)row.Tag;
 
-            SEPO_TFLEX_OBJ_SYNCH synch =
-                    Module.Context.SEPO_TFLEX_OBJ_SYNCH.Where(x => x.ID == id).FirstOrDefault();
+            using (var transaction = new UnitOfWork())
+            {
+                try
+                {
+                    SEPO_TFLEX_OBJ_SYNCH synch = _repoObjSynch.GetQuery().Where(x => x.ID == id).FirstOrDefault();
+                    _repoObjSynch.Delete(synch);
 
-            Module.Context.SEPO_TFLEX_OBJ_SYNCH.Remove(synch);
-            Module.Context.SaveChanges();
+                    transaction.Commit();
 
-            scene.Rows.Remove(row);
+                    scene.Rows.Remove(row);
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
         }
 
         protected void OnMenuVisible(object sender, EventArgs e)

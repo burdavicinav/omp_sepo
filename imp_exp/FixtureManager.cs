@@ -8,7 +8,7 @@ namespace imp_exp
     {
         private void LoadOsnAll(string file)
         {
-            (new OracleCommand("delete from sepo_osn_all", Module.Connection)).ExecuteNonQuery();
+            (new OracleCommand("delete from sepo_osn_all", obj_lib.Module.Connection)).ExecuteNonQuery();
 
             CsvColumn[] columns = {
                 new CsvColumn("art_id"),
@@ -40,14 +40,14 @@ namespace imp_exp
             };
 
             CsvFile csv = new CsvFile(file, '\t', columns);
-            csv.Load("sepo_osn_all", Module.Connection);
+            csv.Load("sepo_osn_all", obj_lib.Module.Connection);
 
             csv.Close();
         }
 
         private void LoadOsnDet(string file)
         {
-            (new OracleCommand("delete from sepo_osn_det", Module.Connection)).ExecuteNonQuery();
+            (new OracleCommand("delete from sepo_osn_det", obj_lib.Module.Connection)).ExecuteNonQuery();
 
             CsvColumn[] columns = {
                 new CsvColumn("art_id"),
@@ -57,14 +57,14 @@ namespace imp_exp
             };
 
             CsvFile csv = new CsvFile(file, '\t', columns);
-            csv.Load("sepo_osn_det", Module.Connection);
+            csv.Load("sepo_osn_det", obj_lib.Module.Connection);
 
             csv.Close();
         }
 
         private void LoadOsnDocs(string file)
         {
-            (new OracleCommand("delete from sepo_osn_docs", Module.Connection)).ExecuteNonQuery();
+            (new OracleCommand("delete from sepo_osn_docs", obj_lib.Module.Connection)).ExecuteNonQuery();
 
             CsvColumn[] columns = {
                 new CsvColumn("doc_id"),
@@ -94,14 +94,14 @@ namespace imp_exp
             };
 
             CsvFile csv = new CsvFile(file, '\t', columns);
-            csv.Load("sepo_osn_docs", Module.Connection);
+            csv.Load("sepo_osn_docs", obj_lib.Module.Connection);
 
             csv.Close();
         }
 
         private void LoadOsnSe(string file)
         {
-            (new OracleCommand("delete from sepo_osn_se", Module.Connection)).ExecuteNonQuery();
+            (new OracleCommand("delete from sepo_osn_se", obj_lib.Module.Connection)).ExecuteNonQuery();
 
             CsvColumn[] columns = {
                 new CsvColumn("art_id"),
@@ -115,14 +115,14 @@ namespace imp_exp
             };
 
             CsvFile csv = new CsvFile(file, '\t', columns);
-            csv.Load("sepo_osn_se", Module.Connection);
+            csv.Load("sepo_osn_se", obj_lib.Module.Connection);
 
             csv.Close();
         }
 
         private void LoadOsnSostav(string file)
         {
-            (new OracleCommand("delete from sepo_osn_sostav", Module.Connection)).ExecuteNonQuery();
+            (new OracleCommand("delete from sepo_osn_sostav", obj_lib.Module.Connection)).ExecuteNonQuery();
 
             CsvColumn[] columns = {
                 new CsvColumn("prjlink_id"),
@@ -148,14 +148,14 @@ namespace imp_exp
             };
 
             CsvFile csv = new CsvFile(file, '\t', columns);
-            csv.Load("sepo_osn_sostav", Module.Connection);
+            csv.Load("sepo_osn_sostav", obj_lib.Module.Connection);
 
             csv.Close();
         }
 
         private void LoadOsnSp(string file)
         {
-            (new OracleCommand("delete from sepo_osn_sp", Module.Connection)).ExecuteNonQuery();
+            (new OracleCommand("delete from sepo_osn_sp", obj_lib.Module.Connection)).ExecuteNonQuery();
 
             CsvColumn[] columns = {
                 new CsvColumn("art_id"),
@@ -168,7 +168,7 @@ namespace imp_exp
             };
 
             CsvFile csv = new CsvFile(file, '\t', columns);
-            csv.Load("sepo_osn_sp", Module.Connection);
+            csv.Load("sepo_osn_sp", obj_lib.Module.Connection);
 
             csv.Close();
         }
@@ -177,7 +177,7 @@ namespace imp_exp
         {
             OracleCommand del_command = new OracleCommand(
                 "delete from sepo_osn_types",
-                Module.Connection
+                obj_lib.Module.Connection
                 );
             del_command.ExecuteNonQuery();
 
@@ -191,7 +191,7 @@ namespace imp_exp
                         osn_type IS NOT NULL
                     GROUP BY
                       Upper(SubStr(osn_type, 1, 1))",
-                Module.Connection
+                obj_lib.Module.Connection
                 );
 
             command.ExecuteNonQuery();
@@ -206,7 +206,7 @@ namespace imp_exp
             string file_sp
             )
         {
-            using (OracleTransaction transaction = Module.Connection.BeginTransaction())
+            using (OracleTransaction transaction = obj_lib.Module.Connection.BeginTransaction())
             {
                 try
                 {

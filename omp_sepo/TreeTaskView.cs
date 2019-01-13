@@ -1,8 +1,11 @@
 ﻿using imp_exp;
+using obj_lib.Entities;
+using obj_lib.Repositories;
 using omp_sepo.dialogs;
 using omp_sepo.views;
 using Oracle.DataAccess.Client;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 using ui_lib;
 
@@ -26,7 +29,7 @@ namespace omp_sepo
             TreeTaskNode node = e.Node as TreeTaskNode;
             if (node.Type == TreeTaskNodeType.File)
             {
-                long id = (long)node.Tag;
+                int id = (int)node.Tag;
                 switch (id)
                 {
                     case 1:
@@ -75,10 +78,8 @@ namespace omp_sepo
 
                     case 12:
 #if DEBUG
-                        using (OracleTransaction transaction = Module.Connection.BeginTransaction())
+                        using (OracleTransaction transaction = obj_lib.Module.Connection.BeginTransaction())
                         {
-                            imp_exp.Module.Connection = Module.Connection;
-
                             try
                             {
                                 StandardFixtureManager mng = new StandardFixtureManager();
@@ -152,8 +153,6 @@ namespace omp_sepo
                         {
                             try
                             {
-                                imp_exp.Module.Connection = Module.Connection;
-
                                 StandardFixtureManager mng = new StandardFixtureManager();
                                 mng.UpdateDB();
 
@@ -193,7 +192,7 @@ namespace omp_sepo
                     case 20:
 #if DEBUG
                         //OracleCommand cmd = new OracleCommand();
-                        //cmd.Connection = Module.Connection;
+                        //cmd.Connection = obj_lib.Module.Connection;
                         //cmd.CommandText = "select steptext_rtf from steps_for_oper_steptext where stepcode = 461";
 
                         //using (OracleDataReader rd = cmd.ExecuteReader())
@@ -209,7 +208,7 @@ namespace omp_sepo
                         //}
 
                         //OracleCommand cmd = new OracleCommand();
-                        //cmd.Connection = Module.Connection;
+                        //cmd.Connection = obj_lib.Module.Connection;
                         //cmd.CommandText = "update techproc_comment set remark = :remark";
 
                         //FileStream fl = new FileStream("D:\\sepotpcmt.rtf", FileMode.Open);
@@ -220,7 +219,7 @@ namespace omp_sepo
                         //cmd.ExecuteNonQuery();
 
                         //OracleCommand cmd = new OracleCommand();
-                        //cmd.Connection = Module.Connection;
+                        //cmd.Connection = obj_lib.Module.Connection;
                         //cmd.CommandText = "select rtf from sepo_tp_comment_blob where id = 2226406";
 
                         //using (OracleDataReader rd = cmd.ExecuteReader())
@@ -253,28 +252,30 @@ namespace omp_sepo
                         ((IMdiForm)Parent).AddChild("Синхронизация объектов", objsynch_view, true);
                         break;
 
+                    case 24:
+                        (new AttachFilesUpdateHashDialog()).ShowDialog();
+                        break;
+
                     default:
                         break;
                 }
             }
         }
 
-        public void LoadData(TreeNode node = null, long parent = 0)
+        public void LoadData(
+            IViewRepository<SEPO_TASK_FOLDER_LIST> foldersRepo,
+            IViewRepository<SEPO_TASK_LIST> tasksRepo,
+            TreeNode node = null,
+            int parent = 0)
         {
-            OracleCommand command = new OracleCommand();
-            command.CommandText =
-                "select * from sepo_task_folder_list where coalesce(id_parent, 0) = :parent";
-            command.Connection = Module.Connection;
-            command.Parameters.Add("parent", parent);
+            var folders = foldersRepo.GetQuery()
+                .Where(x => ((x.ID_PARENT == null) ? 0 : x.ID_PARENT.ID) == parent)
+                .OrderBy(x => x.ID);
 
-            OracleDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+            foreach (var folder in folders)
             {
-                long id = reader.GetInt64(0);
-                string name = reader.GetString(1);
-
-                TreeTaskNode childNode = new TreeTaskNode(name, TreeTaskNodeType.Folder);
-                childNode.Tag = id;
+                TreeTaskNode childNode = new TreeTaskNode(folder.NAME, TreeTaskNodeType.Folder);
+                childNode.Tag = folder.ID;
                 childNode.ImageKey = "folder";
                 childNode.SelectedImageKey = "folder";
 
@@ -287,23 +288,17 @@ namespace omp_sepo
                     node.Nodes.Add(childNode);
                 }
 
-                LoadData(childNode, id);
+                LoadData(foldersRepo, tasksRepo, childNode, folder.ID);
             }
 
-            OracleCommand task_command = new OracleCommand();
-            task_command.CommandText =
-                "select * from sepo_task_list where id_folder = :folder order by id";
-            task_command.Connection = Module.Connection;
-            task_command.Parameters.Add("folder", parent);
+            var tasks = tasksRepo.GetQuery()
+                .Where(x => x.ID_FOLDER.ID == parent)
+                .OrderBy(x => x.ID);
 
-            OracleDataReader task_reader = task_command.ExecuteReader();
-            while (task_reader.Read())
+            foreach (var task in tasks)
             {
-                long id_task = task_reader.GetInt64(0);
-                string name_task = task_reader.GetString(1);
-
-                TreeTaskNode taskNode = new TreeTaskNode(name_task, TreeTaskNodeType.File);
-                taskNode.Tag = id_task;
+                TreeTaskNode taskNode = new TreeTaskNode(task.NAME, TreeTaskNodeType.File);
+                taskNode.Tag = task.ID;
                 taskNode.ImageKey = "task";
                 taskNode.SelectedImageKey = "task";
 

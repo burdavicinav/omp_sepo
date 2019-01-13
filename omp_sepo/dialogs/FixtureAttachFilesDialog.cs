@@ -60,7 +60,7 @@ namespace omp_sepo.dialogs
             Dictionary<decimal, string> groups = new Dictionary<decimal, string>();
 
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = "select code, name from attachments_groups where botype = :botype";
             command.Parameters.Add("botype", botype);
 
@@ -76,7 +76,7 @@ namespace omp_sepo.dialogs
         private void SetFileGroupsFilter()
         {
             OracleCommand command = new OracleCommand();
-            command.Connection = Module.Connection;
+            command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"insert into sepo_attachment_groups_filter(botype, grcode)
                                     values(:botype, :grcode)";
 
@@ -118,9 +118,8 @@ namespace omp_sepo.dialogs
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            using (OracleTransaction transaction = Module.Connection.BeginTransaction())
+            using (OracleTransaction transaction = obj_lib.Module.Connection.BeginTransaction())
             {
-                imp_exp.Module.Connection = Module.Connection;
                 FixtureAttachFiles mgr = new FixtureAttachFiles();
 
                 try

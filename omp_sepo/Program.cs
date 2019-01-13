@@ -1,8 +1,17 @@
-﻿using obj_lib;
-using ora_dialog;
+﻿#if DEBUG
+
+using Oracle.DataAccess.Client;
 using System;
 using System.Windows.Forms;
-using Oracle.DataAccess.Client;
+
+#else
+
+using ora_dialog;
+using System;
+using System.Reflection;
+using System.Windows.Forms;
+
+#endif
 
 namespace omp_sepo
 {
@@ -29,21 +38,21 @@ namespace omp_sepo
             //Application.Run(new ui_lib.MdiFormBase());
 
             // соединение с Oracle
-            OracleConnectionStringBuilder oraBuilder = new OracleConnectionStringBuilder();
-            oraBuilder.DataSource = "omega";
-            oraBuilder.UserID = "omp_adm";
-            oraBuilder.Password = "eastsoft";
+            OracleConnectionStringBuilder oraBuilder = new OracleConnectionStringBuilder
+            {
+                DataSource = "omega",
+                UserID = "omp_adm",
+                Password = "eastsoft"
+            };
 
             OracleConnection connection = new OracleConnection(oraBuilder.ToString());
             connection.Open();
 
-            Module.Connection = connection;
-
             // контекст
-            OmpModel ent = new OmpModel();
-            ent.Database.Connection.ConnectionString = oraBuilder.ConnectionString;
+            obj_lib.Module.ConnectionString = oraBuilder.ConnectionString;
 
-            Module.Context = ent;
+            // дополнительное подключение
+            obj_lib.Module.Connection = connection;
 
             // запуск приложения
             Application.Run(new MainForm());
@@ -51,17 +60,17 @@ namespace omp_sepo
 
             try
             {
-                MainDialog dialog = new MainDialog(Settings.Connections);
+                MainDialog dialog = new MainDialog(
+                    Assembly.GetExecutingAssembly().GetName().Version,
+                    Settings.Connections);
+
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     // соединение с Oracle
-                    Module.Connection = dialog.Connection;
+                    obj_lib.Module.Connection = dialog.Connection;
 
                     // контекст
-                    OmpModel ent = new OmpModel();
-                    ent.Database.Connection.ConnectionString = dialog.ConnectionString;
-
-                    Module.Context = ent;
+                    obj_lib.Module.ConnectionString = dialog.ConnectionString;
 
                     // запуск приложения
                     Application.Run(new MainForm());

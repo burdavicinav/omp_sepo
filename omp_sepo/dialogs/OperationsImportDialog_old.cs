@@ -17,8 +17,6 @@ namespace omp_sepo.dialogs
             {
                 fileBox.Filter = Extension;
 
-                imp_exp.Module.Connection = omp_sepo.Module.Connection;
-
                 IImportManager import = new TechnologyOperationsManager();
                 import.LoadFromXml(this.File);
                 import.Load();

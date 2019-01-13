@@ -23,7 +23,7 @@ namespace imp_exp
         {
             OracleCommand command = new OracleCommand(
                 "delete from sepo_oper_folders",
-                Module.Connection
+                obj_lib.Module.Connection
                 );
             command.ExecuteNonQuery();
 
@@ -35,7 +35,7 @@ namespace imp_exp
             OracleCommand folderCommand = new OracleCommand(
                 @"insert into sepo_oper_folders (f_key, f_owner, f_level, f_name)
                     values (:key, :owner, :level_, :name)",
-                Module.Connection
+                obj_lib.Module.Connection
                 );
 
             OracleParameter p_key = new OracleParameter("key", OracleDbType.Decimal);
@@ -66,7 +66,7 @@ namespace imp_exp
         {
             OracleCommand command = new OracleCommand(
                 "delete from sepo_professions_on_opers",
-                Module.Connection
+                obj_lib.Module.Connection
                 );
             command.ExecuteNonQuery();
 
@@ -82,7 +82,7 @@ namespace imp_exp
             OracleCommand recCommand = new OracleCommand(
                 @"insert into sepo_oper_recs (f_key, f_level, f1, f2, f3, f4)
                     values (:key, :level_, :f1, :f2, :f3, :f4)",
-                Module.Connection
+                obj_lib.Module.Connection
                 );
 
             OracleParameter p_key = new OracleParameter("key", OracleDbType.Decimal);
@@ -108,7 +108,7 @@ namespace imp_exp
                     string[] professions = f3.Value.Split(',');
 
                     OracleCommand profCommand = new OracleCommand();
-                    profCommand.Connection = Module.Connection;
+                    profCommand.Connection = obj_lib.Module.Connection;
                     profCommand.CommandText =
                         @"insert into sepo_professions_on_opers (id_oper, id_prof)
                             select sq_sepo_oper_recs.currval, id FROM sepo_professions
@@ -149,7 +149,7 @@ namespace imp_exp
         {
             OracleCommand command = new OracleCommand(
                 "delete from sepo_oper_folder_codes",
-                Module.Connection
+                obj_lib.Module.Connection
                 );
             command.ExecuteNonQuery();
 
@@ -161,7 +161,7 @@ namespace imp_exp
             OracleCommand folderCommand = new OracleCommand(
                 @"insert into sepo_oper_folder_codes (f_level, f_code)
                     values (:level_, :code)",
-                Module.Connection
+                obj_lib.Module.Connection
                 );
 
             OracleParameter p_level = new OracleParameter("level_", OracleDbType.Decimal);
@@ -189,7 +189,7 @@ namespace imp_exp
 
         public void LoadFromXml(string file_opers, string file_codes)
         {
-            using (OracleTransaction transaction = Module.Connection.BeginTransaction())
+            using (OracleTransaction transaction = obj_lib.Module.Connection.BeginTransaction())
             {
                 try
                 {
@@ -219,12 +219,12 @@ namespace imp_exp
 
         public void Load(decimal? opertype)
         {
-            using (OracleTransaction transaction = Module.Connection.BeginTransaction())
+            using (OracleTransaction transaction = obj_lib.Module.Connection.BeginTransaction())
             {
                 try
                 {
                     OracleCommand command = new OracleCommand();
-                    command.Connection = Module.Connection;
+                    command.Connection = obj_lib.Module.Connection;
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.CommandText = "pkg_sepo_import_global.clearoperations";
                     command.ExecuteNonQuery();

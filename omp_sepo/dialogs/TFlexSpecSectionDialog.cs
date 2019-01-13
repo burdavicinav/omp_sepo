@@ -1,26 +1,43 @@
 ﻿using obj_lib;
+using obj_lib.Entities;
+using obj_lib.Repositories;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace omp_sepo.dialogs
 {
     public partial class TFlexSpecSectionDialog : Form
     {
+        private IRepository<SEPO_TFLEX_SPEC_SECTIONS> sectionsRepo;
+
         private DialogType dialogType;
 
-        public decimal Id { get; set; }
+        public SEPO_TFLEX_SPEC_SECTIONS TFlexSpecSection { get; set; }
 
-        public TFlexSpecSectionDialog()
+        public TFlexSpecSectionDialog(IRepository<SEPO_TFLEX_SPEC_SECTIONS> repo)
         {
-            InitializeComponent();
+            sectionsRepo = repo;
 
-            dialogType = DialogType.Add;
+            InitializeComponent();
 
             sectionBox.TextChanged += SectionBox_TextChanged;
             okButton.Enabled = false;
 
             okButton.Click += OkButton_Click;
+        }
+
+        public TFlexSpecSectionDialog() : this(new Repository<SEPO_TFLEX_SPEC_SECTIONS>())
+        {
+            dialogType = DialogType.Add;
+        }
+
+        public TFlexSpecSectionDialog(SEPO_TFLEX_SPEC_SECTIONS section)
+            : this(new Repository<SEPO_TFLEX_SPEC_SECTIONS>())
+        {
+            dialogType = DialogType.Edit;
+            TFlexSpecSection = section;
+
+            sectionBox.Text = section.SECTION_;
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -32,39 +49,43 @@ namespace omp_sepo.dialogs
                     SECTION_ = sectionBox.Text
                 };
 
-                Module.Context.SEPO_TFLEX_SPEC_SECTIONS.Add(section);
-
-                try
+                using (UnitOfWork transaction = new UnitOfWork())
                 {
-                    Module.Context.SaveChanges();
+                    try
+                    {
+                        sectionsRepo.Create(section);
 
-                    Id = section.ID;
+                        transaction.Commit();
 
-                    DialogResult = DialogResult.OK;
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show(exc.Message);
-
-                    Module.Context.SEPO_TFLEX_SPEC_SECTIONS.Remove(section);
+                        TFlexSpecSection = section;
+                        DialogResult = DialogResult.OK;
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
                 }
             }
             else
             {
-                SEPO_TFLEX_SPEC_SECTIONS item =
-                    Module.Context.SEPO_TFLEX_SPEC_SECTIONS.Where(x => x.ID == Id).FirstOrDefault();
+                TFlexSpecSection.SECTION_ = sectionBox.Text;
 
-                item.SECTION_ = sectionBox.Text;
-
-                try
+                using (UnitOfWork transaction = new UnitOfWork())
                 {
-                    Module.Context.SaveChanges();
+                    try
+                    {
+                        sectionsRepo.Update(TFlexSpecSection);
 
-                    DialogResult = DialogResult.OK;
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show(exc.Message);
+                        transaction.Commit();
+
+                        DialogResult = DialogResult.OK;
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
                 }
             }
         }
@@ -72,24 +93,6 @@ namespace omp_sepo.dialogs
         private void SectionBox_TextChanged(object sender, EventArgs e)
         {
             okButton.Enabled = (sectionBox.Text != String.Empty);
-        }
-
-        public TFlexSpecSectionDialog(decimal id) : this()
-        {
-            dialogType = DialogType.Edit;
-            Id = id;
-
-            try
-            {
-                SEPO_TFLEX_SPEC_SECTIONS item =
-                    Module.Context.SEPO_TFLEX_SPEC_SECTIONS.Where(x => x.ID == id).FirstOrDefault();
-
-                sectionBox.Text = item.SECTION_;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
         }
     }
 }

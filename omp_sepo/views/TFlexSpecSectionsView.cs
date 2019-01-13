@@ -1,19 +1,23 @@
 ﻿using obj_lib;
+using obj_lib.Entities;
+using obj_lib.Repositories;
 using omp_sepo.dialogs;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace omp_sepo.views
 {
     public partial class TFlexSpecSectionsView : UserControl
     {
+        private IRepository<SEPO_TFLEX_SPEC_SECTIONS> sectionsRepo;
+
         private ContextMenuStrip menu;
 
         private void RefrechData()
         {
-            foreach (var item in Module.Context.SEPO_TFLEX_SPEC_SECTIONS)
+            foreach (var item in sectionsRepo.GetQuery())
             {
+                //obj_lib.Module.OpenSession().Evict(item);
                 AddRow(item);
             }
         }
@@ -55,7 +59,12 @@ namespace omp_sepo.views
             this.ContextMenuStrip = menu;
         }
 
-        public TFlexSpecSectionsView()
+        public TFlexSpecSectionsView(IRepository<SEPO_TFLEX_SPEC_SECTIONS> repo)
+        {
+            sectionsRepo = repo;
+        }
+
+        public TFlexSpecSectionsView() : this(new Repository<SEPO_TFLEX_SPEC_SECTIONS>())
         {
             InitializeComponent();
 
@@ -66,27 +75,25 @@ namespace omp_sepo.views
 
         protected void OnAddItemClick(object sender, EventArgs e)
         {
-            TFlexSpecSectionDialog dialog = new TFlexSpecSectionDialog();
+            TFlexSpecSectionDialog dialog = new TFlexSpecSectionDialog(sectionsRepo);
+
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                SEPO_TFLEX_SPEC_SECTIONS section =
-                    Module.Context.SEPO_TFLEX_SPEC_SECTIONS.Where(x => x.ID == dialog.Id).FirstOrDefault();
-
-                AddRow(section);
+                AddRow(dialog.TFlexSpecSection);
             }
         }
 
         protected void OnEditItemClick(object sender, EventArgs e)
         {
             DataGridViewRow row = scene.SelectedRows[0];
-            decimal id = (decimal)row.Tag;
+            int id = (int)row.Tag;
 
-            TFlexSpecSectionDialog dialog = new TFlexSpecSectionDialog(id);
+            SEPO_TFLEX_SPEC_SECTIONS section = sectionsRepo.GetById(id);
+
+            TFlexSpecSectionDialog dialog = new TFlexSpecSectionDialog(section);
+
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                SEPO_TFLEX_SPEC_SECTIONS section =
-                    Module.Context.SEPO_TFLEX_SPEC_SECTIONS.Where(x => x.ID == dialog.Id).FirstOrDefault();
-
                 UpdateRow(row, section);
             }
         }
@@ -95,15 +102,25 @@ namespace omp_sepo.views
         {
             DataGridViewRow row = scene.SelectedRows[0];
 
-            decimal id = (decimal)row.Tag;
+            int id = (int)row.Tag;
 
-            SEPO_TFLEX_SPEC_SECTIONS section =
-                    Module.Context.SEPO_TFLEX_SPEC_SECTIONS.Where(x => x.ID == id).FirstOrDefault();
+            using (UnitOfWork transaction = new UnitOfWork())
+            {
+                SEPO_TFLEX_SPEC_SECTIONS section = sectionsRepo.GetById(id);
 
-            Module.Context.SEPO_TFLEX_SPEC_SECTIONS.Remove(section);
-            Module.Context.SaveChanges();
+                try
+                {
+                    sectionsRepo.Delete(section);
+                    transaction.Commit();
 
-            scene.Rows.Remove(row);
+                    scene.Rows.Remove(row);
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
         }
 
         protected void OnMenuVisible(object sender, EventArgs e)

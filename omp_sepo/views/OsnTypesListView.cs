@@ -1,42 +1,38 @@
-﻿using obj_lib;
+﻿using obj_lib.Entities;
+using obj_lib.Repositories;
 using omp_sepo.dialogs;
-using Oracle.DataAccess.Client;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace omp_sepo.views
 {
     public class OsnTypesListView : ListView
     {
+        private IViewRepository<V_SEPO_OSN_TYPES> typesRepo;
+
         private void AddItem(V_SEPO_OSN_TYPES tps)
         {
-            ListViewItem item = new ListViewItem(tps.ShortName);
-            item.SubItems.Add(tps.OmpName);
-            item.Tag = tps.Id;
+            ListViewItem item = new ListViewItem(tps.SHORTNAME);
+            item.SubItems.Add(tps.OMP_NAME);
+            item.Tag = tps.ID;
 
             Items.Add(item);
         }
 
         private void SelectObjects()
         {
-            OracleCommand command = new OracleCommand(
-                "select * from v_sepo_osn_types order by shortname",
-                Module.Connection
-                );
-
-            OracleDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+            foreach (var type in typesRepo.GetQuery().OrderBy(x => x.SHORTNAME))
             {
-                V_SEPO_OSN_TYPES tps = new V_SEPO_OSN_TYPES();
-                tps.Id = reader.GetDecimal(0);
-                if (!reader.IsDBNull(1)) tps.ShortName = reader.GetString(1);
-                if (!reader.IsDBNull(2)) tps.OmpCode = reader.GetDecimal(2);
-                if (!reader.IsDBNull(3)) tps.OmpName = reader.GetString(3);
-
-                AddItem(tps);
+                AddItem(type);
             }
         }
 
-        public OsnTypesListView()
+        public OsnTypesListView(IViewRepository<V_SEPO_OSN_TYPES> repo)
+        {
+            typesRepo = repo;
+        }
+
+        public OsnTypesListView() : this(new ViewRepository<V_SEPO_OSN_TYPES>())
         {
             this.View = View.Details;
             this.GridLines = true;

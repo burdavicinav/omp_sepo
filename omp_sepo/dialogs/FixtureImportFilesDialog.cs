@@ -37,7 +37,6 @@ namespace omp_sepo.dialogs
         {
             try
             {
-                imp_exp.Module.Connection = Module.Connection;
                 imp_exp.FixtureManager mgr = new imp_exp.FixtureManager();
                 mgr.LoadFromFiles(
                     osnAllBox.TextValue,
