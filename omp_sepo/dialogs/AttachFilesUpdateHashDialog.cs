@@ -52,7 +52,7 @@ namespace omp_sepo.dialogs
             }
             else if (e.Error != null)
             {
-                MessageBox.Show(e.Error.Message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Error.Message + e.Error.StackTrace, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -77,7 +77,11 @@ namespace omp_sepo.dialogs
             {
                 try
                 {
-                    foreach (var docParam in _repoDocParam.GetQuery())
+                    var docs = _repoDocParam
+                                    .GetQuery()
+                                    .Where(x => x.FILENAME.ToLower().EndsWith(".grb"));
+
+                    foreach (var docParam in docs)
                     {
                         if (backWorker.CancellationPending)
                         {
@@ -117,6 +121,8 @@ namespace omp_sepo.dialogs
                         {
                             docContent = docPart.DATA;
                         }
+
+                        if (docContent == null) continue;
 
                         SHA1 s = new SHA1CryptoServiceProvider();
                         byte[] hash = s.ComputeHash(docContent);
