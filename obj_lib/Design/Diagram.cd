@@ -159,5 +159,19 @@
       <FileName>Entities\DOCUMENTS_PARAMS.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="obj_lib.Entities.SEPO_OSN_ALL">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAK4gAAEIAgBAIASADgiAAQgAAAIAAAAJQCAAIAEA=</HashCode>
+      <FileName>Entities\SEPO_OSN_ALL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="obj_lib.Entities.V_SEPO_FIXTURE_DOCS">
+    <Position X="20.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAEAAAACAACAAACAAAgAAAAAAAAAAAABAAEA=</HashCode>
+      <FileName>Entities\V_SEPO_FIXTURE_DOCS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

@@ -118,6 +118,12 @@
     <Compile Include="dialogs\FixtureImportObjectsDialog.Designer.cs">
       <DependentUpon>FixtureImportObjectsDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="dialogs\LoadFixtureDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\LoadFixtureDialog.Designer.cs">
+      <DependentUpon>LoadFixtureDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="dialogs\OsnTypesDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,6 +217,12 @@
     <Compile Include="dialogs\TFlexSpecSectionDialog.Designer.cs">
       <DependentUpon>TFlexSpecSectionDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\LoadFixtureView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="views\LoadFixtureView.Designer.cs">
+      <DependentUpon>LoadFixtureView.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\TFlexObjSynchView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -288,6 +300,9 @@
     <EmbeddedResource Include="dialogs\FixtureImportObjectsDialog.resx">
       <DependentUpon>FixtureImportObjectsDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\LoadFixtureDialog.resx">
+      <DependentUpon>LoadFixtureDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dialogs\OsnTypesDialog.resx">
       <DependentUpon>OsnTypesDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -329,6 +344,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dialogs\TFlexSpecSectionDialog.resx">
       <DependentUpon>TFlexSpecSectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\LoadFixtureView.resx">
+      <DependentUpon>LoadFixtureView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="views\TFlexObjSynchView.resx">
       <DependentUpon>TFlexObjSynchView.cs</DependentUpon>
@@ -392,7 +410,9 @@
       <Name>ui_lib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Icon1.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

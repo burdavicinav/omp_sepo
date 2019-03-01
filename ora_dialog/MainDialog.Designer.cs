@@ -143,9 +143,11 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainDialog";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Соединение...";
             this.groupBox1.ResumeLayout(false);

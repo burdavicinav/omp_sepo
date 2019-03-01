@@ -80,6 +80,7 @@
     <Compile Include="Entities\BUSINESS_OBJECTS.cs" />
     <Compile Include="Entities\DOCUMENTS_PARAMS.cs" />
     <Compile Include="Entities\DOCUMENTS_PARTS.cs" />
+    <Compile Include="Entities\SEPO_OSN_ALL.cs" />
     <Compile Include="Entities\SEPO_STD_FOLDERS.cs" />
     <Compile Include="Entities\SEPO_TASK_FOLDER_LIST.cs" />
     <Compile Include="Entities\SEPO_TASK_LIST.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Entities\SEPO_TFLEX_SPEC_SECTIONS.cs" />
     <Compile Include="Entities\SPC_SECTIONS.cs" />
     <Compile Include="Entities\TECHOPERATION_TYPES.cs" />
+    <Compile Include="Entities\V_SEPO_FIXTURE_DOCS.cs" />
     <Compile Include="Entities\V_SEPO_TFLEX_BO_TYPES.cs" />
     <Compile Include="Entities\V_SEPO_TFLEX_OBJ_SYNCH.cs" />
     <Compile Include="IUnitOfWork.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Mappings\BusinessObjStatesMap.cs" />
     <Compile Include="Mappings\DocumentsParamsMap.cs" />
     <Compile Include="Mappings\DocumentsPartsMap.cs" />
+    <Compile Include="Mappings\SepoOsnAllMap.cs" />
     <Compile Include="Mappings\SepoStdFoldersMap.cs" />
     <Compile Include="Mappings\SepoStdFoxProAttrsMap.cs" />
     <Compile Include="Mappings\SepoTaskFolderListMap.cs" />
@@ -105,6 +108,7 @@
     <Compile Include="Mappings\SepoTFlexObjSynchMap.cs" />
     <Compile Include="Mappings\SpcSectionsMap.cs" />
     <Compile Include="Mappings\TechoperationTypesMap.cs" />
+    <Compile Include="Mappings\VSepoFixtureDocsMap.cs" />
     <Compile Include="Mappings\VSepoOsnTypesMap.cs" />
     <Compile Include="Mappings\VSepoStdAttrsMap.cs" />
     <Compile Include="Mappings\VSepoStdSchemesMap.cs" />

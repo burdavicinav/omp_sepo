@@ -258,6 +258,17 @@ namespace omp_sepo
 
                     default:
                         break;
+
+                    case 25:
+                        LoadFixtureDialog loadFixtureDialog = new LoadFixtureDialog();
+
+                        if (loadFixtureDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            LoadFixtureView fixture_view = new LoadFixtureView(loadFixtureDialog.Sign);
+                            ((IMdiForm)Parent).AddChild("Загруженная оснастка", fixture_view, true);
+                        }
+
+                        break;
                 }
             }
         }

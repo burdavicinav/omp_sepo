@@ -42,7 +42,7 @@ namespace imp_exp
 
             OracleCommand file_command = new OracleCommand();
             file_command.Connection = obj_lib.Module.Connection;
-            file_command.CommandText = "select doc_id, filename from v_sepo_fixture_docs group by doc_id, filename";
+            file_command.CommandText = "select doc_id, filename from v_sepo_fixture_docs where file_isload = 1 group by doc_id, filename";
 
             OracleDataReader reader = file_command.ExecuteReader();
             while (reader.Read())
