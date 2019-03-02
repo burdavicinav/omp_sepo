@@ -75,6 +75,12 @@ namespace omp_sepo.dialogs
 
         private void SetFileGroupsFilter()
         {
+            OracleCommand del_command = new OracleCommand();
+            del_command.Connection = obj_lib.Module.Connection;
+            del_command.CommandText = "delete from sepo_attachment_groups_filter";
+
+            del_command.ExecuteNonQuery();
+
             OracleCommand command = new OracleCommand();
             command.Connection = obj_lib.Module.Connection;
             command.CommandText = @"insert into sepo_attachment_groups_filter(botype, grcode)
