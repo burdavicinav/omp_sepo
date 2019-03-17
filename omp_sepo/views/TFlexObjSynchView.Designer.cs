@@ -35,6 +35,9 @@
             this.boStateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupFileColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ompSectionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paramDependenceColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.paramColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.expressionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.scene)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,45 +53,72 @@
             this.boTypeColumn,
             this.boStateColumn,
             this.groupFileColumn,
-            this.ompSectionColumn});
+            this.ompSectionColumn,
+            this.paramDependenceColumn,
+            this.paramColumn,
+            this.expressionColumn});
             this.scene.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scene.Location = new System.Drawing.Point(0, 0);
             this.scene.MultiSelect = false;
             this.scene.Name = "scene";
             this.scene.ReadOnly = true;
             this.scene.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.scene.Size = new System.Drawing.Size(671, 354);
+            this.scene.Size = new System.Drawing.Size(820, 354);
             this.scene.TabIndex = 0;
             // 
             // specColumn
             // 
             this.specColumn.HeaderText = "TFlex Спецификация";
             this.specColumn.Name = "specColumn";
+            this.specColumn.ReadOnly = true;
             // 
             // signDocColumn
             // 
             this.signDocColumn.HeaderText = "TFlex Обозначение документа";
             this.signDocColumn.Name = "signDocColumn";
+            this.signDocColumn.ReadOnly = true;
             // 
             // boTypeColumn
             // 
             this.boTypeColumn.HeaderText = "Тип БО";
             this.boTypeColumn.Name = "boTypeColumn";
+            this.boTypeColumn.ReadOnly = true;
             // 
             // boStateColumn
             // 
             this.boStateColumn.HeaderText = "Статус БО";
             this.boStateColumn.Name = "boStateColumn";
+            this.boStateColumn.ReadOnly = true;
             // 
             // groupFileColumn
             // 
             this.groupFileColumn.HeaderText = "Группа файлов";
             this.groupFileColumn.Name = "groupFileColumn";
+            this.groupFileColumn.ReadOnly = true;
             // 
             // ompSectionColumn
             // 
             this.ompSectionColumn.HeaderText = "Раздел спецификации";
             this.ompSectionColumn.Name = "ompSectionColumn";
+            this.ompSectionColumn.ReadOnly = true;
+            // 
+            // paramDependenceColumn
+            // 
+            this.paramDependenceColumn.HeaderText = "Зависимость от параметра";
+            this.paramDependenceColumn.Name = "paramDependenceColumn";
+            this.paramDependenceColumn.ReadOnly = true;
+            // 
+            // paramColumn
+            // 
+            this.paramColumn.HeaderText = "Параметр";
+            this.paramColumn.Name = "paramColumn";
+            this.paramColumn.ReadOnly = true;
+            // 
+            // expressionColumn
+            // 
+            this.expressionColumn.HeaderText = "Выражение";
+            this.expressionColumn.Name = "expressionColumn";
+            this.expressionColumn.ReadOnly = true;
             // 
             // TFlexObjSynchView
             // 
@@ -96,7 +126,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.scene);
             this.Name = "TFlexObjSynchView";
-            this.Size = new System.Drawing.Size(671, 354);
+            this.Size = new System.Drawing.Size(820, 354);
             ((System.ComponentModel.ISupportInitialize)(this.scene)).EndInit();
             this.ResumeLayout(false);
 
@@ -111,5 +141,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn boStateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn groupFileColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ompSectionColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn paramDependenceColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn paramColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn expressionColumn;
     }
 }

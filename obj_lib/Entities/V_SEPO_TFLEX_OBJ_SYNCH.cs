@@ -39,5 +39,13 @@
         public virtual int OMPSECTION { get; }
 
         public virtual string OMPSECTIONNAME { get; }
+
+        public virtual int PARAM_DEPENDENCE { get; }
+
+        public virtual int ID_PARAM { get; }
+
+        public virtual string PARAM { get; }
+
+        public virtual string PARAM_EXPRESSION { get; }
     }
 }

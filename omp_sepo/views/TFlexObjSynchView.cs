@@ -54,7 +54,10 @@ namespace omp_sepo.views
                 item.BOTYPESHORTNAME,
                 item.BOSTATESHORTNAME,
                 item.FILEGROUPSHORTNAME,
-                item.OMPSECTIONNAME
+                item.OMPSECTIONNAME,
+                item.PARAM_DEPENDENCE,
+                item.PARAM,
+                item.PARAM_EXPRESSION
                 );
 
             row.Tag = item.ID;
@@ -72,6 +75,9 @@ namespace omp_sepo.views
             row.Cells[3].Value = item.BOSTATESHORTNAME;
             row.Cells[4].Value = item.FILEGROUPSHORTNAME;
             row.Cells[5].Value = item.OMPSECTIONNAME;
+            row.Cells[6].Value = item.PARAM_DEPENDENCE;
+            row.Cells[7].Value = item.PARAM;
+            row.Cells[8].Value = item.PARAM_EXPRESSION;
         }
 
         private void InizializeMenu()

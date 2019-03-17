@@ -29,6 +29,10 @@ namespace obj_lib.Mappings
 
             Map(x => x.OMP_SECTION)
                 .Not.Nullable();
+
+            Map(x => x.PARAM_DEPENDENCE);
+            References(x => x.ID_PARAM, "ID_PARAM");
+            Map(x => x.EXPRESSION);
         }
     }
 }

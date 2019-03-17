@@ -32,6 +32,10 @@ namespace obj_lib.Mappings
             Map(m => m.OWNERNAME);
             Map(m => m.OMPSECTION);
             Map(m => m.OMPSECTIONNAME);
+            Map(m => m.PARAM_DEPENDENCE);
+            Map(m => m.ID_PARAM);
+            Map(m => m.PARAM);
+            Map(m => m.PARAM_EXPRESSION);
         }
     }
 }

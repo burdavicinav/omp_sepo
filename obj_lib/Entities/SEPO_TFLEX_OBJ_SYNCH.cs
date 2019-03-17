@@ -17,5 +17,16 @@
         public virtual int? OMP_OWNER { get; set; }
 
         public virtual int OMP_SECTION { get; set; }
+
+        public virtual int PARAM_DEPENDENCE { get; set; }
+
+        public virtual SEPO_TFLEX_OBJ_PARAMETERS ID_PARAM { get; set; }
+
+        public virtual string EXPRESSION { get; set; }
+
+        public SEPO_TFLEX_OBJ_SYNCH()
+        {
+            PARAM_DEPENDENCE = 0;
+        }
     }
 }

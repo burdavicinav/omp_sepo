@@ -17,41 +17,41 @@ namespace omp_sepo
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.treeTaskView = new omp_sepo.TreeTaskView();
             this.SuspendLayout();
-            //
+            // 
             // windowTab
-            //
+            // 
             this.windowTab.Location = new System.Drawing.Point(270, 24);
-            this.windowTab.Size = new System.Drawing.Size(564, 21);
-            //
+            this.windowTab.Size = new System.Drawing.Size(808, 21);
+            // 
             // splitter1
-            //
+            // 
             this.splitter1.Location = new System.Drawing.Point(270, 45);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(3, 459);
             this.splitter1.TabIndex = 5;
             this.splitter1.TabStop = false;
-            //
+            // 
             // statusStrip1
-            //
+            // 
             this.statusStrip1.Location = new System.Drawing.Point(0, 504);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(834, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1078, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
-            //
+            // 
             // treeTaskView
-            //
+            // 
             this.treeTaskView.Dock = System.Windows.Forms.DockStyle.Left;
             this.treeTaskView.Location = new System.Drawing.Point(0, 24);
             this.treeTaskView.Name = "treeTaskView";
             this.treeTaskView.Size = new System.Drawing.Size(270, 480);
             this.treeTaskView.TabIndex = 4;
-            //
+            // 
             // MainForm
-            //
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(834, 526);
+            this.ClientSize = new System.Drawing.Size(1078, 526);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.treeTaskView);
             this.Controls.Add(this.statusStrip1);
@@ -63,6 +63,7 @@ namespace omp_sepo
             this.Controls.SetChildIndex(this.splitter1, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         private void SetMainMenu()

@@ -84,6 +84,7 @@
     <Compile Include="Entities\SEPO_STD_FOLDERS.cs" />
     <Compile Include="Entities\SEPO_TASK_FOLDER_LIST.cs" />
     <Compile Include="Entities\SEPO_TASK_LIST.cs" />
+    <Compile Include="Entities\SEPO_TFLEX_OBJ_PARAMETERS.cs" />
     <Compile Include="Entities\SEPO_TFLEX_OBJ_SYNCH.cs" />
     <Compile Include="Entities\SEPO_TFLEX_SIGN_DOCS.cs" />
     <Compile Include="Entities\SEPO_TFLEX_SPEC_SECTIONS.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Mappings\SepoStdFoxProAttrsMap.cs" />
     <Compile Include="Mappings\SepoTaskFolderListMap.cs" />
     <Compile Include="Mappings\SepoTaskListMap.cs" />
+    <Compile Include="Mappings\SepoTFlexObjParametersMap.cs" />
     <Compile Include="Mappings\SepoTFlexSectionMap.cs" />
     <Compile Include="Mappings\SepoTFlexSignDocsMap.cs" />
     <Compile Include="Mappings\SepoTFlexObjSynchMap.cs" />

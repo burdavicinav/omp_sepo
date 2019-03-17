@@ -34,6 +34,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ompSectionBox = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupFileBox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.boStateBox = new System.Windows.Forms.ComboBox();
@@ -42,10 +44,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.ompSectionBox = new System.Windows.Forms.ComboBox();
+            this.paramGroupBox = new System.Windows.Forms.GroupBox();
+            this.paramExpressionBox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.paramBox = new System.Windows.Forms.ComboBox();
+            this.paramDependenceBox = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.paramGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -83,7 +90,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 52);
+            this.label2.Location = new System.Drawing.Point(7, 52);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 13);
             this.label2.TabIndex = 1;
@@ -116,6 +123,24 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "КИС \"Омега\"";
             // 
+            // ompSectionBox
+            // 
+            this.ompSectionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ompSectionBox.FormattingEnabled = true;
+            this.ompSectionBox.Location = new System.Drawing.Point(137, 106);
+            this.ompSectionBox.Name = "ompSectionBox";
+            this.ompSectionBox.Size = new System.Drawing.Size(186, 21);
+            this.ompSectionBox.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 109);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(124, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Раздел спецификации:";
+            // 
             // groupFileBox
             // 
             this.groupFileBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -128,7 +153,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 79);
+            this.label5.Location = new System.Drawing.Point(7, 79);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(86, 13);
             this.label5.TabIndex = 4;
@@ -155,7 +180,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 52);
+            this.label3.Location = new System.Drawing.Point(7, 52);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 13);
             this.label3.TabIndex = 1;
@@ -173,7 +198,7 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(267, 248);
+            this.cancelButton.Location = new System.Drawing.Point(267, 359);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 5;
@@ -182,30 +207,68 @@
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(186, 248);
+            this.okButton.Location = new System.Drawing.Point(186, 359);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 6;
             this.okButton.Text = "ОК";
             this.okButton.UseVisualStyleBackColor = true;
             // 
-            // label6
+            // paramGroupBox
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 109);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(124, 13);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Раздел спецификации:";
+            this.paramGroupBox.Controls.Add(this.paramExpressionBox);
+            this.paramGroupBox.Controls.Add(this.label8);
+            this.paramGroupBox.Controls.Add(this.label7);
+            this.paramGroupBox.Controls.Add(this.paramBox);
+            this.paramGroupBox.Location = new System.Drawing.Point(13, 274);
+            this.paramGroupBox.Name = "paramGroupBox";
+            this.paramGroupBox.Size = new System.Drawing.Size(329, 79);
+            this.paramGroupBox.TabIndex = 7;
+            this.paramGroupBox.TabStop = false;
             // 
-            // ompSectionBox
+            // paramExpressionBox
             // 
-            this.ompSectionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ompSectionBox.FormattingEnabled = true;
-            this.ompSectionBox.Location = new System.Drawing.Point(137, 106);
-            this.ompSectionBox.Name = "ompSectionBox";
-            this.ompSectionBox.Size = new System.Drawing.Size(186, 21);
-            this.ompSectionBox.TabIndex = 7;
+            this.paramExpressionBox.Location = new System.Drawing.Point(137, 46);
+            this.paramExpressionBox.Name = "paramExpressionBox";
+            this.paramExpressionBox.Size = new System.Drawing.Size(186, 20);
+            this.paramExpressionBox.TabIndex = 11;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(7, 49);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(49, 13);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Шаблон:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(61, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Параметр:";
+            // 
+            // paramBox
+            // 
+            this.paramBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paramBox.FormattingEnabled = true;
+            this.paramBox.Location = new System.Drawing.Point(137, 19);
+            this.paramBox.Name = "paramBox";
+            this.paramBox.Size = new System.Drawing.Size(186, 21);
+            this.paramBox.TabIndex = 8;
+            // 
+            // paramDependenceBox
+            // 
+            this.paramDependenceBox.AutoSize = true;
+            this.paramDependenceBox.Location = new System.Drawing.Point(12, 251);
+            this.paramDependenceBox.Name = "paramDependenceBox";
+            this.paramDependenceBox.Size = new System.Drawing.Size(140, 17);
+            this.paramDependenceBox.TabIndex = 0;
+            this.paramDependenceBox.Text = "Зависит от параметра";
+            this.paramDependenceBox.UseVisualStyleBackColor = true;
             // 
             // TFlexObjSynchDialog
             // 
@@ -213,10 +276,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(358, 283);
+            this.ClientSize = new System.Drawing.Size(358, 395);
+            this.Controls.Add(this.paramGroupBox);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.paramDependenceBox);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -228,7 +293,10 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.paramGroupBox.ResumeLayout(false);
+            this.paramGroupBox.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -250,5 +318,11 @@
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.ComboBox ompSectionBox;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox paramGroupBox;
+        private System.Windows.Forms.TextBox paramExpressionBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox paramBox;
+        private System.Windows.Forms.CheckBox paramDependenceBox;
     }
 }

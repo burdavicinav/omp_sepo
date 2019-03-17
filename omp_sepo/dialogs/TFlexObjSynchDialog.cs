@@ -23,6 +23,8 @@ namespace omp_sepo.dialogs
 
         private IViewRepository<ATTACHMENTS_GROUPS> _repoAttachGroups;
 
+        private IViewRepository<SEPO_TFLEX_OBJ_PARAMETERS> _repoObjParams;
+
         private DialogType dialogType;
 
         private void InizializeRepo(
@@ -32,7 +34,8 @@ namespace omp_sepo.dialogs
             IViewRepository<SPC_SECTIONS> repoOmpSections,
             IRepository<SEPO_TFLEX_OBJ_SYNCH> repoObjSynch,
             IViewRepository<BUSINESSOBJ_STATES> repoBoStates,
-            IViewRepository<ATTACHMENTS_GROUPS> repoAttachGroups)
+            IViewRepository<ATTACHMENTS_GROUPS> repoAttachGroups,
+            IViewRepository<SEPO_TFLEX_OBJ_PARAMETERS> repoObjParams)
         {
             _repoSections = repoSections;
             _repoSignDocs = repoSignDocs;
@@ -41,6 +44,7 @@ namespace omp_sepo.dialogs
             _repoObjSynch = repoObjSynch;
             _repoBoStates = repoBoStates;
             _repoAttachGroups = repoAttachGroups;
+            _repoObjParams = repoObjParams;
         }
 
         private bool IsCorrect()
@@ -79,6 +83,11 @@ namespace omp_sepo.dialogs
             ompSectionBox.ValueMember = "CODE";
             ompSectionBox.DataSource = _repoOmpSections.GetQuery().Select(
                 x => new { SECTION = x.NAME, x.CODE }).OrderBy(x => x.SECTION).ToList();
+
+            paramBox.DisplayMember = "PARAM";
+            paramBox.ValueMember = "CODE";
+            paramBox.DataSource = _repoObjParams.GetQuery().Select(
+                x => new { PARAM = x.NAME, CODE = x.ID }).OrderBy(x => x.CODE).ToList();
         }
 
         public TFlexObjSynchDialog(
@@ -88,7 +97,8 @@ namespace omp_sepo.dialogs
             IViewRepository<SPC_SECTIONS> repoOmpSections,
             IRepository<SEPO_TFLEX_OBJ_SYNCH> repoObjSynch,
             IViewRepository<BUSINESSOBJ_STATES> repoBoStates,
-            IViewRepository<ATTACHMENTS_GROUPS> repoAttachGroups)
+            IViewRepository<ATTACHMENTS_GROUPS> repoAttachGroups,
+            IViewRepository<SEPO_TFLEX_OBJ_PARAMETERS> repoObjParams)
         {
             InitializeComponent();
 
@@ -99,7 +109,8 @@ namespace omp_sepo.dialogs
                 repoOmpSections,
                 repoObjSynch,
                 repoBoStates,
-                repoAttachGroups);
+                repoAttachGroups,
+                repoObjParams);
 
             dialogType = DialogType.Add;
 
@@ -109,8 +120,14 @@ namespace omp_sepo.dialogs
             boTypeBox.SelectedValueChanged += OnSelectedValueChanged;
             boStateBox.SelectedValueChanged += OnSelectedValueChanged;
             ompSectionBox.SelectedValueChanged += OnSelectedValueChanged;
+            paramDependenceBox.CheckedChanged += ParamDependenceCheckedChanged;
 
             RefreshData();
+        }
+
+        private void ParamDependenceCheckedChanged(object sender, EventArgs e)
+        {
+            paramGroupBox.Enabled = paramDependenceBox.Checked;
         }
 
         public TFlexObjSynchDialog() : this(
@@ -120,7 +137,8 @@ namespace omp_sepo.dialogs
             new ViewRepository<SPC_SECTIONS>(),
             new Repository<SEPO_TFLEX_OBJ_SYNCH>(),
             new ViewRepository<BUSINESSOBJ_STATES>(),
-            new ViewRepository<ATTACHMENTS_GROUPS>())
+            new ViewRepository<ATTACHMENTS_GROUPS>(),
+            new ViewRepository<SEPO_TFLEX_OBJ_PARAMETERS>())
         {
         }
 
@@ -139,6 +157,12 @@ namespace omp_sepo.dialogs
                 boStateBox.SelectedValue = item.OMP_BOSTATE;
                 groupFileBox.SelectedValue = (item.OMP_FILEGROUP == null) ? 0 : item.OMP_FILEGROUP;
                 ompSectionBox.SelectedValue = item.OMP_SECTION;
+                paramDependenceBox.Checked = (item.PARAM_DEPENDENCE == 1);
+
+                paramGroupBox.Enabled = paramDependenceBox.Checked;
+
+                if (item.ID_PARAM != null) paramBox.SelectedValue = item.ID_PARAM.ID;
+                paramExpressionBox.Text = item.EXPRESSION;
             }
             catch (Exception e)
             {
@@ -169,6 +193,19 @@ namespace omp_sepo.dialogs
                 }
 
                 synch.OMP_SECTION = (int)ompSectionBox.SelectedValue;
+
+                if (paramDependenceBox.Checked)
+                {
+                    synch.PARAM_DEPENDENCE = 1;
+                    synch.ID_PARAM = _repoObjParams.GetById(paramBox.SelectedValue);
+                    synch.EXPRESSION = paramExpressionBox.Text;
+                }
+                else
+                {
+                    synch.PARAM_DEPENDENCE = 0;
+                    synch.ID_PARAM = null;
+                    synch.EXPRESSION = null;
+                }
 
                 using (var transaction = new UnitOfWork())
                 {
@@ -216,6 +253,19 @@ namespace omp_sepo.dialogs
                 }
 
                 item.OMP_SECTION = (int)ompSectionBox.SelectedValue;
+
+                if (paramDependenceBox.Checked)
+                {
+                    item.PARAM_DEPENDENCE = 1;
+                    item.ID_PARAM = _repoObjParams.GetById(paramBox.SelectedValue);
+                    item.EXPRESSION = paramExpressionBox.Text;
+                }
+                else
+                {
+                    item.PARAM_DEPENDENCE = 0;
+                    item.ID_PARAM = null;
+                    item.EXPRESSION = null;
+                }
 
                 using (var transaction = new UnitOfWork())
                 {

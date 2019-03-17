@@ -51,12 +51,13 @@
   <Class Name="obj_lib.Entities.SEPO_TFLEX_OBJ_SYNCH">
     <Position X="4" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAACAAEAAgAAAhAAAAAAAAAAAAAAACAAAACAAAAA=</HashCode>
+      <HashCode>AIABAACAAEAAgAAAhAAAAAAAAAAAAAAAGAAAACQAAAA=</HashCode>
       <FileName>Entities\SEPO_TFLEX_OBJ_SYNCH.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="TFLEX_SECTION" />
       <Property Name="TFLEX_DOCSIGN" />
+      <Property Name="ID_PARAM" />
     </ShowAsAssociation>
   </Class>
   <Class Name="obj_lib.Entities.V_SEPO_TFLEX_OBJ_SYNCH">
@@ -171,6 +172,13 @@
     <TypeIdentifier>
       <HashCode>QAAAAAAAAEAAAACAACAAACAAAgAAAAAAAAAAAABAAEA=</HashCode>
       <FileName>Entities\V_SEPO_FIXTURE_DOCS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="obj_lib.Entities.SEPO_TFLEX_OBJ_PARAMETERS">
+    <Position X="4.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Entities\SEPO_TFLEX_OBJ_PARAMETERS.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
