@@ -256,9 +256,6 @@ namespace omp_sepo
                         (new AttachFilesUpdateHashDialog()).ShowDialog();
                         break;
 
-                    default:
-                        break;
-
                     case 25:
                         LoadFixtureDialog loadFixtureDialog = new LoadFixtureDialog();
 
@@ -268,6 +265,14 @@ namespace omp_sepo
                             ((IMdiForm)Parent).AddChild("Загруженная оснастка", fixture_view, true);
                         }
 
+                        break;
+
+                    case 26:
+                        (new TpImportLinkOperationsDialog()).ShowDialog();
+
+                        break;
+
+                    default:
                         break;
                 }
             }

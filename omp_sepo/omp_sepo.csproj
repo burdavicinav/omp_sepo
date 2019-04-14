@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="dialogs\AttachFilesUpdateHashDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,6 +218,12 @@
     <Compile Include="dialogs\TFlexSpecSectionDialog.Designer.cs">
       <DependentUpon>TFlexSpecSectionDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="dialogs\TpImportLinkOperationsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\TpImportLinkOperationsDialog.Designer.cs">
+      <DependentUpon>TpImportLinkOperationsDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\LoadFixtureView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -345,6 +352,9 @@
     <EmbeddedResource Include="dialogs\TFlexSpecSectionDialog.resx">
       <DependentUpon>TFlexSpecSectionDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\TpImportLinkOperationsDialog.resx">
+      <DependentUpon>TpImportLinkOperationsDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="views\LoadFixtureView.resx">
       <DependentUpon>LoadFixtureView.cs</DependentUpon>
     </EmbeddedResource>
@@ -389,6 +399,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\csv_lib\csv_lib.csproj">
+      <Project>{9f3dc95b-bcb2-46a0-92a3-7131e64a95c4}</Project>
+      <Name>csv_lib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\general\general.csproj">
       <Project>{6c9d676d-5041-4919-8d3e-3d85840e350f}</Project>
       <Name>general</Name>
