@@ -1,4 +1,5 @@
 ﻿using imp_exp;
+using obj_lib;
 using obj_lib.Entities;
 using obj_lib.Repositories;
 using omp_sepo.dialogs;
@@ -15,11 +16,11 @@ namespace omp_sepo
     {
         public void Init()
         {
-            //ImageList images = new ImageList();
-            //images.Images.Add("folder", Properties.Resources.folder);
-            //images.Images.Add("task", Properties.Resources.file);
+            ImageList images = new ImageList();
+            images.Images.Add("folder", Properties.Resources.folder);
+            images.Images.Add("task", Properties.Resources.file);
 
-            //this.ImageList = images;
+            this.ImageList = images;
 
             this.NodeMouseClick += TreeTaskView_NodeMouseClick;
         }
@@ -69,6 +70,13 @@ namespace omp_sepo
                         break;
 
                     case 10:
+                        //var objects = obj_lib.Module.OpenSession()
+                        //    .GetNamedQuery("TestHib")
+                        //    .SetParameter(0, 1)
+                        //    .SetParameter(1, "2")
+                        //    .List();
+                        //.List<TEST_HIB>();
+
                         (new FixtureAttachFilesDialog()).ShowDialog();
                         break;
 
@@ -234,7 +242,30 @@ namespace omp_sepo
                         //    fl.Close();
                         //}
 #endif
-                        (new TpImportDialog()).ShowDialog();
+                        bool isrun = false;
+
+                        // проверить, задана ли связь технологических операций
+                        if (Module.OpenSession().QueryOver<SEPO_TECH_OPER_LINKS>().RowCount() > 0)
+                        {
+                            isrun = true;
+                        }
+                        else
+                        {
+                            if (MessageBox.Show(
+                                "Не задано соответствие технологических операций. Уверены, что хотите продолжить?",
+                                "Внимание!",
+                                MessageBoxButtons.OKCancel,
+                                MessageBoxIcon.Information) == DialogResult.OK)
+                            {
+                                isrun = true;
+                            }
+                        }
+
+                        if (isrun)
+                        {
+                            (new TpImportDialog()).ShowDialog();
+                        }
+
                         break;
 
                     case 21:
@@ -270,6 +301,11 @@ namespace omp_sepo
                     case 26:
                         (new TpImportLinkOperationsDialog()).ShowDialog();
 
+                        break;
+
+                    case 27:
+                        FixtureAttachFileObjects af_view = new FixtureAttachFileObjects();
+                        ((IMdiForm)Parent).AddChild("Объекты для загрузки файлов", af_view, true);
                         break;
 
                     default:

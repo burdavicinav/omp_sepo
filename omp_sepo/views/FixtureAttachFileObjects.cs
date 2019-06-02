@@ -1,61 +1,40 @@
 ﻿using obj_lib;
 using obj_lib.Entities;
-using obj_lib.Repositories;
 using omp_sepo.dialogs;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace omp_sepo.views
 {
-    public partial class TFlexObjSynchView : UserControl
+    public partial class FixtureAttachFileObjects : UserControl
     {
-        private IViewRepository<V_SEPO_TFLEX_OBJ_SYNCH> _repoObjSynchView;
-
-        private IRepository<SEPO_TFLEX_OBJ_SYNCH> _repoObjSynch;
-
-        public TFlexObjSynchView(
-            IViewRepository<V_SEPO_TFLEX_OBJ_SYNCH> repoView,
-            IRepository<SEPO_TFLEX_OBJ_SYNCH> repo)
+        public FixtureAttachFileObjects()
         {
-            _repoObjSynchView = repoView;
-            _repoObjSynch = repo;
-
             InitializeComponent();
 
             InizializeMenu();
-
             RefrechData();
-        }
-
-        public TFlexObjSynchView() : this(
-            new ViewRepository<V_SEPO_TFLEX_OBJ_SYNCH>(),
-            new Repository<SEPO_TFLEX_OBJ_SYNCH>())
-        {
         }
 
         private void RefrechData()
         {
-            foreach (var item in _repoObjSynchView.GetQuery())
+            var session = Module.OpenSession();
+
+            foreach (var item in session.QueryOver<V_SEPO_FIXTURE_AF_OBJECTS>().List())
             {
                 AddRow(item);
             }
         }
 
-        private DataGridViewRow AddRow(V_SEPO_TFLEX_OBJ_SYNCH item)
+        private DataGridViewRow AddRow(V_SEPO_FIXTURE_AF_OBJECTS item)
         {
             DataGridViewRow row = new DataGridViewRow();
             row.CreateCells(
                 scene,
-                item.TFLEX_SECTION,
-                item.TFLEX_DOCSIGN,
-                item.BOTYPESHORTNAME,
-                item.BOSTATESHORTNAME,
-                item.FILEGROUPSHORTNAME,
-                item.OMPSECTIONNAME,
-                item.PARAM_DEPENDENCE,
-                item.PARAM,
-                item.PARAM_EXPRESSION
+                item.ID_TYPE,
+                item.TYPENAME,
+                item.FILEGROUP,
+                item.OWNER
                 );
 
             row.Tag = item.ID;
@@ -65,17 +44,12 @@ namespace omp_sepo.views
             return row;
         }
 
-        private void UpdateRow(DataGridViewRow row, V_SEPO_TFLEX_OBJ_SYNCH item)
+        private void UpdateRow(DataGridViewRow row, V_SEPO_FIXTURE_AF_OBJECTS item)
         {
-            row.Cells[0].Value = item.TFLEX_SECTION;
-            row.Cells[1].Value = item.TFLEX_DOCSIGN;
-            row.Cells[2].Value = item.BOTYPESHORTNAME;
-            row.Cells[3].Value = item.BOSTATESHORTNAME;
-            row.Cells[4].Value = item.FILEGROUPSHORTNAME;
-            row.Cells[5].Value = item.OMPSECTIONNAME;
-            row.Cells[6].Value = item.PARAM_DEPENDENCE;
-            row.Cells[7].Value = item.PARAM;
-            row.Cells[8].Value = item.PARAM_EXPRESSION;
+            row.Cells[0].Value = item.ID_TYPE;
+            row.Cells[1].Value = item.TYPENAME;
+            row.Cells[2].Value = item.FILEGROUP;
+            row.Cells[3].Value = item.OWNER;
         }
 
         private void InizializeMenu()
@@ -90,10 +64,11 @@ namespace omp_sepo.views
 
         protected void OnAddItemClick(object sender, EventArgs e)
         {
-            TFlexObjSynchDialog dialog = new TFlexObjSynchDialog();
+            SepoFixtureAfObjectsDialog dialog = new SepoFixtureAfObjectsDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                var obj = _repoObjSynchView.GetById(dialog.Id);
+                var session = Module.OpenSession();
+                var obj = session.Get<V_SEPO_FIXTURE_AF_OBJECTS>(dialog.Id);
                 AddRow(obj);
             }
         }
@@ -103,10 +78,11 @@ namespace omp_sepo.views
             DataGridViewRow row = scene.SelectedRows[0];
             int id = (int)row.Tag;
 
-            TFlexObjSynchDialog dialog = new TFlexObjSynchDialog(id);
+            SepoFixtureAfObjectsDialog dialog = new SepoFixtureAfObjectsDialog(id);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                var obj = _repoObjSynchView.GetById(dialog.Id);
+                var session = Module.OpenSession();
+                var obj = session.Get<V_SEPO_FIXTURE_AF_OBJECTS>(dialog.Id);
                 UpdateRow(row, obj);
             }
         }
@@ -121,8 +97,10 @@ namespace omp_sepo.views
             {
                 try
                 {
-                    SEPO_TFLEX_OBJ_SYNCH synch = _repoObjSynch.GetQuery().Where(x => x.ID == id).FirstOrDefault();
-                    _repoObjSynch.Delete(synch);
+                    var session = Module.OpenSession();
+
+                    SEPO_FIXTURE_AF_OBJECTS obj = session.Get<SEPO_FIXTURE_AF_OBJECTS>(id);
+                    session.Delete(obj);
 
                     transaction.Commit();
 

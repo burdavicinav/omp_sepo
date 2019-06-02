@@ -11,8 +11,6 @@ namespace omp_sepo.views
     {
         private IRepository<SEPO_TFLEX_SPEC_SECTIONS> sectionsRepo;
 
-        private ContextMenuStrip menu;
-
         private void RefrechData()
         {
             foreach (var item in sectionsRepo.GetQuery())
@@ -40,23 +38,10 @@ namespace omp_sepo.views
 
         private void InizializeMenu()
         {
-            menu = new ContextMenuStrip();
+            this.ContextMenuStrip = new ContextMenuStrip();
 
-            ToolStripItem addMenuItem = menu.Items.Add("Добавить");
-            addMenuItem.Name = "Add";
-            addMenuItem.Click += OnAddItemClick;
-
-            ToolStripItem editMenuItem = menu.Items.Add("Изменить");
-            editMenuItem.Name = "Edit";
-            editMenuItem.Click += OnEditItemClick;
-
-            ToolStripItem deleteMenuItem = menu.Items.Add("Удалить");
-            deleteMenuItem.Name = "Delete";
-            deleteMenuItem.Click += OnDeleteItemClick;
-
-            menu.VisibleChanged += OnMenuVisible;
-
-            this.ContextMenuStrip = menu;
+            ContextMenuBuilder menuBuilder = new ContextMenuBuilder(this.ContextMenuStrip);
+            menuBuilder.BlockEditStripItem(OnAddItemClick, OnEditItemClick, OnDeleteItemClick);
         }
 
         public TFlexSpecSectionsView(IRepository<SEPO_TFLEX_SPEC_SECTIONS> repo)
@@ -125,10 +110,10 @@ namespace omp_sepo.views
 
         protected void OnMenuVisible(object sender, EventArgs e)
         {
-            if (menu.Visible)
+            if (this.ContextMenuStrip.Visible)
             {
-                menu.Items["Edit"].Enabled = scene.SelectedRows.Count > 0;
-                menu.Items["Delete"].Enabled = scene.SelectedRows.Count > 0;
+                this.ContextMenuStrip.Items["Edit"].Enabled = scene.SelectedRows.Count > 0;
+                this.ContextMenuStrip.Items["Delete"].Enabled = scene.SelectedRows.Count > 0;
             }
         }
     }

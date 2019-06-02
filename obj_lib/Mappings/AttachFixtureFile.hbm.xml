@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true">
+  <sql-query name="AttachFixtureFile" callable="true">
+    <return class="obj_lib.Entities.SEPO_FIXTURE_AF_RESULT_TEMP, obj_lib" />
+    <query-param name="p_iddoc" type="System.Int32" />
+    <query-param name="p_docname" type="System.String" />
+    <query-param name="p_hash" type="System.String" />
+    <query-param name="p_data" type="Oracle.DataAccess.Client.OracleDbType.Blob" />
+    { call pkg_sepo_import_global.attach_fixture_file(?,?,?,?) }
+  </sql-query>
+</hibernate-mapping>

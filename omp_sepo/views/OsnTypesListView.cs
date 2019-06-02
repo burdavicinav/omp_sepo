@@ -50,7 +50,7 @@ namespace omp_sepo.views
         private void OsnTypesListView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ListViewItem row = this.SelectedItems[0];
-            decimal id = (decimal)row.Tag;
+            int id = (int)row.Tag;
 
             OsnTypesDialog dialog = new OsnTypesDialog(id);
             if (dialog.ShowDialog() == DialogResult.OK)

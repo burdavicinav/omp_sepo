@@ -11,9 +11,6 @@ namespace omp_sepo.views
     {
         private IRepository<SEPO_STD_FOXPRO_ATTRS> attrsRepo;
 
-        private ContextMenuStrip menu;
-        private ToolStripItem addMenuItem, editMenuItem, deleteMenuItem;
-
         public StdFoxProAttrsView(IRepository<SEPO_STD_FOXPRO_ATTRS> repo)
         {
             attrsRepo = repo;
@@ -41,33 +38,27 @@ namespace omp_sepo.views
         {
             if (e.Button == MouseButtons.Right)
             {
-                menu.Show(this, e.X, e.Y);
+                this.ContextMenuStrip.Show(this, e.X, e.Y);
 
                 if (this.SelectedItems.Count == 0)
                 {
-                    editMenuItem.Enabled = false;
-                    deleteMenuItem.Enabled = false;
+                    this.ContextMenuStrip.Items["Edit"].Enabled = false;
+                    this.ContextMenuStrip.Items["Delete"].Enabled = false;
                 }
                 else
                 {
-                    editMenuItem.Enabled = true;
-                    deleteMenuItem.Enabled = true;
+                    this.ContextMenuStrip.Items["Edit"].Enabled = true;
+                    this.ContextMenuStrip.Items["Delete"].Enabled = true;
                 }
             }
         }
 
         private void InizializeMenu()
         {
-            menu = new ContextMenuStrip();
+            this.ContextMenuStrip = new ContextMenuStrip();
 
-            addMenuItem = menu.Items.Add("Добавить");
-            addMenuItem.Click += OnAddItemClick;
-
-            editMenuItem = menu.Items.Add("Изменить");
-            editMenuItem.Click += OnEditItemClick;
-
-            deleteMenuItem = menu.Items.Add("Удалить");
-            deleteMenuItem.Click += OnDeleteItemClick;
+            ContextMenuBuilder menuBuilder = new ContextMenuBuilder(this.ContextMenuStrip);
+            menuBuilder.BlockEditStripItem(OnAddItemClick, OnEditItemClick, OnDeleteItemClick);
         }
 
         private void OnAddItemClick(object sender, EventArgs args)

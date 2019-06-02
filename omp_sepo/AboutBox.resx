@@ -117,41 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="add_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\add_green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="edit_pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\edit_pencil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="file" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\file.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="seacrh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\seacrh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="specification" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\specification.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="synch_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\synch_black.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="synch_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\synch_blue.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="update_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\update_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="update_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\update_green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="update_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\update_orange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="logoPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAABtRJREFUeF7tnUmIHFUcxqNR3DC4oKDiviEEo4gQ0YCC61FxOYiiYPDgxYN4Coig
+        KHgQNCcPnhTUZMweZ7ILMTtBTcasqImTTNTu6dlnenp6nvWvTNOjftXzquq9qlf9vg9+l687Tab6o/uj
+        /+/VmzPn65IiHgNN4g/QJP4ATeIP0CT+AE3iD9Ak/gBN4g/QJP4ATeIP0CT+AE3iD9Ak/gBN4g/QJNrM
+        /66iblzTBx8rBNAk2jzx/YDqHa2rBzf1w8edB5pEGwmAaGxySr28awg+x2mgSbRpBEA0NTWlPjw0quZ+
+        g5/rJNAk2swMQEOreqrq0g78fOeAJtEGBUD0c6Wmbl5bgHIITaJNVABEZ8bqatFmx8shNIk2rQIgGg/K
+        4au7HS6H0CTazBYAkZTDj1wth9Ak2ugEoKE1p6pqXkcZvk5uQJNoEycAogP9NXWLS+UQmkSbuAEQ/TVe
+        Vw9vcaQcQpNokyQAIimHi/c6UA6hSbRJGgBR0A3Vx0dG1Xl5lkNoEm3SBKCh9aer6rJvcyqH0MyAc9uE
+        pwwEQNQdlMPb1uVQDqFpmbs7K2pwYiqgXnhGasHnuCH9HZTDR7ZmXA6haZkFXZXpP5n6r6r1KfV6luUQ
+        mpZhAFpLyuEnRzMqh9C0DAOgp67eqrrcdjmEpmUYAH0dHphUd9gsh9C0DAMQT6WgHD62bQBey9RA0zIM
+        QHxNBOXwjX0WyiE0LcMAJJOUw6VBOTzfZDmEpmUYgHTaGJTDK1YYKofQtAwDkF5HBifVnesNlENoWoYB
+        MKO+al09nrYcQtMyDIAZyaLTh9IuOoWmZRiA9PqpUlM3mdiTCE3LMADptDLceMIS6J1kdfEHvxheXQxN
+        yzAA8SWbT1/aNQivZyqgaRkGIJ5k+/kDtrafQ9MyDIC+9vfV1A02b0ABTcswAHrq+GNcXWJ7lzE0LcMA
+        tFY9KHvvdY+Eaw7R9TMKNC3DAERrNCh7L+60UPaigKZl5MZKp4Ni0w6Uq/Xpty69TgWvt3CjB4tChXPa
+        hCcNLQvfF5S961d7siy8nTCxMWTZyXF18XL8+taBJtEmTQCk7L17MKOyFwU0iTZJAyAbSl7YkWHZiwKa
+        RJskAegJyt79Gyrw9TIHmkSbuAHYU66p6/Ioe1FAk2gTJwBfncix7EUBTaKNTgCk7L1zIOeyFwU0C8AF
+        y0pqSXBR0WNZMlsAhoOy99wPDpS9KKDpONeuKqsdpYlwZSx6PEtaBeDkyKS6z5WyFwU0HUZ+Ku0JLqzI
+        5QDsCgJ6TRBU9G+cApqO8sruoXBY0pCrAfjy93F1YfAVhZ7vHNB0DNknLzdTkjVxM+VaACaD/9+Sn0fC
+        GQF6rpNA0yGuXFFWG3qr05f433IpAENB2Xtmu8NlLwpoOsL8zoo6NnT2+x7JlQCcGJ5U93Y5XvaigKYD
+        PL19ILwJUyu5EAC5eUMhyl4U0MwR+bFEfjSR79PZ5EIACg80c0KOWZGFkLpiAAwAzRy4dW1feMxKHDEA
+        BoBmxjy6bSC8SWJcMQAGgGaGvLl/OLz/TRIxAAaAZgbIL2Wf/zo2/VYmEwNgAGhaRoY5O0sT029jcjEA
+        BoCmRRZuag5z0uowA5AeaFpCjk+bOcxJK1lYueXPibag83QVXjPrQNMwUcMcqilZOIKunXWgaRAZ5mw8
+        g4c5VFNtGQAZ5hxvMcyhmmq7AMhodLZhDtVU2wQgHOYc1BvmUE21RQDiDnOopgofgCTDHKqpQgcg6TCH
+        aqqwAUgzzKGaKmQAPjuebphDNVXIACza3K96x/jRb0KF/QqQmxjuLbP8pVWhS+BFy0vhbhgquQodAEF2
+        w7z947CqsRAmUuED0EBO05ajTKh4apsACLJZ4tAAh0Bx1FYBEOZ1lNXqUxwD66rtAiDIyRbvd4+Et0ih
+        WqstA9Dg+R2D4R9IRautAyDc01VRvw2zF0RJ1jei62YdaFri6pXlcAGkKcndteXTRe64WXSezetGUtC0
+        iBx8vPSYLBCdfhdTiPsCDADNDFi8d0iNp1wizgAYAJoZIceeyqELScUAGACaGSKHJMj9c5OIATAANDNG
+        hklfJBgmMQAGgGYOyDDprZjDJAbAANDMETmDR/cgJgbAANDMmdvX9anu/tl7AQNgAGg6gAyTVvW0HiYx
+        AAaApiPMDZATNKOGSQyAAaDpGHK/fTRMYgAMAE0HWdD5/2ESA2AAaDrKVSvLauuMYRIDYABoOowMkz49
+        enaYxAAYAJoF4LU9Q+FmVPQYiQE0C8Jd6x06f6+oQJP4AzSJP0CT+AM0iT9Ak/gDNIk/QJP4AzSJP0CT
+        +AM0iT9Ak/gDNIk/QJP4AzSJJ5TUP/bElMKksktJAAAAAElFTkSuQmCC
+</value>
   </data>
 </root>

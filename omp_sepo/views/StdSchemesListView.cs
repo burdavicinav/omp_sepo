@@ -11,8 +11,6 @@ namespace omp_sepo.views
 {
     public class StdSchemesListView : ListView
     {
-        private ContextMenuStrip menu;
-
         private ToolStripItem folders;
 
         private IViewRepository<V_SEPO_STD_SCHEMES> schemesRepo;
@@ -61,8 +59,8 @@ namespace omp_sepo.views
 
         public void MenuSettings()
         {
-            menu = new ContextMenuStrip();
-            folders = menu.Items.Add("Каталоги");
+            this.ContextMenuStrip = new ContextMenuStrip();
+            folders = this.ContextMenuStrip.Items.Add("Каталоги");
             folders.Click += Folders_Click;
         }
 
@@ -82,7 +80,7 @@ namespace omp_sepo.views
         {
             if (e.Button == MouseButtons.Right)
             {
-                menu.Show(this, e.X, e.Y);
+                this.ContextMenuStrip.Show(this, e.X, e.Y);
             }
         }
 

@@ -62,6 +62,7 @@
     <Compile Include="DirectoryPathBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="IContextMenuBuilder.cs" />
     <Compile Include="IMdiForm.cs" />
     <Compile Include="MdiFormBase.cs">
       <SubType>Form</SubType>

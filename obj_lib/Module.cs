@@ -18,6 +18,7 @@ namespace obj_lib
                     Fluently.Configure()
                         .Database(OracleDataClientConfiguration.Oracle10.ConnectionString(ConnectionString))
                         .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Module>())
+                        .Mappings(m => m.HbmMappings.AddFromAssemblyOf<Module>())
                         .BuildSessionFactory();
 
                 _session = sessionFatory.OpenSession();

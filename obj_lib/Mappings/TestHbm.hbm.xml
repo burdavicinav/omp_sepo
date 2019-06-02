@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true">
+  <sql-query name="TestHib" callable="true">
+    <!--<return class="obj_lib.Entities.TEST_HIB, obj_lib" />-->
+    <return-scalar column="code" type="System.Int64" />
+    <return-scalar column="str" type="System.String" />
+    { call p_test_hib(?,?) }
+  </sql-query>
+</hibernate-mapping>

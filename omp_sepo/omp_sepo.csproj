@@ -49,8 +49,12 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>synch_blue.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
@@ -65,6 +69,7 @@
     <Reference Include="Oracle.DataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\oracle\app\product\11.2.0\client_1\odp.net\bin\4\Oracle.DataAccess.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -78,7 +83,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContextMenuBuilder.cs" />
     <Compile Include="dialogs\AttachFilesUpdateHashDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +156,12 @@
     </Compile>
     <Compile Include="dialogs\OperationsImportDialog.Designer.cs">
       <DependentUpon>OperationsImportDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\SepoFixtureAfObjectsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\SepoFixtureAfObjectsDialog.Designer.cs">
+      <DependentUpon>SepoFixtureAfObjectsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="dialogs\StdFixtureImportClassifyDialog.cs">
       <SubType>Form</SubType>
@@ -224,6 +241,22 @@
     <Compile Include="dialogs\TpImportLinkOperationsDialog.Designer.cs">
       <DependentUpon>TpImportLinkOperationsDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="FixtureAttachFileEndArgs.cs" />
+    <Compile Include="FixtureAttachFileObject.cs" />
+    <Compile Include="FixtureAttachFileProgress.cs" />
+    <Compile Include="FixtureAttachFilesById.cs" />
+    <Compile Include="FixtureAttachFileStartArgs.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="views\FixtureAttachFileObjects.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="views\FixtureAttachFileObjects.Designer.cs">
+      <DependentUpon>FixtureAttachFileObjects.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\LoadFixtureView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -289,6 +322,9 @@
     <Compile Include="views\StdSchemesListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dialogs\AttachFilesUpdateHashDialog.resx">
       <DependentUpon>AttachFilesUpdateHashDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -315,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dialogs\OperationsImportDialog.resx">
       <DependentUpon>OperationsImportDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\SepoFixtureAfObjectsDialog.resx">
+      <DependentUpon>SepoFixtureAfObjectsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dialogs\StdFixtureImportClassifyDialog.resx">
       <DependentUpon>StdFixtureImportClassifyDialog.cs</DependentUpon>
@@ -355,6 +394,9 @@
     <EmbeddedResource Include="dialogs\TpImportLinkOperationsDialog.resx">
       <DependentUpon>TpImportLinkOperationsDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="views\FixtureAttachFileObjects.resx">
+      <DependentUpon>FixtureAttachFileObjects.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="views\LoadFixtureView.resx">
       <DependentUpon>LoadFixtureView.cs</DependentUpon>
     </EmbeddedResource>
@@ -375,14 +417,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="views\StdSchemesForm.resx">
       <DependentUpon>StdSchemesForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -426,6 +463,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon1.ico" />
+    <None Include="images\add_green.png" />
+    <None Include="images\delete.png" />
+    <None Include="images\edit_pencil.png" />
+    <None Include="images\seacrh.png" />
+    <None Include="images\specification.png" />
+    <None Include="images\update_blue.png" />
+    <None Include="images\update_green.png" />
+    <None Include="images\update_orange.png" />
+    <Content Include="synch_blue.ico" />
+    <None Include="images\synch_blue.ico" />
+    <None Include="images\synch_black.ico" />
+    <None Include="images\folder.png" />
+    <None Include="images\file.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

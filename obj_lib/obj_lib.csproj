@@ -61,6 +61,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\oracle\app\product\11.2.0\client_1\odp.net\bin\4\Oracle.DataAccess.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -75,41 +76,56 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\ATTACHMENTS.cs" />
     <Compile Include="Entities\ATTACHMENTS_GROUPS.cs" />
     <Compile Include="Entities\BUSINESSOBJ_STATES.cs" />
     <Compile Include="Entities\BUSINESS_OBJECTS.cs" />
     <Compile Include="Entities\DOCUMENTS_PARAMS.cs" />
     <Compile Include="Entities\DOCUMENTS_PARTS.cs" />
+    <Compile Include="Entities\OWNER_NAME.cs" />
+    <Compile Include="Entities\SEPO_FIXTURE_AF_OBJECTS.cs" />
+    <Compile Include="Entities\SEPO_FIXTURE_AF_RESULT_TEMP.cs" />
     <Compile Include="Entities\SEPO_OSN_ALL.cs" />
     <Compile Include="Entities\SEPO_STD_FOLDERS.cs" />
     <Compile Include="Entities\SEPO_TASK_FOLDER_LIST.cs" />
     <Compile Include="Entities\SEPO_TASK_LIST.cs" />
+    <Compile Include="Entities\SEPO_TECH_OPER_LINKS.cs" />
     <Compile Include="Entities\SEPO_TFLEX_OBJ_PARAMETERS.cs" />
     <Compile Include="Entities\SEPO_TFLEX_OBJ_SYNCH.cs" />
     <Compile Include="Entities\SEPO_TFLEX_SIGN_DOCS.cs" />
     <Compile Include="Entities\SEPO_TFLEX_SPEC_SECTIONS.cs" />
     <Compile Include="Entities\SPC_SECTIONS.cs" />
     <Compile Include="Entities\TECHOPERATION_TYPES.cs" />
+    <Compile Include="Entities\TEST_HIB.cs" />
+    <Compile Include="Entities\V_SEPO_FIXTURE_AF_LOAD.cs" />
     <Compile Include="Entities\V_SEPO_FIXTURE_DOCS.cs" />
     <Compile Include="Entities\V_SEPO_TFLEX_BO_TYPES.cs" />
     <Compile Include="Entities\V_SEPO_TFLEX_OBJ_SYNCH.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Mappings\AttachmentsGroupsMap.cs" />
+    <Compile Include="Mappings\AttachmentsMap.cs" />
     <Compile Include="Mappings\BusinessObjectsMap.cs" />
     <Compile Include="Mappings\BusinessObjStatesMap.cs" />
     <Compile Include="Mappings\DocumentsParamsMap.cs" />
     <Compile Include="Mappings\DocumentsPartsMap.cs" />
+    <Compile Include="Mappings\OwnerNameMap.cs" />
+    <Compile Include="Mappings\SepoFixtureAfObjectsMap.cs" />
+    <Compile Include="Mappings\SepoFixtureAfResultTempMap.cs" />
     <Compile Include="Mappings\SepoOsnAllMap.cs" />
     <Compile Include="Mappings\SepoStdFoldersMap.cs" />
     <Compile Include="Mappings\SepoStdFoxProAttrsMap.cs" />
     <Compile Include="Mappings\SepoTaskFolderListMap.cs" />
     <Compile Include="Mappings\SepoTaskListMap.cs" />
+    <Compile Include="Mappings\SepoTechOperLinksMap.cs" />
     <Compile Include="Mappings\SepoTFlexObjParametersMap.cs" />
     <Compile Include="Mappings\SepoTFlexSectionMap.cs" />
     <Compile Include="Mappings\SepoTFlexSignDocsMap.cs" />
     <Compile Include="Mappings\SepoTFlexObjSynchMap.cs" />
     <Compile Include="Mappings\SpcSectionsMap.cs" />
     <Compile Include="Mappings\TechoperationTypesMap.cs" />
+    <Compile Include="Mappings\TestHibMap.cs" />
+    <Compile Include="Mappings\VSepoFixtureAfLoadMap.cs" />
+    <Compile Include="Mappings\VSepoFixtureAfObjects.cs" />
     <Compile Include="Mappings\VSepoFixtureDocsMap.cs" />
     <Compile Include="Mappings\VSepoOsnTypesMap.cs" />
     <Compile Include="Mappings\VSepoStdAttrsMap.cs" />
@@ -129,6 +145,7 @@
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\ViewRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
+    <Compile Include="Entities\V_SEPO_FIXTURE_AF_OBJECTS.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
@@ -138,7 +155,12 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\TestHbm.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\AttachFixtureFile.hbm.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
