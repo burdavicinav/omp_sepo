@@ -306,6 +306,13 @@ namespace omp_sepo
                     case 27:
                         FixtureAttachFileObjects af_view = new FixtureAttachFileObjects();
                         ((IMdiForm)Parent).AddChild("Объекты для загрузки файлов", af_view, true);
+
+                        break;
+
+                    case 28:
+                        TpImportOwnersView ownersView = new TpImportOwnersView();
+                        ((IMdiForm)Parent).AddChild("Владельцы", ownersView, true);
+
                         break;
 
                     default:

@@ -20,6 +20,10 @@ namespace omp_sepo.dialogs
 
         private ContextMenuStrip logMenu;
 
+        private int currentColumnIndex = -1;
+
+        private int currentSortOrder = 0;
+
         public FixtureAttachFilesDialog()
         {
             InitializeComponent();
@@ -47,6 +51,21 @@ namespace omp_sepo.dialogs
             //directoryBox.TextValue = @"C:\Users\Alexander\Downloads\Telegram Desktop\Files1";
             //okButton.Enabled = IsCorrectData();
 #endif
+        }
+
+        private void OnColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column != currentColumnIndex)
+            {
+                currentColumnIndex = e.Column;
+                currentSortOrder = 1;
+            }
+            else
+            {
+                currentSortOrder *= (-1);
+            }
+
+            logView.ListViewItemSorter = new FixtureAttachFileLogCompare(currentColumnIndex, currentSortOrder);
         }
 
         private void ResetLog()
@@ -254,6 +273,7 @@ namespace omp_sepo.dialogs
             }
 
             okButton.Enabled = true;
+            //logView.ColumnClick += OnColumnClick;
         }
 
         private void OnAcceptButton(object sender, EventArgs e)
@@ -261,6 +281,7 @@ namespace omp_sepo.dialogs
             if (!backWorker.IsBusy)
             {
                 ResetLog();
+                //logView.ColumnClick -= OnColumnClick;
 
                 backWorker.RunWorkerAsync();
                 okButton.Enabled = false;

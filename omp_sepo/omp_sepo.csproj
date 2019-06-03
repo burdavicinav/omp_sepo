@@ -73,6 +73,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -242,6 +243,7 @@
       <DependentUpon>TpImportLinkOperationsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="FixtureAttachFileEndArgs.cs" />
+    <Compile Include="FixtureAttachFileLogCompare.cs" />
     <Compile Include="FixtureAttachFileObject.cs" />
     <Compile Include="FixtureAttachFileProgress.cs" />
     <Compile Include="FixtureAttachFilesById.cs" />
@@ -321,6 +323,12 @@
     </Compile>
     <Compile Include="views\StdSchemesListView.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="views\TpImportOwnersView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="views\TpImportOwnersView.Designer.cs">
+      <DependentUpon>TpImportOwnersView.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
@@ -422,6 +430,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="views\StdSchemesForm.resx">
       <DependentUpon>StdSchemesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\TpImportOwnersView.resx">
+      <DependentUpon>TpImportOwnersView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />
