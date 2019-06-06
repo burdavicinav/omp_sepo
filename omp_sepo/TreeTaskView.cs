@@ -299,7 +299,8 @@ namespace omp_sepo
                         break;
 
                     case 26:
-                        (new TpImportLinkOperationsDialog()).ShowDialog();
+                        TpImportOperationsView opersView = new TpImportOperationsView();
+                        ((IMdiForm)Parent).AddChild("Технологические операции", opersView, true);
 
                         break;
 

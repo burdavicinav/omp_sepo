@@ -324,6 +324,12 @@
     <Compile Include="views\StdSchemesListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="views\TpImportOperationsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="views\TpImportOperationsView.Designer.cs">
+      <DependentUpon>TpImportOperationsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\TpImportOwnersView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -430,6 +436,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="views\StdSchemesForm.resx">
       <DependentUpon>StdSchemesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\TpImportOperationsView.resx">
+      <DependentUpon>TpImportOperationsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="views\TpImportOwnersView.resx">
       <DependentUpon>TpImportOwnersView.cs</DependentUpon>

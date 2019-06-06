@@ -7,14 +7,11 @@ namespace obj_lib.Mappings
     {
         public SepoTechOperLinksMap()
         {
-            Id(m => m.ID).GeneratedBy.Assigned();
+            Id(m => m.ID).GeneratedBy.TriggerIdentity();
 
             Map(m => m.OPERCODE);
-            Map(m => m.VARIANTCODE);
-            Map(m => m.NAME);
-            Map(m => m.RECKEY);
-            Map(m => m.TPOPERCODE);
-            Map(m => m.TPOPERNAME);
+            Map(m => m.OPERNAME);
+            Map(m => m.OMPID);
         }
     }
 }

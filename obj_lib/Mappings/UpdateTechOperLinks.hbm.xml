@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true">
+  <sql-query name="UpdateTechOperLinks" callable="true">
+    <return class="obj_lib.Entities.V_SEPO_TECH_OPER_LINKS, obj_lib" />
+    { call pkg_sepo_import_global.update_techoper_links() }
+  </sql-query>
+</hibernate-mapping>

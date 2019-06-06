@@ -6,14 +6,8 @@
 
         public virtual string OPERCODE { get; set; }
 
-        public virtual string VARIANTCODE { get; set; }
+        public virtual string OPERNAME { get; set; }
 
-        public virtual string NAME { get; set; }
-
-        public virtual int? RECKEY { get; set; }
-
-        public virtual int? TPOPERCODE { get; set; }
-
-        public virtual string TPOPERNAME { get; set; }
+        public virtual int? OMPID { get; set; }
     }
 }

@@ -96,10 +96,12 @@
     <Compile Include="Entities\SEPO_TFLEX_SPEC_SECTIONS.cs" />
     <Compile Include="Entities\SEPO_TP_WORKSHOP_OWNER.cs" />
     <Compile Include="Entities\SPC_SECTIONS.cs" />
+    <Compile Include="Entities\TECHNOLOGY_OPERATIONS.cs" />
     <Compile Include="Entities\TECHOPERATION_TYPES.cs" />
     <Compile Include="Entities\TEST_HIB.cs" />
     <Compile Include="Entities\V_SEPO_FIXTURE_AF_LOAD.cs" />
     <Compile Include="Entities\V_SEPO_FIXTURE_DOCS.cs" />
+    <Compile Include="Entities\V_SEPO_TECH_OPER_LINKS.cs" />
     <Compile Include="Entities\V_SEPO_TFLEX_BO_TYPES.cs" />
     <Compile Include="Entities\V_SEPO_TFLEX_OBJ_SYNCH.cs" />
     <Compile Include="Entities\V_SEPO_TP_WORKSHOP_OWNER.cs" />
@@ -125,6 +127,7 @@
     <Compile Include="Mappings\SepoTFlexObjSynchMap.cs" />
     <Compile Include="Mappings\SepoTpWorkshopOwnerMap.cs" />
     <Compile Include="Mappings\SpcSectionsMap.cs" />
+    <Compile Include="Mappings\TechnologyOperationsMap.cs" />
     <Compile Include="Mappings\TechoperationTypesMap.cs" />
     <Compile Include="Mappings\TestHibMap.cs" />
     <Compile Include="Mappings\VSepoFixtureAfLoadMap.cs" />
@@ -134,6 +137,7 @@
     <Compile Include="Mappings\VSepoStdAttrsMap.cs" />
     <Compile Include="Mappings\VSepoStdSchemesMap.cs" />
     <Compile Include="Mappings\VSepoStdTablesMap.cs" />
+    <Compile Include="Mappings\VSepoTechOperLinksMap.cs" />
     <Compile Include="Mappings\VSepoTFlexBoTypesMap.cs" />
     <Compile Include="Mappings\VSepoTFlexObjSynchMap.cs" />
     <Compile Include="Entities\V_SEPO_OSN_TYPES.cs" />
@@ -164,6 +168,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mappings\AttachFixtureFile.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\UpdateTechOperLinks.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
