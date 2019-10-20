@@ -491,6 +491,7 @@
     <None Include="images\update_blue.png" />
     <None Include="images\update_green.png" />
     <None Include="images\update_orange.png" />
+    <Content Include="riched20.dll" />
     <Content Include="synch_blue.ico" />
     <None Include="images\synch_blue.ico" />
     <None Include="images\synch_black.ico" />

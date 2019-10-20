@@ -135,13 +135,6 @@ namespace imp_exp
                 {
                     transaction.Rollback();
 
-                    //OracleCommand command_log = new OracleCommand(
-                    //       "insert into sepo_xml_log values (:log_)",
-                    //       obj_lib.Module.Connection
-                    //       );
-                    //command_log.Parameters.Add("log_", level);
-                    //command_log.ExecuteNonQuery();
-
                     throw;
                 }
             }

@@ -6,7 +6,9 @@ using omp_sepo.dialogs;
 using omp_sepo.views;
 using Oracle.DataAccess.Client;
 using System;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using ui_lib;
 
@@ -314,6 +316,29 @@ namespace omp_sepo
                         TpImportOwnersView ownersView = new TpImportOwnersView();
                         ((IMdiForm)Parent).AddChild("Владельцы", ownersView, true);
 
+                        break;
+
+                    case 29:
+                        TPManager mgr = new TPManager();
+
+                        DialogResult dr = MessageBox.Show("Будут обновлены тексты переходов в ТП. Продолжить?", "Внимание!",
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                        if (dr == DialogResult.OK)
+                        {
+                            try
+                            {
+                                mgr.StepTextToRTF();
+
+                                MessageBox.Show("Обновление завершено!", "Информация",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show(exc.Message, "Ошибка!",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
                         break;
 
                     default:

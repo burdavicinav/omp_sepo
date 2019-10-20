@@ -5,7 +5,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml.Linq;
+
+using ICSharpCode.SharpZipLib.BZip2;
+using obj_lib;
 
 namespace imp_exp
 {
@@ -892,16 +896,106 @@ namespace imp_exp
             }
         }
 
-        //private void OnImporting()
-        //{
-        //    EventArgs args = new EventArgs();
-        //    StartImporting?.Invoke(this, args);
-        //}
+        public void StepTextToRTF()
+        {
+            string steptext = String.Empty;
+            string rtf = String.Empty;
+            decimal code;
+            int k = 0;
 
-        //private void OnTpImporting()
-        //{
-        //    EventArgs args = new EventArgs();
-        //    ImportingTP?.Invoke(this, args);
-        //}
+            RichTextBox box = new RichTextBox
+            {
+                Font = new System.Drawing.Font("Times New Roman", 9)
+            };
+
+            OracleCommand command = new OracleCommand();
+            command.Connection = Module.Connection;
+            command.CommandText = @"select stepcode, new_stepname, new_steptext
+                                                    from omp_adm.v_sepo_tp_diff_steptext";
+
+            OracleCommand txtCommand = new OracleCommand();
+            txtCommand.Connection = Module.Connection;
+            txtCommand.CommandText = @"update omp_adm.steps_for_oper_steptext
+                                                    set steptext_rtf = :txt where stepcode = :code";
+
+            OracleParameter p_txt = new OracleParameter("txt", OracleDbType.Blob);
+            OracleParameter p_code = new OracleParameter("code", OracleDbType.Decimal);
+
+            txtCommand.Parameters.AddRange(new OracleParameter[] { p_txt, p_code });
+
+            OracleCommand stepCommand = new OracleCommand();
+            stepCommand.Connection = Module.Connection;
+            stepCommand.CommandText = @"update omp_adm.steps_for_operation
+                                                    set name = :name, texttype = 1
+                                                        where code = :code";
+
+            OracleParameter p_name = new OracleParameter("name", OracleDbType.Varchar2);
+            OracleParameter p_scode = new OracleParameter("code", OracleDbType.Decimal);
+
+            stepCommand.Parameters.AddRange(new OracleParameter[] { p_name, p_scode });
+
+            using (var transaction = Module.Connection.BeginTransaction())
+            {
+                try
+                {
+                    OracleDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        k++;
+
+                        if (!reader.IsDBNull(2))
+                        {
+                            code = reader.GetDecimal(0);
+                            steptext = reader.GetString(2);
+
+                            p_scode.Value = code;
+                            p_name.Value = reader.GetString(1);
+
+                            // обновление наименования
+                            stepCommand.ExecuteNonQuery();
+
+                            box.Text = steptext;
+
+                            rtf = box.Rtf;
+                            int length = rtf.Length;
+
+                            Stream inStream = new MemoryStream(Encoding.Default.GetBytes(rtf));
+                            Stream outStream = new MemoryStream();
+
+                            BZip2.Compress(inStream, outStream, false, 9);
+
+                            outStream.Seek(0, SeekOrigin.Begin);
+
+                            byte[] archBytes = new byte[outStream.Length];
+                            outStream.Read(archBytes, 0, archBytes.Length);
+
+                            byte[] lenBytes = BitConverter.GetBytes(length);
+                            byte[] bytes = { 0x78, 0x56, 0x34, 0x12 };
+
+                            p_txt.Value = (lenBytes.Concat(bytes)).Concat(archBytes).ToArray();
+                            p_code.Value = code;
+
+                            // обновление текста перехода в rtf формате
+                            txtCommand.ExecuteNonQuery();
+
+                            // освобождение потоков
+                            inStream.Dispose();
+                            outStream.Dispose();
+                        }
+                    }
+
+                    reader.Dispose();
+
+                    // завершение транзакции
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+        }
     }
 }
