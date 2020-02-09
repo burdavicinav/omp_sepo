@@ -31,6 +31,7 @@
             this.scene = new System.Windows.Forms.DataGridView();
             this.specColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.signDocColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.secTypeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.boTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.boStateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupFileColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,6 +51,7 @@
             this.scene.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.specColumn,
             this.signDocColumn,
+            this.secTypeNameColumn,
             this.boTypeColumn,
             this.boStateColumn,
             this.groupFileColumn,
@@ -77,6 +79,12 @@
             this.signDocColumn.HeaderText = "TFlex Обозначение документа";
             this.signDocColumn.Name = "signDocColumn";
             this.signDocColumn.ReadOnly = true;
+            // 
+            // secTypeNameColumn
+            // 
+            this.secTypeNameColumn.HeaderText = "TFlex Тип объекта";
+            this.secTypeNameColumn.Name = "secTypeNameColumn";
+            this.secTypeNameColumn.ReadOnly = true;
             // 
             // boTypeColumn
             // 
@@ -137,6 +145,7 @@
         private System.Windows.Forms.DataGridView scene;
         private System.Windows.Forms.DataGridViewTextBoxColumn specColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn signDocColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn secTypeNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn boTypeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn boStateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn groupFileColumn;

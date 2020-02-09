@@ -92,6 +92,7 @@
     <Compile Include="Entities\SEPO_TECH_OPER_LINKS.cs" />
     <Compile Include="Entities\SEPO_TFLEX_OBJ_PARAMETERS.cs" />
     <Compile Include="Entities\SEPO_TFLEX_OBJ_SYNCH.cs" />
+    <Compile Include="Entities\SEPO_TFLEX_SECTION_TYPES.cs" />
     <Compile Include="Entities\SEPO_TFLEX_SIGN_DOCS.cs" />
     <Compile Include="Entities\SEPO_TFLEX_SPEC_SECTIONS.cs" />
     <Compile Include="Entities\SEPO_TP_WORKSHOP_OWNER.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Mappings\SepoTechOperLinksMap.cs" />
     <Compile Include="Mappings\SepoTFlexObjParametersMap.cs" />
     <Compile Include="Mappings\SepoTFlexSectionMap.cs" />
+    <Compile Include="Mappings\SepoTFlexSectionTypesMap.cs" />
     <Compile Include="Mappings\SepoTFlexSignDocsMap.cs" />
     <Compile Include="Mappings\SepoTFlexObjSynchMap.cs" />
     <Compile Include="Mappings\SepoTpWorkshopOwnerMap.cs" />

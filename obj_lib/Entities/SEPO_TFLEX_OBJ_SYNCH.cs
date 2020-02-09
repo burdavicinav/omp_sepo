@@ -24,6 +24,8 @@
 
         public virtual string EXPRESSION { get; set; }
 
+        public virtual SEPO_TFLEX_SECTION_TYPES ID_SECTION_TYPE { get; set; }
+
         public SEPO_TFLEX_OBJ_SYNCH()
         {
             PARAM_DEPENDENCE = 0;

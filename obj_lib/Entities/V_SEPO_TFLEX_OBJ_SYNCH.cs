@@ -47,5 +47,11 @@
         public virtual string PARAM { get; }
 
         public virtual string PARAM_EXPRESSION { get; }
+
+        public virtual int ID_SECTYPE { get; }
+
+        public virtual short SECTYPE_SIGN { get; }
+
+        public virtual string SECTYPE_NAME { get; }
     }
 }

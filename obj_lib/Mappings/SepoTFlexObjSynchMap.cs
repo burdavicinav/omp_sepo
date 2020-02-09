@@ -33,6 +33,7 @@ namespace obj_lib.Mappings
             Map(x => x.PARAM_DEPENDENCE);
             References(x => x.ID_PARAM, "ID_PARAM");
             Map(x => x.EXPRESSION);
+            References(x => x.ID_SECTION_TYPE, "ID_SECTION_TYPE");
         }
     }
 }

@@ -25,6 +25,8 @@ namespace omp_sepo.dialogs
 
         private IViewRepository<SEPO_TFLEX_OBJ_PARAMETERS> _repoObjParams;
 
+        private IViewRepository<SEPO_TFLEX_SECTION_TYPES> _repoSectionTypes;
+
         private DialogType dialogType;
 
         private void InizializeRepo(
@@ -35,7 +37,8 @@ namespace omp_sepo.dialogs
             IRepository<SEPO_TFLEX_OBJ_SYNCH> repoObjSynch,
             IViewRepository<BUSINESSOBJ_STATES> repoBoStates,
             IViewRepository<ATTACHMENTS_GROUPS> repoAttachGroups,
-            IViewRepository<SEPO_TFLEX_OBJ_PARAMETERS> repoObjParams)
+            IViewRepository<SEPO_TFLEX_OBJ_PARAMETERS> repoObjParams,
+            IViewRepository<SEPO_TFLEX_SECTION_TYPES> repoSectionTypes)
         {
             _repoSections = repoSections;
             _repoSignDocs = repoSignDocs;
@@ -45,6 +48,7 @@ namespace omp_sepo.dialogs
             _repoBoStates = repoBoStates;
             _repoAttachGroups = repoAttachGroups;
             _repoObjParams = repoObjParams;
+            _repoSectionTypes = repoSectionTypes;
         }
 
         private bool IsCorrect()
@@ -98,7 +102,8 @@ namespace omp_sepo.dialogs
             IRepository<SEPO_TFLEX_OBJ_SYNCH> repoObjSynch,
             IViewRepository<BUSINESSOBJ_STATES> repoBoStates,
             IViewRepository<ATTACHMENTS_GROUPS> repoAttachGroups,
-            IViewRepository<SEPO_TFLEX_OBJ_PARAMETERS> repoObjParams)
+            IViewRepository<SEPO_TFLEX_OBJ_PARAMETERS> repoObjParams,
+            IViewRepository<SEPO_TFLEX_SECTION_TYPES> repoSectionTypes)
         {
             InitializeComponent();
 
@@ -110,7 +115,8 @@ namespace omp_sepo.dialogs
                 repoObjSynch,
                 repoBoStates,
                 repoAttachGroups,
-                repoObjParams);
+                repoObjParams,
+                repoSectionTypes);
 
             dialogType = DialogType.Add;
 
@@ -121,6 +127,7 @@ namespace omp_sepo.dialogs
             boStateBox.SelectedValueChanged += OnSelectedValueChanged;
             ompSectionBox.SelectedValueChanged += OnSelectedValueChanged;
             paramDependenceBox.CheckedChanged += ParamDependenceCheckedChanged;
+            sectionBox.SelectedValueChanged += OnTFlexSectionChanged;
 
             RefreshData();
         }
@@ -138,7 +145,8 @@ namespace omp_sepo.dialogs
             new Repository<SEPO_TFLEX_OBJ_SYNCH>(),
             new ViewRepository<BUSINESSOBJ_STATES>(),
             new ViewRepository<ATTACHMENTS_GROUPS>(),
-            new ViewRepository<SEPO_TFLEX_OBJ_PARAMETERS>())
+            new ViewRepository<SEPO_TFLEX_OBJ_PARAMETERS>(),
+            new ViewRepository<SEPO_TFLEX_SECTION_TYPES>())
         {
         }
 
@@ -163,6 +171,7 @@ namespace omp_sepo.dialogs
 
                 if (item.ID_PARAM != null) paramBox.SelectedValue = item.ID_PARAM.ID;
                 paramExpressionBox.Text = item.EXPRESSION;
+                typeObjBox.SelectedValue = (item.ID_SECTION_TYPE == null) ? 0 : item.ID_SECTION_TYPE.ID;
             }
             catch (Exception e)
             {
@@ -205,6 +214,11 @@ namespace omp_sepo.dialogs
                     synch.PARAM_DEPENDENCE = 0;
                     synch.ID_PARAM = null;
                     synch.EXPRESSION = null;
+                }
+
+                if ((int)typeObjBox.SelectedValue != 0)
+                {
+                    synch.ID_SECTION_TYPE = _repoSectionTypes.GetById(typeObjBox.SelectedValue);
                 }
 
                 using (var transaction = new UnitOfWork())
@@ -267,6 +281,15 @@ namespace omp_sepo.dialogs
                     item.EXPRESSION = null;
                 }
 
+                if ((int)typeObjBox.SelectedValue != 0)
+                {
+                    item.ID_SECTION_TYPE = _repoSectionTypes.GetById(typeObjBox.SelectedValue);
+                }
+                else
+                {
+                    item.ID_SECTION_TYPE = null;
+                }
+
                 using (var transaction = new UnitOfWork())
                 {
                     try
@@ -316,6 +339,28 @@ namespace omp_sepo.dialogs
             list.Add(new { GROUPNAME = string.Empty, GROUPCODE = 0 });
 
             groupFileBox.DataSource = list;
+        }
+
+        private void OnTFlexSectionChanged(object sender, EventArgs e)
+        {
+            if (sectionBox.SelectedValue == null)
+            {
+                return;
+            }
+
+            SEPO_TFLEX_SPEC_SECTIONS section = _repoSections.GetById((int)sectionBox.SelectedValue);
+
+            typeObjBox.DisplayMember = "NAME";
+            typeObjBox.ValueMember = "ID";
+
+            var list = _repoSectionTypes.GetQuery()
+                .Where(x => x.ID_SECTION == section)
+                .Select(x => new { ID = x.ID, NAME = x.NAME })
+                .ToList();
+
+            list.Add(new { ID = 0, NAME = string.Empty });
+
+            typeObjBox.DataSource = list;
         }
     }
 }

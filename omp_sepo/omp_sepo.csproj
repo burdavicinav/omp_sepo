@@ -236,6 +236,12 @@
     <Compile Include="dialogs\TFlexSpecSectionDialog.Designer.cs">
       <DependentUpon>TFlexSpecSectionDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="dialogs\TFlexSpecSectionTypeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\TFlexSpecSectionTypeDialog.Designer.cs">
+      <DependentUpon>TFlexSpecSectionTypeDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="dialogs\TpImportLinkOperationsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -404,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dialogs\TFlexSpecSectionDialog.resx">
       <DependentUpon>TFlexSpecSectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\TFlexSpecSectionTypeDialog.resx">
+      <DependentUpon>TFlexSpecSectionTypeDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dialogs\TpImportLinkOperationsDialog.resx">
       <DependentUpon>TpImportLinkOperationsDialog.cs</DependentUpon>

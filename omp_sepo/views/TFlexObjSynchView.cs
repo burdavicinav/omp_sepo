@@ -49,6 +49,7 @@ namespace omp_sepo.views
                 scene,
                 item.TFLEX_SECTION,
                 item.TFLEX_DOCSIGN,
+                item.SECTYPE_NAME,
                 item.BOTYPESHORTNAME,
                 item.BOSTATESHORTNAME,
                 item.FILEGROUPSHORTNAME,
@@ -69,13 +70,14 @@ namespace omp_sepo.views
         {
             row.Cells[0].Value = item.TFLEX_SECTION;
             row.Cells[1].Value = item.TFLEX_DOCSIGN;
-            row.Cells[2].Value = item.BOTYPESHORTNAME;
-            row.Cells[3].Value = item.BOSTATESHORTNAME;
-            row.Cells[4].Value = item.FILEGROUPSHORTNAME;
-            row.Cells[5].Value = item.OMPSECTIONNAME;
-            row.Cells[6].Value = item.PARAM_DEPENDENCE;
-            row.Cells[7].Value = item.PARAM;
-            row.Cells[8].Value = item.PARAM_EXPRESSION;
+            row.Cells[2].Value = item.SECTYPE_NAME;
+            row.Cells[3].Value = item.BOTYPESHORTNAME;
+            row.Cells[4].Value = item.BOSTATESHORTNAME;
+            row.Cells[5].Value = item.FILEGROUPSHORTNAME;
+            row.Cells[6].Value = item.OMPSECTIONNAME;
+            row.Cells[7].Value = item.PARAM_DEPENDENCE;
+            row.Cells[8].Value = item.PARAM;
+            row.Cells[9].Value = item.PARAM_EXPRESSION;
         }
 
         private void InizializeMenu()

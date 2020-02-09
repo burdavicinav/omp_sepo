@@ -50,6 +50,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.paramBox = new System.Windows.Forms.ComboBox();
             this.paramDependenceBox = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.typeObjBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.paramGroupBox.SuspendLayout();
@@ -57,6 +59,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.typeObjBox);
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.signDocBox);
             this.groupBox1.Controls.Add(this.sectionBox);
             this.groupBox1.Controls.Add(this.label2);
@@ -64,7 +68,7 @@
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox1.Size = new System.Drawing.Size(329, 82);
+            this.groupBox1.Size = new System.Drawing.Size(329, 110);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "TFlex";
@@ -73,7 +77,7 @@
             // 
             this.signDocBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.signDocBox.FormattingEnabled = true;
-            this.signDocBox.Location = new System.Drawing.Point(99, 49);
+            this.signDocBox.Location = new System.Drawing.Point(99, 77);
             this.signDocBox.Name = "signDocBox";
             this.signDocBox.Size = new System.Drawing.Size(224, 21);
             this.signDocBox.TabIndex = 3;
@@ -90,7 +94,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 52);
+            this.label2.Location = new System.Drawing.Point(7, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 13);
             this.label2.TabIndex = 1;
@@ -115,7 +119,7 @@
             this.groupBox2.Controls.Add(this.boTypeBox);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(13, 101);
+            this.groupBox2.Location = new System.Drawing.Point(13, 129);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.groupBox2.Size = new System.Drawing.Size(329, 141);
@@ -198,7 +202,7 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(267, 359);
+            this.cancelButton.Location = new System.Drawing.Point(267, 384);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 5;
@@ -207,7 +211,7 @@
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(186, 359);
+            this.okButton.Location = new System.Drawing.Point(186, 384);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 6;
@@ -220,7 +224,7 @@
             this.paramGroupBox.Controls.Add(this.label8);
             this.paramGroupBox.Controls.Add(this.label7);
             this.paramGroupBox.Controls.Add(this.paramBox);
-            this.paramGroupBox.Location = new System.Drawing.Point(13, 274);
+            this.paramGroupBox.Location = new System.Drawing.Point(13, 299);
             this.paramGroupBox.Name = "paramGroupBox";
             this.paramGroupBox.Size = new System.Drawing.Size(329, 79);
             this.paramGroupBox.TabIndex = 7;
@@ -263,12 +267,30 @@
             // paramDependenceBox
             // 
             this.paramDependenceBox.AutoSize = true;
-            this.paramDependenceBox.Location = new System.Drawing.Point(12, 251);
+            this.paramDependenceBox.Location = new System.Drawing.Point(12, 276);
             this.paramDependenceBox.Name = "paramDependenceBox";
             this.paramDependenceBox.Size = new System.Drawing.Size(140, 17);
             this.paramDependenceBox.TabIndex = 0;
             this.paramDependenceBox.Text = "Зависит от параметра";
             this.paramDependenceBox.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 52);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(74, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Тип объекта:";
+            // 
+            // typeObjBox
+            // 
+            this.typeObjBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.typeObjBox.FormattingEnabled = true;
+            this.typeObjBox.Location = new System.Drawing.Point(99, 49);
+            this.typeObjBox.Name = "typeObjBox";
+            this.typeObjBox.Size = new System.Drawing.Size(224, 21);
+            this.typeObjBox.TabIndex = 5;
             // 
             // TFlexObjSynchDialog
             // 
@@ -276,7 +298,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(358, 395);
+            this.ClientSize = new System.Drawing.Size(358, 419);
             this.Controls.Add(this.paramGroupBox);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.cancelButton);
@@ -324,5 +346,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox paramBox;
         private System.Windows.Forms.CheckBox paramDependenceBox;
+        private System.Windows.Forms.ComboBox typeObjBox;
+        private System.Windows.Forms.Label label9;
     }
 }

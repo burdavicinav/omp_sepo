@@ -36,6 +36,9 @@ namespace obj_lib.Mappings
             Map(m => m.ID_PARAM);
             Map(m => m.PARAM);
             Map(m => m.PARAM_EXPRESSION);
+            Map(m => m.ID_SECTYPE);
+            Map(m => m.SECTYPE_SIGN);
+            Map(m => m.SECTYPE_NAME);
         }
     }
 }

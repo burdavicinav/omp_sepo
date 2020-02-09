@@ -35,14 +35,14 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="obj_lib.Entities.SEPO_TFLEX_SPEC_SECTIONS">
-    <Position X="1" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAQEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\SEPO_TFLEX_SPEC_SECTIONS.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="obj_lib.Entities.SEPO_TFLEX_SIGN_DOCS">
-    <Position X="1" Y="4" Width="1.5" />
+    <Position X="1.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAEAAAAAAAAAAAQAAA=</HashCode>
       <FileName>Entities\SEPO_TFLEX_SIGN_DOCS.cs</FileName>
@@ -63,7 +63,7 @@
   <Class Name="obj_lib.Entities.V_SEPO_TFLEX_OBJ_SYNCH">
     <Position X="6.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABCAAIAkABghAQAAAAIEAAAAEAAIIAAAAAAIIgAAI=</HashCode>
+      <HashCode>AIABCAAIAkABghAQAIAAIEAAAAEAAIIAAAAAAIcgAII=</HashCode>
       <FileName>Entities\V_SEPO_TFLEX_OBJ_SYNCH.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -92,7 +92,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="obj_lib.Entities.SEPO_STD_FOXPRO_ATTRS">
-    <Position X="6.5" Y="8.75" Width="1.5" />
+    <Position X="6.5" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAABAAAACAIAAAAEA=</HashCode>
       <FileName>Entities\SEPO_STD_FOXPRO_ATTRS.cs</FileName>
@@ -180,6 +180,16 @@
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Entities\SEPO_TFLEX_OBJ_PARAMETERS.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="obj_lib.Entities.SEPO_TFLEX_SECTION_TYPES">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAEAAAAAAAAAAAAAAAAAQAEA=</HashCode>
+      <FileName>Entities\SEPO_TFLEX_SECTION_TYPES.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ID_SECTION" />
+    </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
